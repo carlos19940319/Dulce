@@ -1,0 +1,205 @@
+
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Inicio | Dulce Postre</title><link rel="stylesheet" href="style.css"><script src="script.js" defer></script></head><body>
+<header><img src="img/logo.png" alt="Logo" class="logo"><div><h2 style="margin:0;color:white">POSTRES Y SNACKS</h2></div><!-- Logo de Instagram con enlace -->
+
+
+ 
+
+
+
+
+
+
+
+</header>
+
+<!-- las pestañas de inicio se pueden agregar mas pestañas -->
+<nav><a href="index.html">Inicio</a><a href="postres.html">Postres</a><a href="snacks.html">Snacks</a></nav>
+<main>
+  <div class="welcome-text"><h2><font color="#bFF0000">¡BIENVENIDOS!</h2></font></div>
+ 
+  
+ 
+ 
+  <section class="hero"><img src="img/principal.jpg" class="img-bienvenida" alt="Bienvenida"></section>
+  <h2><font color="white">Descubre nuestro menú</h2><p>Explore sabores únicos en nuestras sección de POSTRES y SNACKS.</p></font>
+</main>
+
+
+
+<!-- Horario Compacto y Minimalista -->
+<iframe id="horario-frame" srcdoc='
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<style>
+html, body {
+    margin:0;
+    padding:0;
+    font-family: Arial, sans-serif;
+    background: transparent;
+    text-align:center;
+}
+h2 { margin:2px 0; font-size:1em; }
+#reloj { font-size:1em; margin:2px 0 4px 0; }
+#estado {
+    font-weight:bold;
+    font-size:1em;
+    margin:2px 0;
+    padding:2px 6px;
+    border-radius:4px;
+    display:inline-block;
+    transition: all 0.3s ease;
+}
+.open-anim {
+    animation: zoomEstado 0.5s ease forwards;
+}
+@keyframes zoomEstado {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+ul { list-style:none; padding:0; margin:0; }
+li { display:flex; align-items:center; justify-content:center; padding:2px 0; font-size:0.9em; }
+@keyframes brillo {
+  0% { box-shadow: 0 0 3px var(--brillo-color); }
+  50% { box-shadow: 0 0 8px var(--brillo-color); }
+  100% { box-shadow: 0 0 3px var(--brillo-color); }
+}
+.dia-actual {
+    border-radius:4px;
+    font-weight:bold;
+    animation: brillo 1.5s infinite;
+    padding:0 3px;
+}
+</style>
+</head>
+<body>
+<h2 id="titulo">Horario</h2>
+<div id="reloj"></div>
+<div id="estado"></div>
+<ul id="dias">
+    <li data-dia="5">Viernes: <strong>19:00 a 23:00 hrs</strong></li>
+</ul>
+
+<script>
+// Reloj en vivo y ajuste de altura
+function actualizarReloj() {
+    const reloj = document.getElementById("reloj");
+    const ahora = new Date();
+    let h = ahora.getHours(), m = ahora.getMinutes(), s = ahora.getSeconds();
+    h=h<10?"0"+h:h; m=m<10?"0"+m:m; s=s<10?"0"+s:s;
+    reloj.textContent=h+":"+m+":"+s;
+    parent.document.getElementById("horario-frame").style.height = document.body.scrollHeight + "px";
+}
+
+// Función para actualizar estado Abierto/Cerrado
+let ultimoEstado = ""; // para detectar cambios y disparar animación
+function actualizarEstado() {
+    const ahora = new Date();
+    const hoy = ahora.getDay();
+    const estado = document.getElementById("estado");
+    let abierto = false;
+
+    if(hoy === 5){ // Solo viernes
+        const ahoraMin = ahora.getHours()*60 + ahora.getMinutes();
+        const abreMin = 19*60;
+        const cierraMin = 23*60;
+        if(ahoraMin >= abreMin && ahoraMin <= cierraMin){
+            abierto = true;
+        }
+    }
+
+    if(abierto){
+        estado.textContent = "🟢 Abierto";
+        estado.style.color = "green"; // color del texto
+        estado.style.boxShadow = "0 0 8px green";
+        if(ultimoEstado !== "abierto") {
+            estado.classList.add("open-anim");
+            setTimeout(()=> estado.classList.remove("open-anim"), 500);
+        }
+        ultimoEstado = "abierto";
+    } else {
+        estado.textContent = "🔴 Cerrado";
+        estado.style.color = "red"; // color del texto
+        estado.style.boxShadow = "0 0 8px red";
+        ultimoEstado = "cerrado";
+    }
+}
+
+// Resaltar día actual
+function resaltarDia(){
+    const dias=document.querySelectorAll("#dias li");
+    const hoy=new Date().getDay();
+    dias.forEach(li=>{
+        if(parseInt(li.dataset.dia)===hoy){
+            li.classList.add("dia-actual");
+        }
+    });
+    ajustarColores();
+    actualizarEstado();
+}
+
+// Ajuste de colores según fondo (manteniendo tu código original)
+function ajustarColores() {
+    let bodyStyles = window.getComputedStyle(document.body);
+    let bgColor = bodyStyles.backgroundColor || "rgb(255,255,255)";
+    let rgb = bgColor.match(/\d+/g);
+    let brightness = (parseInt(rgb[0])*299 + parseInt(rgb[1])*587 + parseInt(rgb[2])*114)/1000;
+    let textoColor = brightness > 128 ? "#000" : "#fff";
+    let brilloColor = brightness > 128 ? "rgba(241,196,15,1)" : "rgba(255,255,0,1)";
+    document.getElementById("titulo").style.color = textoColor;
+    document.getElementById("reloj").style.color = textoColor;
+    document.querySelectorAll("#dias li").forEach(li=>li.style.color = textoColor);
+    document.documentElement.style.setProperty("--brillo-color", brilloColor);
+    document.querySelectorAll(".dia-actual").forEach(li=>{
+        li.style.backgroundColor = brightness > 128 ? "rgba(241,196,15,0.5)" : "rgba(255,255,0,0.5)";
+    });
+}
+
+// Inicialización
+setInterval(()=>{ actualizarReloj(); actualizarEstado(); }, 1000);
+window.onload = ()=>{
+    actualizarReloj();
+    resaltarDia();
+};
+</script>
+</body>
+
+' width="100%" style="border:none; background:transparent;"></iframe>
+
+
+
+
+
+
+<footer>
+
+    <h3><p style="margin-bottom:20px; line-height:1.5; font-size:16px;">
+    Calle Amado Nervo 14-MZ 016,<br>
+    San Miguel, 52740 Ocoyoacac, Méx
+  </p></h3>
+  <!-- Botones juntos -->
+  <div style="display:flex; justify-content:center; gap:5px; flex-wrap:wrap; margin-bottom:5px;">
+    <!-- Botón ladrillo -->
+    <a href="https://www.google.com/maps/dir/?api=1&origin=My+Location&destination=Calle+Amado+Nervo+14-MZ+016,+San+Miguel,+52740+Ocoyoacac,+Méx" 
+       target="_blank" 
+       style="display:inline-block; padding:10px 18px; background:#b22222; color:#fff; 
+              font-size:15px; font-weight:bold; border-radius:15px; text-decoration:none;">
+      Cómo llegar
+    </a>
+
+    <!-- Botón grande de WhatsApp -->
+    <a href="https://wa.me/5217224640760?text=Hola%20me%20podria%20hacer%20un%20pedido" target="_blank" 
+       style="display:inline-flex; align-items:center; justify-content:center; gap:10px;
+              padding:10px 18px; background:#25d366; color:#fff; font-size:15px; font-weight:bold; 
+              border-radius:8px; text-decoration:none;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
+           alt="WhatsApp" 
+           style="width:24px; height:24px;">
+      WhatsApp
+    </a>
+  </div>
+
+  
