@@ -79,7 +79,7 @@ li { display:flex; align-items:center; justify-content:center; padding:2px 0; fo
 <div id="reloj"></div>
 <div id="estado"></div>
 <ul id="dias">
-    <li data-dia="1,5,6,0">Viernes a Domingo de: <strong>17:00 a 23:00 hrs</strong></li>
+    <li data-dia="5,6,0">Viernes a Domingo de: <strong>17:00 a 23:00 hrs</strong></li>
 </ul>
 
 <script>
@@ -102,9 +102,9 @@ function actualizarEstado() {
     let abierto = false;
 
     // Viernes (5), Sábado (6), Domingo (0) de 17:00 a 23:00
-    if ([1,2,3,4,5,6,0].includes(hoy)) {
+    if ([5,6,0].includes(hoy)) {
         const ahoraMin = ahora.getHours() * 60 + ahora.getMinutes();
-        const abreMin = 10 * 60;   // 17:00
+        const abreMin = 17 * 60;   // 17:00
         const cierraMin = 23 * 60; // 23:00
         if (ahoraMin >= abreMin && ahoraMin <= cierraMin) {
             abierto = true;
