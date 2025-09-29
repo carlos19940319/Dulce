@@ -26,6 +26,7 @@
 
 
 
+
 <!-- Horario Compacto y Minimalista -->
 <iframe id="horario-frame" srcdoc='
 <!DOCTYPE html>
@@ -79,60 +80,63 @@ li { display:flex; align-items:center; justify-content:center; padding:2px 0; fo
 <div id="reloj"></div>
 <div id="estado"></div>
 <ul id="dias">
-    <li data-dia="5,6,7">Viernes a Domingo de: <strong>19:00 a 23:00 hrs</strong></li>
+    <li data-dia="5">Viernes de: <strong>17:00 a 23:00 hrs</strong></li>
+    <li data-dia="6">Sábado de: <strong>17:00 a 23:00 hrs</strong></li>
+    <li data-dia="0">Domingo de: <strong>17:00 a 23:00 hrs</strong></li>
 </ul>
 
 <script>
-// Reloj en vivo y ajuste de altura
+// 🕐 Actualizar reloj
 function actualizarReloj() {
     const reloj = document.getElementById("reloj");
     const ahora = new Date();
     let h = ahora.getHours(), m = ahora.getMinutes(), s = ahora.getSeconds();
     h=h<10?"0"+h:h; m=m<10?"0"+m:m; s=s<10?"0"+s:s;
-    reloj.textContent=h+":"+m+":"+s;
+    reloj.textContent = h + ":" + m + ":" + s;
     parent.document.getElementById("horario-frame").style.height = document.body.scrollHeight + "px";
 }
 
-// Función para actualizar estado Abierto/Cerrado
-let ultimoEstado = ""; // para detectar cambios y disparar animación
+// 🟢 Verificar si está abierto o cerrado
+let ultimoEstado = "";
 function actualizarEstado() {
     const ahora = new Date();
     const hoy = ahora.getDay();
     const estado = document.getElementById("estado");
     let abierto = false;
 
-    if(hoy === 5,6,7){ // Solo viernes
-        const ahoraMin = ahora.getHours()*60 + ahora.getMinutes();
-        const abreMin = 19*60;
-        const cierraMin = 23*60;
-        if(ahoraMin >= abreMin && ahoraMin <= cierraMin){
+    // ✅ Viernes (5), Sábado (6), Domingo (0) de 17:00 a 23:00
+    if ([5, 6, 0].includes(hoy)) {
+        const ahoraMin = ahora.getHours() * 60 + ahora.getMinutes();
+        const abreMin = 17 * 60;   // 17:00
+        const cierraMin = 23 * 60; // 23:00
+        if (ahoraMin >= abreMin && ahoraMin <= cierraMin) {
             abierto = true;
         }
     }
 
-    if(abierto){
+    if (abierto) {
         estado.textContent = "🟢 Abierto";
-        estado.style.color = "green"; // color del texto
+        estado.style.color = "green";
         estado.style.boxShadow = "0 0 8px green";
-        if(ultimoEstado !== "abierto") {
+        if (ultimoEstado !== "abierto") {
             estado.classList.add("open-anim");
             setTimeout(()=> estado.classList.remove("open-anim"), 500);
         }
         ultimoEstado = "abierto";
     } else {
         estado.textContent = "🔴 Cerrado";
-        estado.style.color = "red"; // color del texto
+        estado.style.color = "red";
         estado.style.boxShadow = "0 0 8px red";
         ultimoEstado = "cerrado";
     }
 }
 
-// Resaltar día actual
+// ✨ Resaltar el día actual
 function resaltarDia(){
-    const dias=document.querySelectorAll("#dias li");
-    const hoy=new Date().getDay();
+    const dias = document.querySelectorAll("#dias li");
+    const hoy = new Date().getDay();
     dias.forEach(li=>{
-        if(parseInt(li.dataset.dia)===hoy){
+        if(parseInt(li.dataset.dia) === hoy){
             li.classList.add("dia-actual");
         }
     });
@@ -140,7 +144,7 @@ function resaltarDia(){
     actualizarEstado();
 }
 
-// Ajuste de colores según fondo (manteniendo tu código original)
+// 🎨 Ajuste de colores según fondo
 function ajustarColores() {
     let bodyStyles = window.getComputedStyle(document.body);
     let bgColor = bodyStyles.backgroundColor || "rgb(255,255,255)";
@@ -157,7 +161,7 @@ function ajustarColores() {
     });
 }
 
-// Inicialización
+// 🚀 Inicializar
 setInterval(()=>{ actualizarReloj(); actualizarEstado(); }, 1000);
 window.onload = ()=>{
     actualizarReloj();
@@ -165,8 +169,9 @@ window.onload = ()=>{
 };
 </script>
 </body>
-
+</html>
 ' width="100%" style="border:none; background:transparent;"></iframe>
+
 
 
 
