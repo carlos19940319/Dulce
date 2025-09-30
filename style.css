@@ -3,19 +3,38 @@
   --color-principal: #b22222;
   --color-secundario: #333333;
   --color-fondo-tarjeta: #ffffff;
-  --navbar-bg: rgba(253,188,180,0.8);
+  --navbar-bg: rgba(253,188,180,0.5);
   --fondo-img: ("img/fondo2.jpg") 
   width: auto;/* ruta editable */
 
 }
 
-/* Fondo */
-body{
-  margin:0;
+
+
+
+:root {
+  --fondo-opacidad: 0.3;
+}
+
+body {
+  margin: 0;
   font-family: Arial, sans-serif;
   color: var(--color-secundario);
-  background: linear-gradient(180deg,#071021cc 0%, #0c1320cc 100%), url("img/fondo2.jpg") center/cover fixed no-repeat;
 
+  /* Fondo con degradado + imagen */
+  background-image: 
+    linear-gradient(
+      180deg,
+      rgba(7, 16, 33, var(--fondo-opacidad)) 0%,
+      rgba(12, 19, 32, var(--fondo-opacidad)) 100%
+    ),
+    url("img/fondo2.jpg");
+
+  /* Propiedades necesarias para que la imagen se vea bien */
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* mantiene la imagen fija al hacer scroll */
 }
 
 /* Header/logo */
@@ -24,7 +43,7 @@ header{
   align-items:center;
   gap:12px;
   padding:14px;
-  background: rgba(0,0,0,0.45);
+  background: rgba(0,0,0,0.1);
   color:#ffffff;
 
 
@@ -102,7 +121,7 @@ main{ max-width:1100px; margin:18px auto; padding:0 14px; }
 .card {
   background: var(--color-fondo-tarjeta) url("img/pngtree-warm-pink-cute-mother-and-baby-background-image_147126.jpg") no-repeat center center;
   background-size: cover;
-  border-radius: 12px 0px 12px 0px;
+  border-radius: 50px 0px 50px 0px;
   padding: 10px;
   text-align: center;
   box-shadow: 0 0px 2px 3px rgba(178, 34, 34, 1);
@@ -115,7 +134,7 @@ main{ max-width:1100px; margin:18px auto; padding:0 14px; }
   width: 98%;
   height: 210px;
   object-fit: cover;
-  border-radius: 0px 12px 0px 12px;
+  border-radius: 50px 0px 50px 0px;
   margin-bottom: 5px;
   box-shadow:0 0px 9px 2px rgba(0, 0, 0, 1);
 }
