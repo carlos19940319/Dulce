@@ -26,8 +26,9 @@
 
 
 
-<!-- Horario Compacto y Minimalista -->
-<iframe id="horario-frame" srcdoc='
+<!-- Horario Compacto y Adaptativo -->
+<iframe id="horario-frame" 
+        srcdoc='
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -36,6 +37,7 @@
 html, body {
     margin:0;
     padding:0;
+    width:100%;
     font-family: Arial, sans-serif;
     background: transparent;
     text-align:center;
@@ -83,17 +85,19 @@ li { display:flex; align-items:center; justify-content:center; padding:2px 0; fo
 </ul>
 
 <script>
-// 🕐 Actualizar reloj
+// 🕐 Actualizar reloj y altura
 function actualizarReloj() {
     const reloj = document.getElementById("reloj");
     const ahora = new Date();
     let h = ahora.getHours(), m = ahora.getMinutes(), s = ahora.getSeconds();
     h=h<10?"0"+h:h; m=m<10?"0"+m:m; s=s<10?"0"+s:s;
     reloj.textContent = h + ":" + m + ":" + s;
+
+    // Ajuste automático del iframe al contenido
     parent.document.getElementById("horario-frame").style.height = document.body.scrollHeight + "px";
 }
 
-// 🟢 Verificar si está abierto o cerrado
+// 🟢 Estado abierto/cerrado
 let ultimoEstado = "";
 function actualizarEstado() {
     const ahora = new Date();
@@ -101,14 +105,11 @@ function actualizarEstado() {
     const estado = document.getElementById("estado");
     let abierto = false;
 
-    // Viernes (5), Sábado (6), Domingo (0) de 17:00 a 23:00
     if ([5,6,0].includes(hoy)) {
         const ahoraMin = ahora.getHours() * 60 + ahora.getMinutes();
-        const abreMin = 17 * 60;   // 17:00
-        const cierraMin = 23 * 60; // 23:00
-        if (ahoraMin >= abreMin && ahoraMin <= cierraMin) {
-            abierto = true;
-        }
+        const abreMin = 17 * 60;
+        const cierraMin = 23 * 60;
+        if (ahoraMin >= abreMin && ahoraMin <= cierraMin) abierto = true;
     }
 
     if (abierto) {
@@ -128,7 +129,7 @@ function actualizarEstado() {
     }
 }
 
-// ✨ Resaltar el día actual dentro de la sección combinada
+// ✨ Resaltar día actual
 function resaltarDia(){
     const dias=document.querySelectorAll("#dias li");
     const hoy=new Date().getDay();
@@ -142,7 +143,7 @@ function resaltarDia(){
     actualizarEstado();
 }
 
-// 🎨 Ajuste de colores según fondo
+// 🎨 Ajuste colores según fondo
 function ajustarColores() {
     let bodyStyles = window.getComputedStyle(document.body);
     let bgColor = bodyStyles.backgroundColor || "rgb(255,255,255)";
@@ -169,6 +170,8 @@ window.onload = ()=>{
 </body>
 </html>
 ' width="100%" style="border:none; background:transparent;"></iframe>
+
+
 
 
 <footer>
