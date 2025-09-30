@@ -46,14 +46,14 @@ header img.logo{
 
 }
 
-/* Nav sticky 3D */
+/* Nav sticky 3D  BARRA DE  BOTONES*/
 nav{
   display:flex;
   justify-content:space-around;
   gap:8px;
   padding:10px;
   border-radius:10px 10px 10px 10px;
-  box-shadow:1px 5px 10px #000000 inset, 0px 0px 8px  -6px #e63244;
+  box-shadow:1px 10px 18px #d15444 inset, 10px 1px 15px  -6px #e63244;
   position:sticky;
   top:0;
   z-index:1000;
@@ -84,7 +84,7 @@ nav a.active{ color: var(--color-principal); background: linear-gradient(145deg,
 main{ max-width:1100px; margin:18px auto; padding:0 14px; }
 
 .welcome-text{ text-align:center; color:#c00000; margin:18px 0; text-shadow: 2px 2px 6px rgba(0,0,0,0.6); animation: aparecer 1.0s ease-out; }
-.welcome-text h2{ margin:6px 0; color:var(--color-principal); font-size:2rem; }
+.welcome-text h2{ margin:1px 0; color:var(--color-principal); font-size:2rem; }
 .welcome-text p{ margin:0; font-size:1.05rem; color:#ffffff; }
 
 .hero{ display:flex; justify-content:center; padding:10px; }
