@@ -1,170 +1,249 @@
-/* Variables editables */
-:root{
-  --color-principal: #b22222;
-  --color-secundario: #333333;
-  --color-fondo-tarjeta: #ffffff;
-  --navbar-bg: rgba(253,188,180,0.8);
-  --fondo-img: ("img/fondo2.jpg") 
-  width: auto;/* ruta editable */
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Inicio | Dulce Postre</title><link rel="stylesheet" href="style.css"><script src="script.js" defer></script></head><body>
+<header><img src="img/logo.png" alt="Logo" class="logo"><div><h2 style="margin:0;color:white">POSTRES Y SNACKS</h2></div><!-- Logo de Instagram con enlace -->
 
+
+ 
+
+
+
+
+
+
+
+</header>
+
+<!-- las pestañas de inicio se pueden agregar mas pestañas -->
+<nav><a href="index.html">Inicio</a><a href="postres.html">Postres</a><a href="snacks.html">Snacks</a></nav>
+<main>
+  <div class="welcome-text"><h2><font color="#bFF0000">¡BIENVENIDOS!</h2></font></div>
+ 
+  
+ 
+ 
+  <section class="hero"><img src="img/principal.jpg" class="img-bienvenida" alt="Bienvenida"></section>
+  <h2><font color="white">Descubre nuestro menú</h2><p>Explore sabores únicos en nuestra sección de POSTRES y SNACKS.</p></font>
+</main>
+
+
+
+<!-- Horario Compacto y Adaptativo -->
+<iframe id="horario-frame" 
+        srcdoc='
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<style>
+html, body {
+    margin:0;
+    padding:0;
+    width:100%;
+    font-family: Arial, sans-serif;
+    background: transparent;
+    text-align:center;
+}
+h2 { margin:2px 0; font-size:1em; }
+#reloj { font-size:1em; margin:2px 0 4px 0; }
+#estado {
+    font-weight:bold;
+    font-size:1em;
+    margin:2px 0;
+    padding:2px 6px;
+    border-radius:4px;
+    display:inline-block;
+    transition: all 0.3s ease;
+}
+.open-anim {
+    animation: zoomEstado 0.5s ease forwards;
+}
+@keyframes zoomEstado {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+ul { list-style:none; padding:0; margin:0; }
+li { display:flex; align-items:center; justify-content:center; padding:2px 0; font-size:0.9em; }
+@keyframes brillo {
+  0% { box-shadow: 0 0 3px var(--brillo-color); }
+  50% { box-shadow: 0 0 8px var(--brillo-color); }
+  100% { box-shadow: 0 0 3px var(--brillo-color); }
+}
+.dia-actual {
+    border-radius:4px;
+    font-weight:bold;
+    animation: brillo 1.5s infinite;
+    padding:0 3px;
+}
+</style>
+</head>
+<body>
+<h2 id="titulo">Horario</h2>
+<div id="reloj"></div>
+<div id="estado"></div>
+<ul id="dias">
+    <li data-dia="5,6,0">Viernes a Domingo de: <strong>17:00 a 23:00 hrs</strong></li>
+</ul>
+
+<script>
+// 🕐 Actualizar reloj y altura
+function actualizarReloj() {
+    const reloj = document.getElementById("reloj");
+    const ahora = new Date();
+    let h = ahora.getHours(), m = ahora.getMinutes(), s = ahora.getSeconds();
+    h=h<10?"0"+h:h; m=m<10?"0"+m:m; s=s<10?"0"+s:s;
+    reloj.textContent = h + ":" + m + ":" + s;
+
+    // Ajuste automático del iframe al contenido
+    parent.document.getElementById("horario-frame").style.height = document.body.scrollHeight + "px";
 }
 
-/* Fondo */
-body{
-  margin:0;
-  font-family: Arial, sans-serif;
-  color: var(--color-secundario);
-  background: linear-gradient(180deg,#071021cc 0%, #0c1320cc 100%), url("img/fondo2.jpg") center/cover fixed no-repeat;
+// 🟢 Estado abierto/cerrado
+let ultimoEstado = "";
+function actualizarEstado() {
+    const ahora = new Date();
+    const hoy = ahora.getDay();
+    const estado = document.getElementById("estado");
+    let abierto = false;
 
+    if ([5,6,0].includes(hoy)) {
+        const ahoraMin = ahora.getHours() * 60 + ahora.getMinutes();
+        const abreMin = 17 * 60;
+        const cierraMin = 23 * 60;
+        if (ahoraMin >= abreMin && ahoraMin <= cierraMin) abierto = true;
+    }
+
+    if (abierto) {
+        estado.textContent = "🟢 Abierto";
+        estado.style.color = "green";
+        estado.style.boxShadow = "0 0 8px green";
+        if (ultimoEstado !== "abierto") {
+            estado.classList.add("open-anim");
+            setTimeout(()=> estado.classList.remove("open-anim"), 500);
+        }
+        ultimoEstado = "abierto";
+    } else {
+        estado.textContent = "🔴 Cerrado";
+        estado.style.color = "red";
+        estado.style.boxShadow = "0 0 8px red";
+        ultimoEstado = "cerrado";
+    }
 }
 
-/* Header/logo */
-header{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:14px;
-  background: rgba(0,0,0,0.45);
-  color:#ffffff;
-
-
-
-
-
-}
-header img.logo{
-  width:100px;
-  height:auto
-   position:sticky;
-   border-radius:50px 50px 50px 50px;
-   box-shadow:0px 1px 
-   58px #000000 inset, 0px 0px 20px  -5px #FFFFFF;
-
-
-
-
-
+// ✨ Resaltar día actual
+function resaltarDia(){
+    const dias=document.querySelectorAll("#dias li");
+    const hoy=new Date().getDay();
+    dias.forEach(li=>{
+        const diasArray = li.dataset.dia.split(",").map(Number);
+        if(diasArray.includes(hoy)){
+            li.classList.add("dia-actual");
+        }
+    });
+    ajustarColores();
+    actualizarEstado();
 }
 
-/* Nav sticky 3D  BARRA DE  BOTONES*/
-nav{
-  display:flex;
-  justify-content:space-around;
-  gap:8px;
-  padding:10px;
-  border-radius:10px 10px 10px 10px;
-  box-shadow:1px 10px 18px #d15444 inset, 10px 1px 15px  -6px #e63244;
-  position:sticky;
-  top:0;
-  z-index:1000;
-  background: var(--navbar-bg);
-  backdrop-filter: blur(-20px);
-}
-nav a{
-  text-decoration:none;
-  color:var(--color-secundario);
-  font-weight:700;
-  padding:10px 14px;
-  border-radius:12px;
-  background: linear-gradient(145deg,#fff,#e6e6e6);
-  box-shadow: 0px 8px 10px #e63244, 0px 0px 0px #ffffff;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  transition: all .18s ease-in-out;
-  border-radius:10px 10px 10px 10px;
-  box-shadow:0px 0px 6px #000000 inset, 0px 9px 8px  -3px #000000;
-}
-nav a:hover{ transform: translateY(-4px) scale(1.03); box-shadow:6px 6px 12px #999, -6px -6px 12px #ffffff;
-box-shadow:1px 5px 10px #000000 inset, 0px 0px 8px  -6px #FFFFFF; }
-nav a:active{ transform: translateY(2px) scale(.98); box-shadow: inset 4px 4px 6px #b3b3b3, inset -4px -4px 6px #ffffff; }
-nav a.active{ color: var(--color-principal); background: linear-gradient(145deg,#fff7f7,#ffecec); }
-
-/* Main */
-main{ max-width:1100px; margin:18px auto; padding:0 14px; }
-
-.welcome-text{ text-align:center; color:#c00000; margin:18px 0; text-shadow: 2px 2px 6px rgba(0,0,0,0.6); animation: aparecer 1.0s ease-out; }
-.welcome-text h2{ margin:1px 0; color:var(--color-principal); font-size:2rem; }
-.welcome-text p{ margin:0; font-size:1.05rem; color:#ffffff; }
-
-.hero{ display:flex; justify-content:center; padding:10px; }
-.img-bienvenida{ width:200%; max-width:950px; height:auto; border-radius:10px; box-shadow:0 0px 10px -2px rgba(255,255,255,1); animation: zoom 5.3s ease-out; }
-
-/* 📦 GRID contenedor de tarjetas */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 15px;
-  margin-top: 12px;
+// 🎨 Ajuste colores según fondo
+function ajustarColores() {
+    let bodyStyles = window.getComputedStyle(document.body);
+    let bgColor = bodyStyles.backgroundColor || "rgb(255,255,255)";
+    let rgb = bgColor.match(/\d+/g);
+    let brightness = (parseInt(rgb[0])*299 + parseInt(rgb[1])*587 + parseInt(rgb[2])*114)/1000;
+    let textoColor = brightness > 128 ? "#000" : "#fff";
+    let brilloColor = brightness > 128 ? "rgba(241,196,15,1)" : "rgba(255,255,0,1)";
+    document.getElementById("titulo").style.color = textoColor;
+    document.getElementById("reloj").style.color = textoColor;
+    document.querySelectorAll("#dias li").forEach(li=>li.style.color = textoColor);
+    document.documentElement.style.setProperty("--brillo-color", brilloColor);
+    document.querySelectorAll(".dia-actual").forEach(li=>{
+        li.style.backgroundColor = brightness > 128 ? "rgba(241,196,15,0.5)" : "rgba(255,255,0,0.5)";
+    });
 }
 
-/* 🖼 Tarjeta con imagen de fondo */
-.card {
-  background: var(--color-fondo-tarjeta) url("img/pngtree-warm-pink-cute-mother-and-baby-background-image_147126.jpg") no-repeat center center;
-  background-size: cover;
-  border-radius: 12px 0px 12px 0px;
-  padding: 10px;
-  text-align: center;
-  box-shadow: 0 0px 2px 3px rgba(178, 34, 34, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-/* 🖼 Imagen interna dentro de la tarjeta (opcional, puedes eliminar si no usas imágenes dentro) */
-.card img {
-  width: 98%;
-  height: 210px;
-  object-fit: cover;
-  border-radius: 0px 12px 0px 12px;
-  margin-bottom: 5px;
-  box-shadow:0 0px 9px 2px rgba(0, 0, 0, 1);
-}
-
-/* 💰 Precio */
-.price {
-  color: var(--color-principal);
-  font-weight: 800;
-}
+// 🚀 Inicializar
+setInterval(()=>{ actualizarReloj(); actualizarEstado(); }, 1000);
+window.onload = ()=>{
+    actualizarReloj();
+    resaltarDia();
+};
+</script>
+</body>
+</html>
+' width="100%" style="border:none; background:transparent;"></iframe>
 
 
 
 
+<footer>
+<!-- Footer al final de la página con fondo negro transparente -->
+<div style="
+  width:100%;                
+  background:rgba(0,0,0,0.2); /* negro semi-transparente */
+  padding:5px 0;            
+  text-align:center;
+  font-size:14px;            
+  line-height:1.4;
+  box-sizing:border-box;
+  color:#fff;                /* texto blanco para contraste */
+">
 
+  <!-- Dirección -->
+  <h3 style="margin:0 0 10px 0; font-size:16px; line-height:1.4;">
+    Calle Emiliano Zapata, San Pedro Abajo 1.ª sección <br>
+    (Frente al centro de salud)<br>
+    Temoaya, Estado de México
+  </h3>
 
-/* footer */
-footer{ text-align:center; padding:-1px; color:#ffffff; margin-top:-10px; background: rgba(0,0,0,.3); border-top-left-radius:8px; border-top-right-radius:1px; }
+  <!-- Botones alineados -->
+  <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
 
-/* Animations */
-@keyframes aparecer{ from{opacity:0; transform:translateY(-20px)} to{opacity:11; transform:translateY(0)} }
-@keyframes zoom{ from{opacity:0; transform:scale(.95)} to{opacity:1; transform:scale(1)} }
+    <!-- Botón Cómo llegar -->
+    <a href="https://www.google.com/maps/dir/Current+Location/19.4788806,-99.5798941" 
+       target="_blank" 
+       style="
+         display:inline-block; 
+         padding:10px 22px; 
+         background:#b22222; 
+         color:#fff; 
+         font-size:15px; 
+         font-weight:bold; 
+         border-radius:20px; 
+         text-decoration:none; 
+         box-shadow:0 2px 6px rgba(0,0,0,0.2);
+         transition: background 0.3s;
+         white-space:nowrap;
+       "
+       onmouseover="this.style.background='#a11d1d';"
+       onmouseout="this.style.background='#b22222';">
+      📍 Cómo llegar
+    </a>
 
-/* Responsive */
-@media(max-width:768px){
-  .img-bienvenida{ width:92%; }
-  nav{ flex-wrap:wrap; gap:6px; }
-  header img.logo{ width:64px; 
-   position:sticky;}
+    <!-- Botón WhatsApp -->
+    <a href="https://wa.me/5217203173783?text=¡Hola!%20me%20podria%20hacer%20un%20pedido%20a%20domicilio" 
+       target="_blank" 
+       style="
+         display:inline-flex; 
+         align-items:center; 
+         justify-content:center; 
+         gap:10px;
+         padding:10px 18px; 
+         background:#25d366; 
+         color:#fff; 
+         font-size:15px; 
+         font-weight:bold; 
+         border-radius:8px; 
+         text-decoration:none;
+         box-shadow:0 2px 6px rgba(0,0,0,0.2);
+         white-space:nowrap;
+         transition: background 0.3s;
+       "
+       onmouseover="this.style.background='#1ebe57';"
+       onmouseout="this.style.background='#25d366';">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
+           alt="WhatsApp" 
+           style="width:24px; height:24px;">
+      ORDENAR
+    </a>
 
-}
-
-/* Hover dorado en botones y pestañas */
-nav a:hover, 
-.card button:hover {
-  background-color: var(--color-secundario);
-  color: #b22222;
-  box-shadow: 0 0 10px var(--color-secundario);
-  transform: scale(1.15);
-  transition: all 0.3s ease-in-out;
-}
-
-/* ✨ Animación de brillo para logo/título */
-@keyframes brilloSuave {
-  0% { text-shadow: 0 0 5px var(--color-secundario); }
-  50% { text-shadow: 0 0 20px var(--color-secundario), 0 0 30px var(--color-principal); }
-  100% { text-shadow: 0 0 5px var(--color-secundario); }
-}
-
-header h1, 
-header img {
-  animation: brilloSuave 3s infinite alternate;
-}
+  </div>
+</div>
