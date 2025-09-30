@@ -73,49 +73,89 @@
 
   
 </main>
+
+
+
 <footer>
+<!-- Footer al final de la página con fondo negro transparente -->
+<div style="
+  width:100%;                
+  background:rgba(0,0,0,0.2); /* negro semi-transparente */
+  padding:5px 0;            
+  text-align:center;
+  font-size:14px;            
+  line-height:1.4;
+  box-sizing:border-box;
+  color:#fff;                /* texto blanco para contraste */
+">
 
+  <!-- Dirección -->
+  <h3 style="margin:0 0 10px 0; font-size:16px; line-height:1.4;">
+    Calle Emiliano Zapata, San Pedro Abajo 1.ª sección <br>
+    (Frente al centro de salud)<br>
+    Temoaya, Estado de México
+  </h3>
 
-<!-- Dirección -->
-<h3 style="margin-bottom:20px; line-height:1.5; font-size:16px; text-align:center;">
-  Calle Emiliano Zapata, San Pedro Abajo 1.ª sección <br>
-  (Frente al centro de salud)<br>
-  Temoaya, Estado de México
-</h3>
+  <!-- Botones alineados -->
+  <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
 
-<!-- Botón con ruta trazada -->
-<div style="display:flex; justify-content:center; margin-bottom:10px;">
-  <a href="https://www.google.com/maps/dir/Current+Location/19.4788806,-99.5798941" 
-     target="_blank" 
-     style="
-       display:inline-block; 
-       padding:10px 22px; 
-       background:#b22222; 
-       color:#fff; 
-       font-size:15px; 
-       font-weight:bold; 
-       border-radius:20px; 
-       text-decoration:none; 
-       box-shadow:0 2px 6px rgba(0,0,0,0.2);
-       transition:background 0.3s;">
-    📍 Cómo llegar</a>
+    <!-- Botón Cómo llegar -->
+    <a href="https://www.google.com/maps/dir/Current+Location/19.4788806,-99.5798941" 
+       target="_blank" 
+       style="
+         display:inline-block; 
+         padding:10px 22px; 
+         background:#b22222; 
+         color:#fff; 
+         font-size:15px; 
+         font-weight:bold; 
+         border-radius:20px; 
+         text-decoration:none; 
+         box-shadow:0 2px 6px rgba(0,0,0,0.2);
+         transition: background 0.3s;
+         white-space:nowrap;
+       "
+       onmouseover="this.style.background='#a11d1d';"
+       onmouseout="this.style.background='#b22222';">
+      📍 Cómo llegar
+    </a>
 
-
-
-
-    
-    <!-- Botón grande de WhatsApp -->
- 
-
-<a href="https://wa.me/5217203173783?text=¡Hola!%20me%20podria%20hacer%20un%20pedido%20a%20domicilio"target="_blank" 
-
-
-       style="display:inline-flex; align-items:center; justify-content:center; gap:10px;
-              padding:10px 18px; background:#25d366; color:#fff; font-size:15px; font-weight:bold; 
-              border-radius:8px; text-decoration:none;">
+    <!-- Botón WhatsApp -->
+    <a href="https://wa.me/5217203173783?text=¡Hola!%20me%20podria%20hacer%20un%20pedido%20a%20domicilio" 
+       target="_blank" 
+       style="
+         display:inline-flex; 
+         align-items:center; 
+         justify-content:center; 
+         gap:10px;
+         padding:10px 18px; 
+         background:#25d366; 
+         color:#fff; 
+         font-size:15px; 
+         font-weight:bold; 
+         border-radius:8px; 
+         text-decoration:none;
+         box-shadow:0 2px 6px rgba(0,0,0,0.2);
+         white-space:nowrap;
+         transition: background 0.3s;
+       "
+       onmouseover="this.style.background='#1ebe57';"
+       onmouseout="this.style.background='#25d366';">
       <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
            alt="WhatsApp" 
-           style="width:24px; height:24px;">ORDENAR</a>
+           style="width:24px; height:24px;">
+      ORDENAR
+    </a>
+
   </div>
+</div>
+
+
+
+
+
+
+
+
 
  
