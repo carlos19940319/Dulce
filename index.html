@@ -24,24 +24,25 @@
   <h2><font color="white">Descubre nuestro menú</h2><p>Explore sabores únicos en nuestra sección de POSTRES y SNACKS.</p></font>
 </main>
 
+
 <!-- Horario Compacto y Adaptativo Integrado -->
-<div id="horario-compacto" style="text-align:center; font-family: Arial, sans-serif;">
+<div id="horario-compacto" style="text-align:center; font-family: Arial, sans-serif; padding:8px 0;">
   <h2 id="titulo">Horario</h2>
   <div id="reloj"></div>
   <div id="estado"></div>
-  <ul id="dias" style="list-style:none; padding:0; margin:0;">
+  <ul id="dias" style="list-style:none; padding:0; margin:8px 0 0 0;">
     <li data-dia="5,6,0">Viernes a Domingo de: <strong>17:00 a 23:00 hrs</strong></li>
   </ul>
 </div>
 
 <style>
-  #horario-compacto h2 { margin:2px 0; font-size:1em; }
-  #horario-compacto #reloj { font-size:1em; margin:2px 0 4px 0; }
+  #horario-compacto h2 { margin:4px 0; font-size:1em; }
+  #horario-compacto #reloj { font-size:1em; margin:4px 0; }
   #horario-compacto #estado {
       font-weight:bold;
       font-size:1em;
-      margin:2px 0;
-      padding:2px 6px;
+      margin:4px 0;
+      padding:3px 8px;
       border-radius:4px;
       display:inline-block;
       transition: all 0.3s ease;
@@ -54,17 +55,23 @@
       50% { transform: scale(1.2); }
       100% { transform: scale(1); }
   }
-  #horario-compacto li { display:flex; align-items:center; justify-content:center; padding:2px 0; font-size:0.9em; }
+  #horario-compacto li { 
+      display:flex; 
+      align-items:center; 
+      justify-content:center; 
+      padding:4px 0; 
+      font-size:0.95em; 
+  }
   @keyframes brillo {
     0% { box-shadow: 0 0 3px var(--brillo-color); }
-    50% { box-shadow: 0 0 8px var(--brillo-color); }
+    50% { box-shadow: 0 0 6px var(--brillo-color); }
     100% { box-shadow: 0 0 3px var(--brillo-color); }
   }
   .dia-actual {
       border-radius:4px;
       font-weight:bold;
       animation: brillo 1.5s infinite;
-      padding:0 3px;
+      padding:1px 4px;
   }
 </style>
 
@@ -149,79 +156,77 @@
   };
 </script>
 
-
-
-
-
 <!-- Footer al final de la página con fondo negro transparente -->
 <div style="
   width:100%;                
-  background:rgba(0,0,0,0.2); /* negro semi-transparente */
+  background:rgba(0,0,0,0.2);
   padding:5px 0;            
   text-align:center;
   font-size:14px;            
   line-height:1.4;
   box-sizing:border-box;
-  color:#fff;                /* texto blanco para contraste */
+  color:#fff;
 ">
 
   <!-- Dirección -->
-  <h3 style="margin:0 0 10px 0; font-size:16px; line-height:1.4;">
-    Calle Emiliano Zapata, San Pedro Abajo 1.ª sección <br>
-    (Frente al centro de salud)<br>
-    Temoaya, Estado de México
-  </h3>
+  <footer>
+    <h3 style="margin:0 0 10px 0; font-size:16px; line-height:1.4;">
+      Calle Emiliano Zapata, San Pedro Abajo 1.ª sección <br>
+      (Frente al centro de salud)<br>
+      Temoaya, Estado de México
+    </h3>
 
-  <!-- Botones alineados -->
-  <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
+    <!-- Botones alineados -->
+    <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
 
-    <!-- Botón Cómo llegar -->
-    <a href="https://www.google.com/maps/dir/Current+Location/19.4788806,-99.5798941" 
-       target="_blank" 
-       style="
-         display:inline-block; 
-         padding:10px 22px; 
-         background:#b22222; 
-         color:#fff; 
-         font-size:15px; 
-         font-weight:bold; 
-         border-radius:20px; 
-         text-decoration:none; 
-         box-shadow:0 2px 6px rgba(0,0,0,0.2);
-         transition: background 0.3s;
-         white-space:nowrap;
-       "
-       onmouseover="this.style.background='#a11d1d';"
-       onmouseout="this.style.background='#b22222';">
-      📍 Cómo llegar
-    </a>
+      <!-- Botón Cómo llegar -->
+      <a href="https://www.google.com/maps/dir/Current+Location/19.4788806,-99.5798941" 
+         target="_blank" 
+         style="
+           display:inline-block; 
+           padding:10px 22px; 
+           background:#b22222; 
+           color:#fff; 
+           font-size:15px; 
+           font-weight:bold; 
+           border-radius:20px; 
+           text-decoration:none; 
+           box-shadow:0 2px 6px rgba(0,0,0,0.2);
+           transition: background 0.3s;
+           white-space:nowrap;
+         "
+         onmouseover="this.style.background='#a11d1d';"
+         onmouseout="this.style.background='#b22222';">
+        📍 Cómo llegar
+      </a>
 
-    <!-- Botón WhatsApp -->
-    <a href="https://wa.me/5217203173783?text=¡Hola!%20me%20podria%20hacer%20un%20pedido%20a%20domicilio" 
-       target="_blank" 
-       style="
-         display:inline-flex; 
-         align-items:center; 
-         justify-content:center; 
-         gap:10px;
-         padding:10px 18px; 
-         background:#25d366; 
-         color:#fff; 
-         font-size:15px; 
-         font-weight:bold; 
-         border-radius:8px; 
-         text-decoration:none;
-         box-shadow:0 2px 6px rgba(0,0,0,0.2);
-         white-space:nowrap;
-         transition: background 0.3s;
-       "
-       onmouseover="this.style.background='#1ebe57';"
-       onmouseout="this.style.background='#25d366';">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
-           alt="WhatsApp" 
-           style="width:24px; height:24px;">
-      ORDENAR
-    </a>
+      <!-- Botón WhatsApp -->
+      <a href="https://wa.me/5217203173783?text=¡Hola!%20me%20podria%20hacer%20un%20pedido%20a%20domicilio" 
+         target="_blank" 
+         style="
+           display:inline-flex; 
+           align-items:center; 
+           justify-content:center; 
+           gap:10px;
+           padding:10px 18px; 
+           background:#25d366; 
+           color:#fff; 
+           font-size:15px; 
+           font-weight:bold; 
+           border-radius:8px; 
+           text-decoration:none;
+           box-shadow:0 2px 6px rgba(0,0,0,0.2);
+           white-space:nowrap;
+           transition: background 0.3s;
+         "
+         onmouseover="this.style.background='#1ebe57';"
+         onmouseout="this.style.background='#25d366';">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
+             alt="WhatsApp" 
+             style="width:24px; height:24px;">
+        ORDENAR
+      </a>
 
-  </div>
+    </div>
+  </footer>
 </div>
