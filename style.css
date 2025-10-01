@@ -149,7 +149,7 @@ main{ max-width:1100px; margin:18px auto; padding:0 14px; }
 
 
 /* footer */
-footer{ text-align:center; padding:-1px; color:#ffffff; margin-top:-10px; background: rgba(0,0,0,.3); border-top-left-radius:8px; border-top-right-radius:1px; }
+footer{ text-align:center; padding:-1px; color:#ffffff; margin-top:-10px; background: rgba(0,0,0,.7); border-top-left-radius:8px; border-top-right-radius:1px; }
 
 /* Animations */
 @keyframes aparecer{ from{opacity:0; transform:translateY(-20px)} to{opacity:11; transform:translateY(0)} }
