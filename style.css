@@ -1,23 +1,25 @@
-/* ================================
-   🎨 Variables editables
-=================================== */
-:root {
+/* Variables editables */
+:root{
   --color-principal: #b22222;
   --color-secundario: #333333;
   --color-fondo-tarjeta: #ffffff;
-  --navbar-bg: rgba(178, 34, 34, 0.9);
+  --navbar-bg: rgba(197,0,0,0.5);
+  --fondo-img: "img/fondo2.jpg"; /* ruta editable */
+  width: auto;
+}
+
+:root {
   --fondo-opacidad: 0.4;
 }
 
-/* ================================
-   🖼️ Body y fondo
-=================================== */
+/* Body y fondo */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   color: var(--color-secundario);
   height: 100vh;
 
+  /* Fondo con degradado + imagen */
   background-image:
     linear-gradient(
       180deg,
@@ -25,136 +27,123 @@ body {
       rgba(12, 19, 32, var(--fondo-opacidad)) 100%
     ),
     url("img/fondo44.jpg");
+
   background-position: center center;
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
 
-/* ================================
-   📌 Header y logo
-=================================== */
-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px;
-  background: rgba(0, 0, 0, 0.45);
-  color: #ffffff;
-  position: relative;
+/* Header/logo fijo */
+header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px;
+  background: rgba(0,0,0,0.45);
+  color:#ffffff;
+  position: fixed; /* ← Fijo */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1001;
 }
 
-header img.logo {
-  width: 100px;
-  height: auto;
-  border-radius: 100px;
-  box-shadow: 0px 1px 58px #000000 inset, 0px 0px 15px 1px #FFFFFF;
-  animation: brilloSuave 3s infinite alternate;
+header img.logo{
+  width:100px;
+  height:auto;
+  border-radius:100px;
+  box-shadow:0px 1px 58px #000000 inset, 0px 0px 15px 1px #FFFFFF;
 }
 
-/* ================================
-   🧭 Nav flotante debajo del logo
-=================================== */
-nav {
-  position: fixed;
-  top: 110px; /* ⬅️ ajusta según altura del header/logo */
+/* Nav fijo debajo del header */
+nav{
+  display:flex;
+  justify-content:space-around;
+  gap:8px;
+  padding:10px;
+  border-radius:10px;
+  box-shadow:1px 10px 20px #320000 inset, 0px 0px 8px -6px #FFFFFF;
+  position: fixed; /* ← Fijo */
+  top: 72px; /* Ajustar según la altura de tu header */
   left: 0;
   width: 100%;
   z-index: 1000;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  padding: 12px 0;
   background: var(--navbar-bg);
-  backdrop-filter: blur(6px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-  transition: all 0.3s ease-in-out;
+  backdrop-filter: blur(-20px);
 }
 
-nav a {
-  text-decoration: none;
-  color: var(--color-secundario);
-  font-weight: 700;
-  padding: 10px 18px;
-  border-radius: 12px;
-  background: linear-gradient(145deg, #fff, #e6e6e6);
-  box-shadow: 0px 0px 8px #000000 inset, 0px 9px 8px -3px #000000;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: all 0.2s ease-in-out;
+nav a{
+  text-decoration:none;
+  color:var(--color-secundario);
+  font-weight:700;
+  padding:10px 14px;
+  border-radius:12px;
+  background: linear-gradient(145deg,#fff,#e6e6e6);
+  box-shadow:0px 0px 8px #000000 inset, 0px 9px 8px -3px #000000;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  transition: all .18s ease-in-out;
 }
 
-nav a:hover {
+nav a:hover{
   transform: translateY(-4px) scale(1.03);
-  box-shadow: 1px 5px 10px #000000 inset, 0px 0px 8px -6px #FFFFFF;
-  color: var(--color-principal);
+  box-shadow:1px 5px 10px #000000 inset, 0px 0px 8px -6px #FFFFFF;
 }
 
-nav a:active {
+nav a:active{
   transform: translateY(2px) scale(.98);
   box-shadow: inset 4px 4px 6px #b3b3b3, inset -4px -4px 6px #ffffff;
 }
 
-nav a.active {
+nav a.active{
   color: var(--color-principal);
-  background: linear-gradient(145deg, #fff7f7, #ffecec);
+  background: linear-gradient(145deg,#fff7f7,#ffecec);
 }
 
-/* ================================
-   📄 Main
-=================================== */
-main {
-  max-width: 1100px;
-  margin: 18px auto;
-  padding: 0 14px;
-  padding-top: 200px; /* espacio para que el nav no tape contenido */
+/* Main con padding-top para que no quede debajo del header+nav */
+main{
+  max-width:1100px;
+  margin:18px auto;
+  padding:0 14px;
+  padding-top: 140px; /* Ajustar según header + nav */
 }
 
-/* ================================
-   ✨ Texto de bienvenida
-=================================== */
-.welcome-text {
-  text-align: center;
-  color: #c00000;
-  margin: 18px 0;
-  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+.welcome-text{
+  text-align:center;
+  color:#c00000;
+  margin:18px 0;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
   animation: aparecer 2.5s ease-out;
 }
-
-.welcome-text h2 {
-  margin: 1px 0;
-  color: var(--color-principal);
-  font-size: 2rem;
+.welcome-text h2{
+  margin:1px 0;
+  color:var(--color-principal);
+  font-size:2rem;
+}
+.welcome-text p{
+  margin:0;
+  font-size:1.05rem;
+  color:#ffffff;
 }
 
-.welcome-text p {
-  margin: 0;
-  font-size: 1.05rem;
-  color: #ffffff;
+/* Imagen de bienvenida */
+.hero{
+  display:flex;
+  justify-content:center;
+  padding:10px;
 }
-
-/* ================================
-   🖼️ Imagen de bienvenida
-=================================== */
-.hero {
-  display: flex;
-  justify-content: center;
-  padding: 10px;
-}
-
-.img-bienvenida {
-  width: 100%;
-  max-width: 700px;
-  height: auto;
-  border-radius: 50px;
-  box-shadow: 0 0px 15px 1px rgba(255, 255, 255, 1);
+.img-bienvenida{
+  width:100%;
+  max-width:700px;
+  height:auto;
+  border-radius:50px;
+  box-shadow:0 0px 15px 1px rgba(255,255,255,1);
   animation: zoom 4.5s ease-out;
 }
 
-/* ================================
-   🪄 Grid de tarjetas
-=================================== */
+/* GRID contenedor de tarjetas */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -162,7 +151,7 @@ main {
   margin-top: 12px;
 }
 
-/* Tarjeta */
+/* Tarjeta con imagen de fondo */
 .card {
   background: var(--color-fondo-tarjeta) url("img/pngtree-warm-pink-cute-mother-and-baby-background-image_147126.jpg") no-repeat center center;
   background-size: cover;
@@ -174,59 +163,68 @@ main {
   overflow: hidden;
 }
 
+/* Imagen interna en tarjeta */
 .card img {
   width: 98%;
   height: 210px;
   object-fit: cover;
   border-radius: 70px 0px 70px 0px;
   margin-bottom: 5px;
-  box-shadow: 0 0px 9px 2px rgba(0, 0, 0, 1);
+  box-shadow:0 0px 9px 2px rgba(0, 0, 0, 1);
 }
 
 /* Precio */
 .price {
   color: var(--color-principal);
-  font-weight: 800;
+  font-weight:800;
 }
 
-/* ================================
-   📍 Footer
-=================================== */
-footer {
-  text-align: center;
-  padding: 4px;
-  color: #ffffff;
-  margin-top: -10px;
-  background: rgba(0, 0, 0, .7);
-  border-top-left-radius: 8px;
-  border-top-right-radius: 1px;
+/* Footer */
+footer{
+  text-align:center;
+  padding:4px;
+  color:#ffffff;
+  margin-top:-10px;
+  background: rgba(0,0,0,.7);
+  border-top-left-radius:8px;
+  border-top-right-radius:1px;
 }
 
-/* ================================
-   ✨ Animaciones
-=================================== */
-@keyframes aparecer {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Animations */
+@keyframes aparecer{
+  from{opacity:0; transform:translateY(-20px)}
+  to{opacity:1; transform:translateY(0)}
+}
+@keyframes zoom{
+  from{opacity:0; transform:scale(.95)}
+  to{opacity:1; transform:scale(1)}
 }
 
-@keyframes zoom {
-  from { opacity: 0; transform: scale(.95); }
-  to { opacity: 1; transform: scale(1); }
+/* Responsive */
+@media(max-width:768px){
+  .img-bienvenida{ width:92%; }
+  nav{ flex-wrap:wrap; gap:6px; top:90px; }
+  header img.logo{ width:64px;}
 }
 
+/* Hover dorado en botones y pestañas */
+nav a:hover,
+.card button:hover {
+  background-color: var(--color-secundario);
+  color: #b22222;
+  box-shadow: 0 0 10px var(--color-secundario);
+  transform: scale(1.15);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Animación de brillo para logo/título */
 @keyframes brilloSuave {
-  0% { text-shadow: 0 0 5px var(--color-secundario); }
-  50% { text-shadow: 0 0 20px var(--color-secundario), 0 0 30px var(--color-principal); }
-  100% { text-shadow: 0 0 5px var(--color-secundario); }
+0% { text-shadow: 0 0 5px var(--color-secundario); }
+50% { text-shadow: 0 0 20px var(--color-secundario), 0 0 30px var(--color-principal); }
+100% { text-shadow: 0 0 5px var(--color-secundario); }
 }
 
-/* ================================
-   📱 Responsive
-=================================== */
-@media (max-width: 768px) {
-  .img-bienvenida { width: 92%; }
-  nav { flex-wrap: wrap; gap: 6px; top: 90px; }
-  header img.logo { width: 64px; }
-  main { padding-top: 180px; }
+header h1,
+header img {
+animation: brilloSuave 3s infinite alternate;
 }
