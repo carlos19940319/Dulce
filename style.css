@@ -65,7 +65,7 @@ nav{
   border-radius:10px 10xp 10xp 10xp;
   box-shadow:1px 10px 20px #320000 inset, 0px 0px 8px -6px #FFFFFF;
   position: fixed; /* ← Fijo */
-  top: 55px; /* Ajustar según la altura de tu header */
+  top: 40px; /* Ajustar según la altura de tu header */
   left: 0;
   width: 100%;
   z-index: 1000;
