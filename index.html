@@ -1,262 +1,214 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Inicio | Dulce Postre</title><link rel="stylesheet" href="style.css"><script src="script.js" defer></script></head><body>
-<header><img src="img/logo.png" alt="Logo" class="logo"><div><h2 style="margin:0;color:white">POSTRES Y SNACKS</h2></div><!-- Logo de Instagram con enlace -->
+/* Variables editables */
+:root {
+  --color-principal: #b22222;
+  --color-secundario: #333333;
+  --color-fondo-tarjeta: #ffffff;
+  --navbar-bg: rgba(197,0,0,0.5);
+  --fondo-img: url("img/fondo44.jpg"); /* ruta editable */
+  --fondo-opacidad: 0.4;
+}
 
-
- 
-
-
-
-
-
-
-
-</header>
-
-<!-- las pestañas de inicio se pueden agregar mas pestañas -->
-<nav><a href="index.html">Inicio</a><a href="postres.html">Postres</a><a href="snacks.html">Snacks</a></nav>
-<main>
-  <div class="welcome-text"><h2><font color="#bFF0000">¡BIENVENIDOS!</h2></font></div>
- 
-  
- 
- 
-  <section class="hero"><img src="img/principal.jpg" class="img-bienvenida" alt="Bienvenida"></section>
-  <h2><font color="white">Descubre nuestro menú</h2><p>Explore sabores únicos en nuestra sección de POSTRES y SNACKS.</p></font>
-</main>
-
-
-<!-- Horario Compacto y Adaptativo Integrado -->
-<div id="horario-compacto" style="text-align:center; font-family: Arial, sans-serif; padding:8px 0;">
-  <h2 id="titulo">Horario</h2>
-  <div id="reloj"></div>
-  <div id="estado"></div>
-  <ul id="dias" style="list-style:none; padding:0; margin:8px 0 0 0;">
-    <li data-dia="5,6,0">Viernes a Domingo de: <strong>17:00 a 23:00 hrs</strong></li>
-  </ul>
-</div>
-
-<style>
-  #horario-compacto h2 { margin:4px 0; font-size:1em; }
-  #horario-compacto #reloj { font-size:1em; margin:4px 0; }
-  #horario-compacto #estado {
-      font-weight:bold;
-      font-size:1em;
-      margin:4px 0;
-      padding:3px 8px;
-      border-radius:4px;
-      display:inline-block;
-      transition: all 0.3s ease;
-  }
-  .open-anim {
-      animation: zoomEstado 0.5s ease forwards;
-  }
-  @keyframes zoomEstado {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); }
-  }
-  #horario-compacto li { 
-      display:flex; 
-      align-items:center; 
-      justify-content:center; 
-      padding:4px 0; 
-      font-size:0.95em; 
-  }
-  @keyframes brillo {
-    0% { box-shadow: 0 0 3px var(--brillo-color); }
-    50% { box-shadow: 0 0 6px var(--brillo-color); }
-    100% { box-shadow: 0 0 3px var(--brillo-color); }
-  }
-  .dia-actual {
-      border-radius:4px;
-      font-weight:bold;
-      animation: brillo 1.5s infinite;
-      padding:1px 4px;
-  }
-</style>
-
-<script>
-  // 🕐 Reloj en vivo
-  function actualizarReloj() {
-      const reloj = document.getElementById("reloj");
-      const ahora = new Date();
-      let h = ahora.getHours(), m = ahora.getMinutes(), s = ahora.getSeconds();
-      h=h<10?"0"+h:h; m=m<10?"0"+m:m; s=s<10?"0"+s:s;
-      reloj.textContent = h + ":" + m + ":" + s;
-  }
-
-  // 🟢 Estado abierto/cerrado
-  let ultimoEstado = "";
-  function actualizarEstado() {
-      const ahora = new Date();
-      const hoy = ahora.getDay();
-      const estado = document.getElementById("estado");
-      let abierto = false;
-
-      if ([5,6,0].includes(hoy)) {
-          const ahoraMin = ahora.getHours() * 60 + ahora.getMinutes();
-          const abreMin = 17 * 60;
-          const cierraMin = 23 * 60;
-          if (ahoraMin >= abreMin && ahoraMin <= cierraMin) abierto = true;
-      }
-
-      if (abierto) {
-          estado.textContent = "🟢 Abierto";
-          estado.style.color = "green";
-          estado.style.boxShadow = "0 0 8px green";
-          if (ultimoEstado !== "abierto") {
-              estado.classList.add("open-anim");
-              setTimeout(()=> estado.classList.remove("open-anim"), 500);
-          }
-          ultimoEstado = "abierto";
-      } else {
-          estado.textContent = "🔴 Cerrado";
-          estado.style.color = "red";
-          estado.style.boxShadow = "0 0 8px red";
-          ultimoEstado = "cerrado";
-      }
-  }
-
-  // ✨ Resaltar día actual
-  function resaltarDia(){
-      const dias = document.querySelectorAll("#dias li");
-      const hoy = new Date().getDay();
-      dias.forEach(li=>{
-          const diasArray = li.dataset.dia.split(",").map(Number);
-          if(diasArray.includes(hoy)){
-              li.classList.add("dia-actual");
-          }
-      });
-      ajustarColores();
-      actualizarEstado();
-  }
-
-  // 🎨 Ajuste de colores según fondo
-  function ajustarColores() {
-      let bodyStyles = window.getComputedStyle(document.body);
-      let bgColor = bodyStyles.backgroundColor || "rgb(255,255,255)";
-      let rgb = bgColor.match(/\d+/g);
-      let brightness = (parseInt(rgb[0])*299 + parseInt(rgb[1])*587 + parseInt(rgb[2])*114)/1000;
-      let textoColor = brightness > 128 ? "#000" : "#fff";
-      let brilloColor = brightness > 128 ? "rgba(241,196,15,1)" : "rgba(255,255,0,1)";
-      document.getElementById("titulo").style.color = textoColor;
-      document.getElementById("reloj").style.color = textoColor;
-      document.querySelectorAll("#dias li").forEach(li=>li.style.color = textoColor);
-      document.documentElement.style.setProperty("--brillo-color", brilloColor);
-      document.querySelectorAll(".dia-actual").forEach(li=>{
-          li.style.backgroundColor = brightness > 128 ? "rgba(241,196,15,0.5)" : "rgba(255,255,0,0.5)";
-      });
-  }
-
-  // 🚀 Inicializar
-  setInterval(()=>{ actualizarReloj(); actualizarEstado(); }, 1000);
-  window.onload = ()=>{
-      actualizarReloj();
-      resaltarDia();
-  };
-</script>
-
-
- <!-- Footer al final de la página -->
-<footer class="footer">
-  <!-- Dirección -->
-  <div class="footer-direccion">
-    <p>
-      Calle Emiliano Zapata, San Pedro Abajo 1.ª sección<br>
-      (Frente al centro de salud)<br>
-      Temoaya, Estado de México
-    </p>
-  </div>
-
-  <!-- Botones -->
-  <div class="footer-botones">
-    <a href="https://www.google.com/maps/dir/Current+Location/19.4788806,-99.5798941" 
-       target="_blank" class="btn-mapa" aria-label="Cómo llegar">
-      📍 Cómo llegar
-    </a>
-
-    <a href="https://wa.me/5217203173783?text=¡Hola!%20me%20podria%20hacer%20un%20pedido%20a%20domicilio" 
-       target="_blank" class="btn-whatsapp" aria-label="Ordenar por WhatsApp">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-      ORDENAR
-    </a>
-  </div>
-</footer>
-
-<style>
-/* Contenedor del footer */
-.footer {
-  width: 100%;
-  background: rgba(0, 0, 0, 0.6); /* fondo semi-transparente */
-  color: #fff;
-  text-align: center;
-  padding: 4px 10px;
-  box-sizing: border-box;
+/* Body con fondo estable */
+body {
+  margin: 0;
   font-family: Arial, sans-serif;
+  color: var(--color-secundario);
+  min-height: 100vh;
+
+  /* Degradado + imagen */
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(7,16,33,var(--fondo-opacidad)) 0%,
+      rgba(12,19,32,var(--fondo-opacidad)) 100%
+    ),
+    var(--fondo-img);
+
+  background-position: center;
+  background-size: cover;  /* cubre todo el espacio */
+  background-repeat: no-repeat;
+  background-attachment: scroll; /* evita que se estire en móviles */
 }
 
-/* Dirección */
-.footer-direccion p {
-  margin: 0 0 12px 0;
-  font-size: 15px;
-  line-height: 1.4;
+/* Fijo solo en desktop */
+@media (min-width: 768px) {
+  body {
+    background-attachment: fixed; /* efecto parallax en desktop */
+  }
 }
 
-/* Botones alineados */
-.footer-botones {
+/* Header/logo */
+header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  background: rgba(0,0,0,0.45);
+  color: #ffffff;
+}
+
+header img.logo {
+  width: 100px;
+  height: auto;
+  border-radius: 100px;
+  box-shadow: inset 0 1px 58px #000000, 0 0 15px 1px #FFFFFF;
+}
+
+/* Nav sticky 3D */
+nav {
+  display: flex;
+  justify-content: space-around;
+  gap: 8px;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 1px 10px 20px #320000 inset, 0 0 8px -6px #FFFFFF;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--navbar-bg);
+  backdrop-filter: blur(10px);
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--color-secundario);
+  font-weight: 700;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: linear-gradient(145deg,#fff,#e6e6e6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all .18s ease-in-out;
+}
+
+nav a:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 1px 5px 10px #000000 inset, 0 0 8px -6px #FFFFFF;
+}
+
+nav a.active {
+  color: var(--color-principal);
+  background: linear-gradient(145deg,#fff7f7,#ffecec);
+}
+
+/* Main */
+main {
+  max-width: 1100px;
+  margin: 18px auto;
+  padding: 0 14px;
+}
+
+.welcome-text {
+  text-align: center;
+  color: var(--color-principal);
+  margin: 18px 0;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+  animation: aparecer 2.5s ease-out;
+}
+
+.welcome-text h2 {
+  margin: 1px 0;
+  font-size: 2rem;
+}
+
+.hero {
   display: flex;
   justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
+  padding: 10px;
 }
 
-/* Botones comunes */
-.footer-botones a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 10px 18px;
-  font-size: 15px;
-  font-weight: bold;
-  border-radius: 8px;
-  text-decoration: none;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  white-space: nowrap;
-  transition: background 0.3s, transform 0.2s;
+.img-bienvenida {
+  width: 100%;
+  max-width: 700px;
+  height: auto;
+  border-radius: 50px;
+  box-shadow: 0 0px 15px 1px rgba(255,255,255,1);
+  animation: zoom 4.5s ease-out;
 }
 
-/* Botón Cómo llegar */
-.btn-mapa {
-  background-color: #b22222;
-  color: #fff;
-  border-radius: 20px;
-}
-.btn-mapa:hover {
-  background-color: #a11d1d;
-  transform: translateY(-2px);
+/* Grid contenedor de tarjetas */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+  margin-top: 12px;
 }
 
-/* Botón WhatsApp */
-.btn-whatsapp {
-  background-color: #25d366;
-  color: #fff;
-  border-radius: 8px;
-}
-.btn-whatsapp img {
-  width: 24px;
-  height: 24px;
-}
-.btn-whatsapp:hover {
-  background-color: #1ebe57;
-  transform: translateY(-2px);
+/* Tarjeta con imagen de fondo */
+.card {
+  background: var(--color-fondo-tarjeta) url("img/pngtree-warm-pink-cute-mother-and-baby-background-image_147126.jpg") no-repeat center center;
+  background-size: cover;
+  border-radius: 70px 0 70px 0;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 0px 8px 2px rgba(178,34,34,1);
+  position: relative;
+  overflow: hidden;
 }
 
-/* Responsive: botones más grandes en móviles */
-@media (max-width: 480px) {
-  .footer-botones a {
-    padding: 10px 14px;
-    font-size: 14px;
-  }
+.card img {
+  width: 98%;
+  height: 210px;
+  object-fit: cover;
+  border-radius: 70px 0 70px 0;
+  margin-bottom: 5px;
+  box-shadow: 0 0px 9px 2px rgba(0,0,0,1);
 }
-</style>
+
+/* Precio */
+.price {
+  color: var(--color-principal);
+  font-weight: 800;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 10px 0;
+  color: #ffffff;
+  margin-top: 20px;
+  background: rgba(0,0,0,.7);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+/* Animations */
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes zoom {
+  from { opacity: 0; transform: scale(.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Responsive */
+@media(max-width:768px){
+  .img-bienvenida{ width:92%; }
+  nav{ flex-wrap:wrap; gap:6px; }
+  header img.logo{ width:64px; }
+}
+
+/* Hover dorado en botones y pestañas */
+nav a:hover, 
+.card button:hover {
+  background-color: var(--color-secundario);
+  color: var(--color-principal);
+  box-shadow: 0 0 10px var(--color-secundario);
+  transform: scale(1.15);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Animación de brillo para logo/título */
+@keyframes brilloSuave {
+  0% { text-shadow: 0 0 5px var(--color-secundario); }
+  50% { text-shadow: 0 0 20px var(--color-secundario), 0 0 30px var(--color-principal); }
+  100% { text-shadow: 0 0 5px var(--color-secundario); }
+}
+
+header h1, 
+header img {
+  animation: brilloSuave 3s infinite alternate;
+}
