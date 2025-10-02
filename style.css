@@ -132,11 +132,11 @@ main{
 .hero{
   display:flex;
   justify-content:center;
-  padding:10px;
+  padding:5px;
 }
 .img-bienvenida{
   width:100%;
-  max-width:700px;
+  max-width:500px;
   height:auto;
   border-radius:50px;
   box-shadow:0 0px 15px 1px rgba(255,255,255,1);
