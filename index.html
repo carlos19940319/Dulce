@@ -160,107 +160,21 @@
 
 
 
+
+
+
 <!-- Footer compacto -->
-<footer class="footer">
-  <!-- Dirección -->
-  <div class="footer-direccion">
-    <p>
-      Calle Emiliano Zapata, San Pedro Abajo 1.ª sección<br>
-      (Frente al centro de salud)<br>
-      Temoaya, Estado de México
-    </p>
+<footer style="width:100%; background:rgba(0,0,0,0.5); color:#fff; text-align:center; padding:12px 8px; box-sizing:border-box; font-family:Arial,sans-serif;">
+  <div class="footer-direccion" style="margin-bottom:10px; font-size:14px; line-height:1.4;">
+    Calle Amado Nervo 14-MZ 016,<br>
+    San Miguel, 52740 Ocoyoacac, Méx
   </div>
-
-  <!-- Botones -->
-  <div class="footer-botones">
-    <a href="https://www.google.com/maps/dir/Current+Location/19.4788806,-99.5798941" 
-       target="_blank" class="btn-mapa" aria-label="Cómo llegar">
-      📍 Cómo llegar
-    </a>
-
-    <a href="https://wa.me/5217203173783?text=¡Hola!%20me%20podria%20hacer%20un%20pedido%20a%20domicilio" 
-       target="_blank" class="btn-whatsapp" aria-label="Ordenar por WhatsApp">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-      ORDENAR
+  <div class="footer-botones" style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+    <a href="https://www.google.com/maps/dir/?api=1&origin=My+Location&destination=Calle+Amado+Nervo+14-MZ+016,+San+Miguel,+52740+Ocoyoacac,+Méx"
+       target="_blank" style="padding:8px 16px; background:#b22222; color:#fff; font-size:14px; font-weight:bold; border-radius:15px; text-decoration:none;">📍 Cómo llegar</a>
+    <a href="https://wa.me/5217222675873?text=Hola%20quiero%20más%20información%20sobre%20su%20pizzería"
+       target="_blank" style="display:inline-flex; align-items:center; gap:6px; padding:8px 16px; background:#25d366; color:#fff; font-size:14px; font-weight:bold; border-radius:8px; text-decoration:none;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width:20px; height:20px;">722 267 5873
     </a>
   </div>
 </footer>
-
-<style>
-/* Contenedor del footer */
-.footer {
-  width: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  color: #fff;
-  text-align: center;
-  padding: 8px 10px; /* más compacto */
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
-
-/* Dirección */
-.footer-direccion p {
-  margin: 0 0 8px 0; /* margen más pequeño */
-  font-size: 14px;   /* fuente más compacta */
-  line-height: 1.3;
-}
-
-/* Botones alineados */
-.footer-botones {
-  display: flex;
-  justify-content: center;
-  gap: 10px; /* menos espacio entre botones */
-  flex-wrap: wrap;
-}
-
-/* Botones comunes */
-.footer-botones a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px; /* espacio icono-texto más compacto */
-  padding: 8px 14px; /* padding más pequeño */
-  font-size: 14px;   /* fuente más pequeña */
-  font-weight: bold;
-  border-radius: 8px;
-  text-decoration: none;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  white-space: nowrap;
-  transition: background 0.3s, transform 0.2s;
-}
-
-/* Botón Cómo llegar */
-.btn-mapa {
-  background-color: #b22222;
-  color: #fff;
-  border-radius: 20px;
-}
-.btn-mapa:hover {
-  background-color: #a11d1d;
-  transform: translateY(-2px);
-}
-
-/* Botón WhatsApp */
-.btn-whatsapp {
-  background-color: #25d366;
-  color: #fff;
-  border-radius: 8px;
-}
-.btn-whatsapp img {
-  width: 20px; /* icono más pequeño */
-  height: 20px;
-}
-.btn-whatsapp:hover {
-  background-color: #1ebe57;
-  transform: translateY(-2px);
-}
-
-/* Responsive: botones más grandes en móviles */
-@media (max-width: 480px) {
-  .footer-botones a {
-    padding: 8px 12px;
-    font-size: 13px;
-  }
-}
-</style>
-</body>
