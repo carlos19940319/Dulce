@@ -17,7 +17,9 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   color: var(--color-secundario);
-  height: 100vh;
+
+  /* Mantener altura mínima igual al viewport real */
+  min-height: 100vh;
 
   /* Fondo con degradado + imagen */
   background-image:
@@ -29,9 +31,9 @@ body {
     url("img/fondo44.jpg");
 
   background-position: center center;
-  background-size: 100% 100%;
+  background-size: cover; /* cubre todo el área sin deformarse */
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-attachment: fixed; /* fondo fijo */
 }
 
 /* Header/logo fijo */
@@ -42,7 +44,7 @@ header{
   padding:14px;
   background: rgba(0,0,0,0.5);
   color:#ffffff;
-  position: fixed; /* ← Fijo */
+  position: fixed; /* Fijo */
   top: 0;
   left: 0;
   width: 100%;
@@ -62,9 +64,9 @@ nav{
   justify-content:space-around;
   gap:4px;
   padding:7px;
-  border-radius:10px 10xp 10xp;
+  border-radius:10px 10px 10px 10px;
   box-shadow:1px 10px 20px #320000 inset, 0px 0px 8px -6px #FFFFFF;
-  position: fixed; /* ← Fijo */
+  position: fixed;
   top: 72px; /* Ajustar según la altura de tu header */
   left: 0;
   width: 100%;
@@ -78,7 +80,7 @@ nav a{
   color:var(--color-secundario);
   font-weight:700;
   padding:10px 14px;
-  border-radius:12px 12px;
+  border-radius:12px;
   background: linear-gradient(145deg,#fff,#e6e6e6);
   box-shadow:0px 0px 8px #000000 inset, 0px 9px 8px -3px #000000;
   display:flex;
