@@ -87,6 +87,15 @@ nav a{
   flex-direction:column;
   align-items:center;
   transition: all .18s ease-in-out;
+
+  /* Eliminar efecto verdoso en móviles */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Quitar contorno al hacer focus (teclado/PC) */
+nav a:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 nav a:hover{
