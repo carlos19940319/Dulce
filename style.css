@@ -32,62 +32,70 @@ header img.logo {
   margin: 10px 0;
 }
 
-/* Nav fijo debajo del header, centrado y responsivo */
+
+/* 📍 NAV fijo debajo del header */
 nav {
-  display: flex;               /* Mantener botones en fila */
-  justify-content: center;     /* Centrar horizontalmente */
-  align-items: center;         /* Centrar verticalmente */
-  gap: 8px;                    /* Espacio entre botones */
-  padding: 7px 10px;
-  border-radius: 10px;
-  box-shadow: 1px 10px 20px #320000 inset, 0px 0px 8px -6px #FFFFFF;
-  position: relative;          /* Para que quede debajo del logo */
-  width: 100%;
-  z-index: 1000;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 8px;
+  padding: 7px;
+  border-radius: 8px;
+  box-shadow: 1px 8px 20px #320000 inset, 0px 0px 8px -6px #FFFFFF;
+  position: fixed;
+  top: calc(var(--header-height) + 0px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 85%;
+  max-width: 1200px;
+  height: var(--nav-height);
+  z-index: 1001;
   background: var(--navbar-bg);
-  backdrop-filter: blur(-20px);
-  flex-wrap: nowrap;           /* Mantiene fila única */
-  box-sizing: border-box;       /* Incluye padding dentro del ancho total */
+  backdrop-filter: blur(20px);
+
+  flex-wrap: nowrap;
+  overflow: hidden;
 }
 
-/* Botones nav centrados y adaptables */
 nav a {
-  display: flex;
-  flex-direction: column;
+  flex: 1 1 auto;
+  min-width: 64px;
+  max-width: 240px;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  flex: 0 1 auto;              /* Ajuste automático sin romper diseño */
-  white-space: nowrap;          /* Evita que el texto se divida */
-  padding: 10px 14px;
-  border-radius: 12px;
+  gap: 8px;
+  white-space: nowrap;
   text-decoration: none;
   color: var(--color-secundario);
   font-weight: 700;
+  font-size: clamp(0.8rem, 1.6vw, 1rem);
+  padding: 10px 14px;
+  border-radius: 8px;
   background: linear-gradient(145deg,#fff,#e6e6e6);
-  box-shadow: 0px 0px 8px #000000 inset, 0px 9px 8px -3px #000000;
-  transition: all .18s ease-in-out;
-  -webkit-tap-highlight-color: transparent; /* Evita efecto verdoso en móviles */
+  box-shadow: 0px 0px 7px #000000 inset, 0px 6px 8px -3px #000000;
+  transition: transform 0.18s ease-in-out, box-shadow 0.18s ease-in-out;
 }
 
-/* Quitar contorno al hacer focus */
+nav a:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 1px 5px 10px #000000 inset, 0px 0px 8px -6px #FFFFFF;
+}
+
+nav a:active {
+  transform: translateY(2px) scale(.98);
+}
+
+nav a.active {
+  color: var(--color-principal);
+  background: linear-gradient(145deg,#fff7f7,#ffecec);
+}
+
 nav a:focus {
   outline: none;
   box-shadow: none;
 }
 
-/* Hover y activo en botones */
-nav a:hover {
-  transform: translateY(-4px) scale(1.03);
-  box-shadow: 1px 5px 10px #000000 inset, 0px 0px 8px -6px #FFFFFF;
-}
-nav a:active {
-  transform: translateY(2px) scale(.98);
-  box-shadow: inset 4px 4px 6px #b3b3b3, inset -4px -4px 6px #ffffff;
-}
-nav a.active {
-  color: var(--color-principal);
-  background: linear-gradient(145deg,#fff7f7,#ffecec);
-}
 
 /* Main con padding-top para que no quede debajo del header+nav */
 main {
