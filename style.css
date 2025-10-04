@@ -42,62 +42,99 @@ body::before {
   background-repeat: no-repeat;
   z-index: -1;
 }
-
-/* Header/logo fijo */
-header{
-  display:flex;
-  align-items:center;
-  justify-content:flex-start; /* Logo a la izquierda */
-  gap:10px;
-  padding:14px;
-  background: rgba(0,0,0,0.5);
-  color:#ffffff;
+/* 📌 Header: logo, título y redes */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 8px 16px;
+  background: rgba(0,0,0,0.7);
+  color: #ffffff;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1001;
+  height: var(--header-height);
+  z-index: 1002;
 }
 
-header img.logo{
-  width:100px;
-  height:auto;
-  border-radius:100px;
-  box-shadow:0px 1px 1px #ffffff inset, 0px 0px 1px 1px #FFFFFF;
+/* Logo principal */
+header img.logo {
+  width: 40px;
+  height: auto;
+  border-radius: 50px;
+  box-shadow: 0px 1px 5px #000000 inset, 0px 0px 10px 1px #FFFFFF;
 }
 
-/* Nav fijo debajo del header */
-nav{
-  display:flex;
-  justify-content:space-around;
-  gap:4px;
-  padding:7px;
-  border-radius:10px 10px 10px 10px;
-  box-shadow:1px 10px 20px #320000 inset, 0px 0px 8px -6px #FFFFFF;
+/* Título junto al logo */
+header h1, header h2, header .titulo {
+  margin: 0;
+  padding: 0;
+  font-size: clamp(1rem, 1.8vw, 1.8rem);
+  color: #ffffff;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+  animation: brilloSuave 3s infinite alternate;
+}
+
+
+
+/* 📍 NAV fijo debajo del header */
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 8px;
+  padding: 7px;
+  border-radius: 8px;
+  box-shadow: 1px 8px 20px #320000 inset, 0px 0px 8px -6px #FFFFFF;
   position: fixed;
-  top: 70px; /* justo debajo del header */
-  left: 0;
-  width: 100%;
-  z-index: 1000;
+  top: calc(var(--header-height) + 0px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 85%;
+  max-width: 1200px;
+  height: var(--nav-height);
+  z-index: 1001;
   background: var(--navbar-bg);
   backdrop-filter: blur(20px);
-  flex-wrap: nowrap; /* no se baja */
-  overflow-x: auto; /* scroll horizontal si no cabe */
+
+  flex-wrap: nowrap;
+  overflow: hidden;
 }
 
-nav a{
-  text-decoration:none;
-  color:var(--color-secundario);
-  font-weight:700;
-  padding:10px 14px;
-  border-radius:12px;
+nav a {
+  flex: 1 1 auto;
+  min-width: 64px;
+  max-width: 240px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+  text-decoration: none;
+  color: var(--color-secundario);
+  font-weight: 700;
+  font-size: clamp(0.8rem, 1.6vw, 1rem);
+  padding: 10px 14px;
+  border-radius: 8px;
   background: linear-gradient(145deg,#fff,#e6e6e6);
-  box-shadow:0px 0px 8px #000000 inset, 0px 9px 8px -3px #000000;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  transition: all .18s ease-in-out;
-  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0px 0px 7px #000000 inset, 0px 6px 8px -3px #000000;
+  transition: transform 0.18s ease-in-out, box-shadow 0.18s ease-in-out;
+}
+
+nav a:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 1px 5px 10px #000000 inset, 0px 0px 8px -6px #FFFFFF;
+}
+
+nav a:active {
+  transform: translateY(1px) scale(.);
+}
+
+nav a.active {
+  color: var(--color-principal);
+  background: linear-gradient(145deg,#fff7f7,#ffecec);
 }
 
 nav a:focus {
@@ -105,20 +142,10 @@ nav a:focus {
   box-shadow: none;
 }
 
-nav a:hover{
-  transform: translateY(-4px) scale(1.03);
-  box-shadow:1px 5px 10px #000000 inset, 0px 0px 8px -6px #FFFFFF;
-}
 
-nav a:active{
-  transform: translateY(2px) scale(.98);
-  box-shadow: inset 4px 4px 6px #b3b3b3, inset -4px -4px 6px #ffffff;
-}
 
-nav a.active{
-  color: var(--color-principal);
-  background: linear-gradient(145deg,#fff7f7,#ffecec);
-}
+
+
 
 /* Main con padding-top para que no quede debajo del header+nav */
 main{
@@ -217,32 +244,33 @@ footer{
   to{opacity:1; transform:scale(1)}
 }
 
-/* Responsive */
-@media(max-width:768px){
-  .img-bienvenida{ width:92%; }
-  nav{ gap:6px; top:100px; } /* Ajustar si header cambia de altura */
-  header img.logo{ width:64px;}
+* 📱 Responsive */
+@media (max-width: 768px) {
+  header img.logo { width: 36px; }
+  header h1, header h2, header .titulo { font-size: clamp(0.9rem, 4vw, 1.6rem); }
+  nav { width: 95%; gap: 4px; }
+  nav a { font-size: clamp(0.7rem, 2.5vw, 0.95rem); padding: 8px 10px; }
+  .img-bienvenida { width: 95%; }
+  footer .footer-botones a { font-size: 13px; padding: 7px 12px; }
 }
 
-/* Hover dorado en botones y pestañas */
-nav a:hover,
-.card button:hover {
-  background-color: var(--color-secundario);
-  color: #b22222;
-  box-shadow: 0 0 10px var(--color-secundario);
-  transform: scale(1.15);
-  transition: all 0.3s ease-in-out;
+/* Animaciones */
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* Animación de brillo para logo/título */
+@keyframes zoom {
+  from { opacity: 0; transform: scale(.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
 @keyframes brilloSuave {
-0% { text-shadow: 0 0 5px var(--color-secundario); }
-50% { text-shadow: 0 0 20px var(--color-secundario), 0 0 30px var(--color-principal); }
-100% { text-shadow: 0 0 5px var(--color-secundario); }
+  0% { text-shadow: 0 0 5px var(--color-secundario); }
+  50% { text-shadow: 0 0 20px var(--color-secundario), 0 0 30px var(--color-principal); }
+  100% { text-shadow: 0 0 5px var(--color-secundario); }
 }
 
-header h1,
-header img {
-animation: brilloSuave 3s infinite alternate;
+header h1, header img {
+  animation: brilloSuave 3s infinite alternate;
 }
-
