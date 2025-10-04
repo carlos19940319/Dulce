@@ -176,12 +176,14 @@ main{
 
 /* Imagen interna en tarjeta */
 .card img {
-  width: 85%;
+  width: 100%; /* 🔁 más pequeña dentro del contenedor */
   height: 210px;
-  object-fit: cover;
+  object-fit: contain; /* ✅ muestra toda la imagen completa */
   border-radius: 70px 0px 70px 0px;
-  margin-bottom: 5px;
-  box-shadow:0 0px 9px 2px rgba(0, 0, 0, 1);
+  margin: 0 auto 5px auto; /* ✅ centra la imagen */
+  display: block;
+  box-shadow: 0 0px 9px 2px rgba(0, 0, 0, 1);
+  background-color: #fff; /* 👈 opcional si quieres fondo detrás de la imagen */
 }
 
 /* Precio */
