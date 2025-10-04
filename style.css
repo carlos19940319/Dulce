@@ -1,4 +1,3 @@
-
 /* Variables editables */
 :root{
   --color-principal: #b22222;
@@ -18,34 +17,42 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   color: var(--color-secundario);
-
-  /* Mantener altura mínima igual al viewport real */
   min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
 
-  /* Fondo con degradado + imagen */
-  background-image:
+/* Fondo fijo usando pseudo-elemento */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
     linear-gradient(
       180deg,
       rgba(7, 16, 33, var(--fondo-opacidad)) 0%,
       rgba(12, 19, 32, var(--fondo-opacidad)) 100%
     ),
     url("img/fondo44.jpg");
-
-  background-position: center center;
-  background-size: cover; /* cubre todo el área sin deformarse */
+  background-position: center;
+  background-size: cover;
   background-repeat: no-repeat;
-  background-attachment: fixed; /* fondo fijo */
+  z-index: -1;
 }
 
 /* Header/logo fijo */
 header{
   display:flex;
   align-items:center;
+  justify-content:flex-start; /* Logo a la izquierda */
   gap:10px;
   padding:14px;
   background: rgba(0,0,0,0.5);
   color:#ffffff;
-  position: fixed; /* Fijo */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -68,12 +75,14 @@ nav{
   border-radius:10px 10px 10px 10px;
   box-shadow:1px 10px 20px #320000 inset, 0px 0px 8px -6px #FFFFFF;
   position: fixed;
-  top: 72px; /* Ajustar según la altura de tu header */
+  top: 70px; /* justo debajo del header */
   left: 0;
   width: 100%;
   z-index: 1000;
   background: var(--navbar-bg);
-  backdrop-filter: blur(-20px);
+  backdrop-filter: blur(20px);
+  flex-wrap: nowrap; /* no se baja */
+  overflow-x: auto; /* scroll horizontal si no cabe */
 }
 
 nav a{
@@ -88,12 +97,9 @@ nav a{
   flex-direction:column;
   align-items:center;
   transition: all .18s ease-in-out;
-
-  /* Eliminar efecto verdoso en móviles */
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Quitar contorno al hacer focus (teclado/PC) */
 nav a:focus {
   outline: none;
   box-shadow: none;
@@ -119,9 +125,10 @@ main{
   max-width:1100px;
   margin:18px auto;
   padding:0 14px;
-  padding-top: 140px; /* Ajustar según header + nav */
+  padding-top: 140px; /* header + nav */
 }
 
+/* Bienvenida */
 .welcome-text{
   text-align:center;
   color:#c00000;
@@ -174,17 +181,14 @@ main{
   position: relative;
   overflow: hidden;
 }
-/* Imagen interna en tarjeta */
 .card img {
-width: 100%;
-height: 220px;
-object-fit: cover;
-border-radius: 70px 0px 70px 0px;
-margin-bottom: 10px;
-box-shadow:0 0px 9px 2px rgba(0, 0, 0, 1);
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 70px 0px 70px 0px;
+  margin-bottom: 10px;
+  box-shadow:0 0px 9px 2px rgba(0, 0, 0, 1);
 }
-
-
 
 /* Precio */
 .price {
@@ -216,7 +220,7 @@ footer{
 /* Responsive */
 @media(max-width:768px){
   .img-bienvenida{ width:92%; }
-  nav{ flex-wrap:wrap; gap:6px; top:90px; }
+  nav{ gap:6px; top:100px; } /* Ajustar si header cambia de altura */
   header img.logo{ width:64px;}
 }
 
@@ -241,3 +245,4 @@ header h1,
 header img {
 animation: brilloSuave 3s infinite alternate;
 }
+
