@@ -14,23 +14,39 @@ button {
   box-shadow: 0px 1px 1px #ffffff inset, 0px 0px 1px 1px #FFFFFF;
 }
 
+/* Header */
+header {
+  display: flex;
+  flex-direction: column; /* Logo arriba, barra debajo */
+  align-items: center;
+  width: 100%;
+  background: transparent;
+  z-index: 1001;
+  position: relative;
+}
+
+/* Logo */
+header img.logo {
+  width: 120px; /* Ajustable */
+  height: auto;
+  margin: 10px 0;
+}
+
 /* Nav fijo debajo del header, centrado y responsivo */
 nav {
   display: flex;               /* Mantener botones en fila */
   justify-content: center;     /* Centrar horizontalmente */
   align-items: center;         /* Centrar verticalmente */
   gap: 8px;                    /* Espacio entre botones */
-  padding: 7px;
+  padding: 7px 10px;
   border-radius: 10px;
   box-shadow: 1px 10px 20px #320000 inset, 0px 0px 8px -6px #FFFFFF;
-  position: fixed;
-  top: 72px;                   /* Ajustar según la altura de tu header */
-  left: 0;
+  position: relative;          /* Para que quede debajo del logo */
   width: 100%;
   z-index: 1000;
   background: var(--navbar-bg);
   backdrop-filter: blur(-20px);
-  flex-wrap: nowrap;            /* Evita que los botones bajen */
+  flex-wrap: nowrap;           /* Mantiene fila única */
   box-sizing: border-box;       /* Incluye padding dentro del ancho total */
 }
 
@@ -76,9 +92,9 @@ nav a.active {
 /* Main con padding-top para que no quede debajo del header+nav */
 main {
   max-width: 1100px;
-  margin: 18px auto;
+  margin: 0 auto;
   padding: 0 14px;
-  padding-top: 155px; /* Ajustar según header + nav */
+  padding-top: 220px; /* altura header + nav */
 }
 
 /* Texto de bienvenida */
@@ -177,7 +193,6 @@ footer {
   nav { 
     flex-wrap: nowrap; /* Mantener fila única */
     gap: 6px; 
-    top: 90px; 
   }
   header img.logo { width: 64px; }
 }
