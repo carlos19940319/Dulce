@@ -118,7 +118,7 @@ main{
   max-width:1100px;
   margin:18px auto;
   padding:0 14px;
-  padding-top: 140px; /* Ajustar según header + nav */
+  padding-top: 155px; /* Ajustar según header + nav */
 }
 
 .welcome-text{
