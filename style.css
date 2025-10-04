@@ -176,7 +176,7 @@ main{
 
 /* Imagen interna en tarjeta */
 .card img {
-  width: 98%;
+  width: 85%;
   height: 210px;
   object-fit: cover;
   border-radius: 70px 0px 70px 0px;
