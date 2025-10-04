@@ -195,6 +195,16 @@ footer {
   to {opacity: 1; transform: scale(1);}
 }
 
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  header img.logo { width: 36px; }
+  header h1, header h2, header .titulo { font-size: clamp(0.9rem, 4vw, 1.6rem); }
+  nav { width: 95%; gap: 4px; }
+  nav a { font-size: clamp(0.7rem, 2.5vw, 0.95rem); padding: 8px 10px; }
+  .img-bienvenida { width: 95%; }
+  footer .footer-botones a { font-size: 13px; padding: 7px 12px; }
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .img-bienvenida { width: 92%; }
