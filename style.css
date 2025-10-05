@@ -33,13 +33,18 @@ background-repeat: no-repeat;
 background-attachment: fixed;
 }
 
+
 header {
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 14px;
 
-  background-image: url("img/muertos3.jpg");
+  /* Color con opacidad + imagen */
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+    url("img/muertos3");
+
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
