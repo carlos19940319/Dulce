@@ -33,28 +33,25 @@ background-repeat: no-repeat;
 background-attachment: fixed;
 }
 
-/* Header/logo fijo */
-header{
-display:flex;
-align-items:center;
-gap:10px;
-padding:14px;
-background: rgba(0,0,0,0.5);
-color:#ffffff;
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-z-index: 1001;
+header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px;
+
+  background-image: url("img/muertos3.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  color: #ffffff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1001;
 }
 
-header img.logo{
-height:auto;
-width: 100px;
-max-width: 20%; /* se adapta a pantallas grandes */
-border-radius:100px;
-box-shadow:0px 1px 1px #ffffff inset, 0px 0px 1px 1px #FFFFFF;
-}
 
 /* 📍 NAV fijo debajo del header */
 nav {
