@@ -1,5 +1,5 @@
 /* 📌 Variables editables */
-:root {
+:root{
   --color-principal: #b22222;
   --color-secundario: #333333;
   --color-fondo-tarjeta: #ffffff;
@@ -7,7 +7,7 @@
   --header-height: 72px; /* altura base del header */
   --fondo-opacidad: 0.4;
 
-  /* Imágenes opcionales */
+  /* Variables opcionales para imágenes de fondo */
   --header-bg-img: ""; /* Ruta de imagen para header, dejar vacío si no hay */
   --nav-bg-img: "";    /* Ruta de imagen para nav, dejar vacío si no hay */
   width: auto;
@@ -32,8 +32,8 @@ body {
   background-attachment: fixed;
 }
 
-/* Header/logo fijo */
-header {
+/* Header/logo fijo con fondo opcional */
+header{
   display:flex;
   align-items:center;
   gap:10px;
@@ -45,12 +45,13 @@ header {
   width: 100%;
   z-index: 1001;
 
-  /* Fondo opcional con opacidad */
-  background: linear-gradient(rgba(0,0,0,var(--fondo-opacidad)), rgba(0,0,0,var(--fondo-opacidad))),
-              url(var(--header-bg-img)) center/cover no-repeat;
+  /* Fondo opcional sin perder diseño */
+  background: 
+    linear-gradient(rgba(0,0,0,var(--fondo-opacidad)), rgba(0,0,0,var(--fondo-opacidad))),
+    url(var(--header-bg-img)) center/cover no-repeat;
 }
 
-header img.logo {
+header img.logo{
   height:auto;
   width: 100px;
   max-width: 20%; /* se adapta a pantallas grandes */
@@ -58,7 +59,7 @@ header img.logo {
   box-shadow:0px 1px 1px #ffffff inset, 0px 0px 1px 1px #FFFFFF;
 }
 
-/* 📍 NAV fijo debajo del header */
+/* NAV fijo debajo del header con fondo opcional */
 nav {
   display: flex;
   justify-content: space-around;
@@ -76,9 +77,10 @@ nav {
   height: var(--nav-height);
   z-index: 1001;
 
-  /* Fondo opcional con opacidad */
-  background: linear-gradient(rgba(197,0,0,var(--fondo-opacidad)), rgba(197,0,0,var(--fondo-opacidad))),
-              url(var(--nav-bg-img)) center/cover no-repeat;
+  /* Fondo opcional sin perder diseño */
+  background: 
+    linear-gradient(rgba(197,0,0,var(--fondo-opacidad)), rgba(197,0,0,var(--fondo-opacidad))),
+    url(var(--nav-bg-img)) center/cover no-repeat;
 
   backdrop-filter: blur(20px);
   flex-wrap: nowrap;
@@ -129,7 +131,7 @@ main{
   max-width:1100px;
   margin:18px auto;
   padding:0 14px;
-  padding-top: calc(var(--header-height) + 60px); /* se adapta automáticamente */
+  padding-top: calc(var(--header-height) + 60px);
 }
 
 .welcome-text{
