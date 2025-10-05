@@ -12,7 +12,7 @@ width: auto;
 
 :root {
   --fondo-opacidad: 0.4;
-  --fondo-header-img: url("img/muertos3.jpg"); /* Imagen opcional del header */
+  
   --fondo-nav-img: url("");    /* Imagen opcional del nav */
 }
 
@@ -43,6 +43,7 @@ align-items:center;
 gap:10px;
 padding:14px;
 background: rgba(0,0,0,0.5);
+--fondo-header-img: url("img/muertos3.jpg"); /* Imagen opcional del header */
 color:#ffffff;
 position: fixed;
 top: 0;
