@@ -6,8 +6,6 @@
   --navbar-bg: rgba(197,0,0,0.5);
   --fondo-img: "img/fondo2.jpg"; /* ruta editable */
   --fondo-img: url("img/fondo24.jpg");
-  --fondo-header-img: url("img/muertos3.jpg");
-  --fondo-nav-img: "";    /* agregar imagen opcional del nav */
   --header-height: 72px; /* altura base del header */
   width: auto;
 }
