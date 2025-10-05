@@ -1,23 +1,19 @@
-/* 📌 Variables editables */
+/* Variables editables */
 :root{
   --color-principal: #b22222;
   --color-secundario: #333333;
   --color-fondo-tarjeta: #ffffff;
   --navbar-bg: rgba(197,0,0,0.5);
-  --fondo-img: url("img/fondo44.jpg"); /* fondo principal intacto */
-  --header-height: 72px;
-  --nav-height: 60px;
-
-  /* Variables para imágenes opcionales */
-  --fondo-header-img: ""; /* poner url("img/header.jpg") si quieres */
-  --fondo-nav-img: "";    /* poner url("img/nav.jpg") si quieres */
-
-  --fondo-opacidad: 0.4;
+  --fondo-img: url("img/fondo24.jpg"); /* ruta editable de fondo principal */
+  --header-height: 72px; /* altura base del header */
+  --nav-height: 60px; /* altura base del nav */
+  width: auto;
 }
 
-/* Reset box-sizing */
-*, *::before, *::after {
-  box-sizing: border-box;
+:root {
+  --fondo-opacidad: 0.4;
+  --fondo-header-img: url(""); /* Imagen opcional del header */
+  --fondo-nav-img: url("");    /* Imagen opcional del nav */
 }
 
 /* Body y fondo */
@@ -32,7 +28,7 @@ body {
       rgba(7, 16, 33, var(--fondo-opacidad)) 0%,
       rgba(12, 19, 32, var(--fondo-opacidad)) 100%
     ),
-    var(--fondo-img);
+    url("img/fondo44.jpg");
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -45,6 +41,7 @@ header{
   align-items:center;
   gap:10px;
   padding:14px;
+  background: rgba(0,0,0,0.5);
   color:#ffffff;
   position: fixed;
   top: 0;
@@ -52,10 +49,8 @@ header{
   width: 100%;
   z-index: 1001;
 
-  /* Fondo opcional sin afectar diseño original */
-  background-image:
-    linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-    var(--fondo-header-img);
+  /* Imagen opcional del header */
+  background-image: var(--fondo-header-img);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -65,13 +60,14 @@ header{
 header img.logo{
   height:auto;
   width: 100px;
-  max-width: 20%;
+  max-width: 20%; /* se adapta a pantallas grandes */
   border-radius:100px;
   box-shadow:0px 1px 1px #ffffff inset, 0px 0px 1px 1px #FFFFFF;
 }
 
-/* Título junto al logo */
-header h1, header h2, header .titulo{
+header h1,
+header h2,
+header .titulo{
   margin:0;
   padding:0;
   font-size: clamp(1rem, 1.8vw, 1.8rem);
@@ -80,7 +76,6 @@ header h1, header h2, header .titulo{
   animation: brilloSuave 3s infinite alternate;
 }
 
-/* Contenedor redes */
 header .redes{
   display:flex;
   align-items:center;
@@ -117,13 +112,12 @@ nav {
   z-index: 1001;
   background: var(--navbar-bg);
   backdrop-filter: blur(20px);
+
   flex-wrap: nowrap;
   overflow: hidden;
 
-  /* Fondo opcional sin afectar diseño original */
-  background-image:
-    linear-gradient(rgba(197,0,0,0.5), rgba(197,0,0,0.5)),
-    var(--fondo-nav-img);
+  /* Imagen opcional del nav */
+  background-image: var(--fondo-nav-img);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -169,15 +163,14 @@ nav a:focus {
   box-shadow: none;
 }
 
-/* Main con padding-top */
+/* Main con padding-top para que no quede debajo del header+nav*/
 main{
   max-width:1100px;
   margin:18px auto;
   padding:0 14px;
-  padding-top: calc(var(--header-height) + var(--nav-height) + 20px);
+  padding-top: calc(var(--header-height) + 60px);
 }
 
-/* Bienvenida */
 .welcome-text{
   text-align:center;
   color:#c00000;
@@ -196,7 +189,7 @@ main{
   color:#ffffff;
 }
 
-/* Hero */
+/* Imagen de bienvenida */
 .hero{
   display:flex;
   justify-content:center;
@@ -219,7 +212,7 @@ main{
   margin-top: 12px;
 }
 
-/* Tarjeta */
+/* Tarjeta con imagen de fondo */
 .card {
   background: var(--color-fondo-tarjeta) url("img/pngtree-warm-pink-cute-mother-and-baby-background-image_147126.jpg") no-repeat center center;
   background-size: cover;
@@ -230,6 +223,8 @@ main{
   position: relative;
   overflow: hidden;
 }
+
+/* Imagen interna en tarjeta */
 .card img {
   width: 98%;
   height: 210px;
@@ -238,6 +233,8 @@ main{
   margin-bottom: 5px;
   box-shadow:0 0px 9px 2px rgba(0, 0, 0, 1);
 }
+
+/* Precio */
 .price {
   color: var(--color-principal);
   font-weight:800;
@@ -263,26 +260,6 @@ footer{
   from{opacity:0; transform:scale(.95)}
   to{opacity:1; transform:scale(1)}
 }
-@keyframes brilloSuave {
-  0% { text-shadow: 0 0 5px var(--color-secundario); }
-  50% { text-shadow: 0 0 20px var(--color-secundario), 0 0 30px var(--color-principal); }
-  100% { text-shadow: 0 0 5px var(--color-secundario); }
-}
-
-header h1,
-header img {
-  animation: brilloSuave 3s infinite alternate;
-}
-
-/* Hover dorado en botones y pestañas */
-nav a:hover,
-.card button:hover {
-  background-color: var(--color-secundario);
-  color: #b22222;
-  box-shadow: 0 0 10px var(--color-secundario);
-  transform: scale(1.15);
-  transition: all 0.3s ease-in-out;
-}
 
 /* Responsive */
 @media(max-width:768px){
@@ -295,4 +272,26 @@ nav a:hover,
   nav a{ font-size: 0.8rem; padding:6px 8px; }
   .grid { gap:10px; }
   header h1 { font-size:1.5rem; }
+}
+
+/* Hover dorado en botones y pestañas */
+nav a:hover,
+.card button:hover {
+  background-color: var(--color-secundario);
+  color: #b22222;
+  box-shadow: 0 0 10px var(--color-secundario);
+  transform: scale(1.15);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Animación de brillo para logo/título */
+@keyframes brilloSuave {
+  0% { text-shadow: 0 0 5px var(--color-secundario); }
+  50% { text-shadow: 0 0 20px var(--color-secundario), 0 0 30px var(--color-principal); }
+  100% { text-shadow: 0 0 5px var(--color-secundario); }
+}
+
+header h1,
+header img {
+  animation: brilloSuave 3s infinite alternate;
 }
