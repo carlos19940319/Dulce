@@ -12,7 +12,7 @@ width: auto;
 
 :root {
   --fondo-opacidad: 0.4;
-  --fondo-header-img: url(""); /* Imagen opcional del header */
+  --fondo-header-img: url("img/muertos3.jpg"); /* Imagen opcional del header */
   --fondo-nav-img: url("");    /* Imagen opcional del nav */
 }
 
