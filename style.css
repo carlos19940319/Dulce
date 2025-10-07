@@ -4,7 +4,7 @@
   --color-secundario: #333333;
   --color-fondo-tarjeta: #ffffff;
   --navbar-bg: rgba(197, 0, 0, 0.6);
-  --fondo-img: url("img/fondo44.jpg");
+  --fondo-img: url("img/fondo44.jpg"); /* fondo principal */
   --fondo-header-img: url("img/muertos3.jpg");
   --fondo-nav-img: url("img/f9653340-7806-11ee-bcbc-b524174ba5c7jpg");    /* imagen opcional nav */
   --fondo-opacidad: 0.3;
@@ -31,22 +31,22 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* 📌 Fondo fijo universal */
+/* 📌 Fondo fijo universal: fondo44 debajo del header */
 body::before {
   content: "";
   position: fixed;
-  top: 0;
+  top: var(--header-height); /* empieza debajo del header */
   left: 0;
   width: 100%;
-  height: 100%;
+  height: calc(100% - var(--header-height));
   background:
     linear-gradient(
       180deg,
-      rgba(7, 16, 33, var(--fondo-opacidad)) 0%,
-      rgba(12, 19, 32, var(--fondo-opacidad)) 100%
+      rgba(7,16,33,var(--fondo-opacidad)) 0%,
+      rgba(12,19,32,var(--fondo-opacidad)) 100%
     ),
-    var(--fondo-img);
-  background-position: center;
+    var(--fondo-img); /* fondo44 */
+  background-position: center top;
   background-size: cover;
   background-repeat: no-repeat;
   z-index: -1;
@@ -67,7 +67,7 @@ header {
   height: var(--header-height);
   z-index: 1002;
 
-  /* fondo por defecto con posibilidad de imagen */
+  /* fondo header */
   background-color: rgba(0,0,0,0.7);
   background-image: var(--fondo-header-img);
   background-size: cover;
@@ -113,11 +113,6 @@ header .redes img:hover {
   transform: scale(1.1);
 }
 
-
-
-
-
-
 /* 📍 NAV fijo debajo del header */
 nav {
   display: flex;
@@ -136,7 +131,7 @@ nav {
   height: 5vh;
   z-index: 1001;
 
-  /* fondo con opacidad igual que antes */
+  /* fondo nav */
   background-color: var(--navbar-bg);
   background-image: var(--fondo-nav-img); /* opcional */
   background-size: cover;
@@ -188,15 +183,14 @@ nav a:focus {
   box-shadow: none;
 }
 
-
-
-
 /* Main con padding-top automático según header + nav */
 main {
   max-width: 1100px;
   margin: 18px auto;
   padding: 0 14px;
   padding-top: calc(var(--header-height) + var(--nav-height) + 16px); /* se adapta automáticamente */
+  position: relative;
+  z-index: 0;
 }
 
 /* Texto de bienvenida */
