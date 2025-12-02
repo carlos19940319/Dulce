@@ -335,16 +335,17 @@ nav a:hover,
 }
 
 
-/* 🔥 BOTONES SOLO CON ICONOS (SIN FONDO) */
+/* 🔥 BOTONES REDONDOS CON IMAGEN QUE CUBRE TODO */
 .footer-botones a {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 60px;
   height: 60px;
-  background: transparent !important;
+  background: transparent;
   border-radius: 50%;
   padding: 0;
+  overflow: hidden;          /* 👈 IMPORTANTE PARA QUE LA IMAGEN SE RECORTE EN CÍRCULO */
   box-shadow: 0 6px 18px rgba(0,0,0,0.25);
   transition: 0.18s ease;
 }
@@ -355,11 +356,12 @@ nav a:hover,
 }
 
 
-/* 🔹 IMÁGENES DE LOS BOTONES */
+/* 🔹 LA IMAGEN LLENA TODO EL CÍRCULO */
 .footer-botones img {
-  width: 60%;
-  height: 60%;
-  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;         /* 👈 ESTO HACE QUE LA IMAGEN CUBRA 100% */
+  object-position: center;   /* 👈 CENTRA LA IMAGEN */
   display: block;
 }
 
@@ -378,7 +380,7 @@ nav a:hover,
   }
 
   .footer-botones img {
-    width: 60%;
-    height: 60%;
+    width: 100%;
+    height: 100%;
   }
 }
