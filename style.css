@@ -324,3 +324,64 @@ nav a:hover,
   header img.logo { width: 50px; }
   main { padding-top: calc(var(--header-height) + var(--nav-height) + 12px); }
 }
+.footer-botones {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-family: sans-serif;
+}
+
+.footer-botones a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 50px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  transition: 0.15s ease;
+}
+
+.footer-botones a:hover {
+  transform: translateY(-4px);
+}
+
+/* Botón de Google Maps */
+.btn-mapa {
+  background: linear-gradient(180deg,#2b7be4,#1f6cd8);
+}
+
+/* Botón WhatsApp */
+.btn-whatsapp {
+  background: linear-gradient(180deg,#25D366,#128C7E);
+}
+
+.btn-whatsapp img {
+  width: 22px;
+  height: 22px;
+}
+
+/* En pantallas pequeñas, solo círculos */
+@media (max-width:480px){
+  .footer-botones a {
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
+  }
+  .footer-botones a img,
+  .footer-botones a::before,
+  .footer-botones a span {
+    margin: 0;
+  }
+  .footer-botones a span {
+    display: none;
+  }
+}
