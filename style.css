@@ -331,37 +331,39 @@ nav a:hover,
   z-index: 9999;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
 }
 
 
-/* 🔥 BOTONES REDONDOS CON IMAGEN QUE CUBRE TODO */
+/* 🔥 BOTONES REDONDOS CON HALO SEMITRANSPARENTE */
 .footer-botones a {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 60px;
-  height: 60px;
-  background: transparent;
+  width: 72px;               /* ⬅️ MÁS GRANDE */
+  height: 72px;
+  background: rgba(255,255,255,0.18); /* ⬅️ HALO SEMITRANSPARENTE */
   border-radius: 50%;
   padding: 0;
-  overflow: hidden;          /* 👈 IMPORTANTE PARA QUE LA IMAGEN SE RECORTE EN CÍRCULO */
-  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  overflow: hidden;  
+  backdrop-filter: blur(3px); /* ⬅️ EFECTO VIDRIO BONITO */
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
   transition: 0.18s ease;
 }
 
 /* HOVER */
 .footer-botones a:hover {
-  transform: translateY(-4px) scale(1.05);
+  transform: translateY(-4px) scale(1.08);
 }
 
 
-/* 🔹 LA IMAGEN LLENA TODO EL CÍRCULO */
+/* 🔹 LA IMAGEN LLENA MÁS AÚN EL CÍRCULO */
 .footer-botones img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;         /* 👈 ESTO HACE QUE LA IMAGEN CUBRA 100% */
-  object-position: center;   /* 👈 CENTRA LA IMAGEN */
+  width: 85%;       /* ⬅️ IMAGEN MÁS GRANDE */
+  height: 85%;
+  object-fit: contain;   /* ⬅️ PARA PNG SIN DISTORSIÓN */
+  object-position: center;
   display: block;
 }
 
@@ -375,12 +377,12 @@ nav a:hover,
 /* 📱 MODO MÓVIL */
 @media (max-width:480px){
   .footer-botones a {
-    width: 54px;
-    height: 54px;
+    width: 62px;
+    height: 62px;
   }
 
   .footer-botones img {
-    width: 100%;
-    height: 100%;
+    width: 86%;
+    height: 86%;
   }
 }
