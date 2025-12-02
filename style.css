@@ -331,80 +331,54 @@ nav a:hover,
   z-index: 9999;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  font-family: sans-serif;
+  gap: 14px;
 }
 
-/* ESTILO GENERAL DE TODOS LOS BOTONES */
+
+/* 🔥 BOTONES SOLO CON ICONOS (SIN FONDO) */
 .footer-botones a {
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 8px;
-  padding: 12px 16px;
-  border-radius: 50px;
-  text-decoration: none;
-  color: #fff;
-  font-weight: 600;
+  width: 60px;
+  height: 60px;
+  background: transparent !important;
+  border-radius: 50%;
+  padding: 0;
   box-shadow: 0 6px 18px rgba(0,0,0,0.25);
-  transition: 0.15s ease;
+  transition: 0.18s ease;
 }
 
 /* HOVER */
 .footer-botones a:hover {
-  transform: translateY(-4px);
+  transform: translateY(-4px) scale(1.05);
 }
 
 
-/* 🔵 BOTÓN FACEBOOK */
-.icono {
-  background: #1877F2;
-}
-
-.icono img,
-.icono i {
-  width: 22px;
-  height: 22px;
+/* 🔹 IMÁGENES DE LOS BOTONES */
+.footer-botones img {
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
   display: block;
 }
 
 
-/* 📍 BOTÓN MAPA */
-.btn-mapa {
-  background: linear-gradient(180deg,#2b7be4,#1f6cd8);
+/* ❌ OCULTAR TEXTOS */
+.footer-botones span {
+  display: none !important;
 }
 
 
-/* 🟢 BOTÓN WHATSAPP */
-.btn-whatsapp {
-  background: linear-gradient(180deg,#25D366,#128C7E);
-}
-
-.btn-whatsapp img {
-  width: 22px;
-  height: 22px;
-}
-
-
-/* 📱 MODO MÓVIL — SOLO CÍRCULOS */
+/* 📱 MODO MÓVIL */
 @media (max-width:480px){
   .footer-botones a {
-    width: 56px;
-    height: 56px;
-    padding: 0;
-    justify-content: center;
-    border-radius: 50%;
-  }
-
-  .footer-botones a span {
-    display: none;
+    width: 54px;
+    height: 54px;
   }
 
   .footer-botones img {
-    width: 26px !important;
-    height: 26px !important;
-  }
-
-  .footer-botones i {
-    font-size: 26px !important;
+    width: 60%;
+    height: 60%;
   }
 }
