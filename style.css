@@ -334,55 +334,51 @@ nav a:hover,
   gap: 16px;
 }
 
-
-/* 🔥 BOTONES REDONDOS CON HALO SEMITRANSPARENTE */
+/* 🔥 BOTONES FLOTANTES SOLO IMAGEN */
 .footer-botones a {
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 72px;               /* ⬅️ MÁS GRANDE */
+  width: 72px;               /* Tamaño grande */
   height: 72px;
-  background: rgba(255,255,255,0.18); /* ⬅️ HALO SEMITRANSPARENTE */
-  border-radius: 50%;
+  background: transparent;    /* Sin fondo */
+  border-radius: 50%;         /* Redondo */
   padding: 0;
-  overflow: hidden;  
-  backdrop-filter: blur(3px); /* ⬅️ EFECTO VIDRIO BONITO */
-  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-  transition: 0.18s ease;
+  overflow: hidden;           /* Recorta la imagen al círculo */
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3); /* Sombra suave */
+  transition: 0.2s ease;
 }
 
 /* HOVER */
 .footer-botones a:hover {
   transform: translateY(-4px) scale(1.08);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
 }
 
-
-/* 🔹 LA IMAGEN LLENA MÁS AÚN EL CÍRCULO */
+/* 🔹 IMAGEN OCUPA TODO EL BOTÓN */
 .footer-botones img {
-  width: 85%;       /* ⬅️ IMAGEN MÁS GRANDE */
-  height: 85%;
-  object-fit: contain;   /* ⬅️ PARA PNG SIN DISTORSIÓN */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;         /* Cubre todo el círculo */
   object-position: center;
   display: block;
+  border-radius: 50%;        /* Redondea la imagen también */
 }
-
 
 /* ❌ OCULTAR TEXTOS */
 .footer-botones span {
   display: none !important;
 }
 
-
 /* 📱 MODO MÓVIL */
 @media (max-width:480px){
   .footer-botones a {
-    width: 62px;
-    height: 62px;
+    width: 60px;
+    height: 60px;
   }
 
   .footer-botones img {
-    width: 86%;
-    height: 86%;
+    width: 100%;
+    height: 100%;
   }
 }
