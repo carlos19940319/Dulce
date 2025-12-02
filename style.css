@@ -335,6 +335,7 @@ nav a:hover,
   font-family: sans-serif;
 }
 
+/* ESTILO GENERAL DE TODOS LOS BOTONES */
 .footer-botones a {
   display: flex;
   align-items: center;
@@ -348,16 +349,32 @@ nav a:hover,
   transition: 0.15s ease;
 }
 
+/* HOVER */
 .footer-botones a:hover {
   transform: translateY(-4px);
 }
 
-/* Botón de Google Maps */
+
+/* 🔵 BOTÓN FACEBOOK */
+.icono {
+  background: #1877F2;
+}
+
+.icono img,
+.icono i {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+
+/* 📍 BOTÓN MAPA */
 .btn-mapa {
   background: linear-gradient(180deg,#2b7be4,#1f6cd8);
 }
 
-/* Botón WhatsApp */
+
+/* 🟢 BOTÓN WHATSAPP */
 .btn-whatsapp {
   background: linear-gradient(180deg,#25D366,#128C7E);
 }
@@ -367,7 +384,8 @@ nav a:hover,
   height: 22px;
 }
 
-/* En pantallas pequeñas, solo círculos */
+
+/* 📱 MODO MÓVIL — SOLO CÍRCULOS */
 @media (max-width:480px){
   .footer-botones a {
     width: 56px;
@@ -376,12 +394,17 @@ nav a:hover,
     justify-content: center;
     border-radius: 50%;
   }
-  .footer-botones a img,
-  .footer-botones a::before,
-  .footer-botones a span {
-    margin: 0;
-  }
+
   .footer-botones a span {
     display: none;
+  }
+
+  .footer-botones img {
+    width: 26px !important;
+    height: 26px !important;
+  }
+
+  .footer-botones i {
+    font-size: 26px !important;
   }
 }
