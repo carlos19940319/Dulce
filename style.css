@@ -32,11 +32,21 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+/* =========================
+   FONDO FIJO ESTABLE (SIN ANIMACIÓN)
+   NO CAMBIA CON BARRA URL
+========================= */
+body::before{
+  content:"";
+  position:fixed;
+  top:0;
+  left:0;
+
+  /* 🔒 viewport estable (NO depende del navegador) */
+  width:100vw;
+  height:100svh;
+
+  /* 🎨 fondo real con tu imagen */
   background:
     linear-gradient(
       180deg,
@@ -44,10 +54,17 @@ body::before {
       rgba(12,19,32,var(--fondo-opacidad)) 100%
     ),
     var(--fondo-img);
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  z-index: -1;
+
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+
+  z-index:-1;
+
+  /* 🧠 evita repaints y saltos */
+  transform:translateZ(0);
+  backface-visibility:hidden;
+  will-change:transform;
 }
 
 /* ===============================
