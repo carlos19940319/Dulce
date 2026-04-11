@@ -1098,8 +1098,8 @@ footer::before{
     min-width:100px;
   }
 }
-/* =================================================
-   MODAL COTIZADOR – LA CHONA (MEJORADO)
+ /* =================================================
+   MODAL COTIZADOR – TOUCH FLUIDO (MÓVIL)
    ================================================= */
 
 .modal-cotiza {
@@ -1107,16 +1107,22 @@ footer::before{
   inset: 0;
   background: rgba(0,0,0,.75);
   backdrop-filter: blur(4px);
+
   display: none;
 
-  /* 🔥 CAMBIO: mejor soporte móvil */
   justify-content: center;
   align-items: flex-start;
-  
+
   padding: 20px;
-  padding-top: 40px; /* evita que pegue arriba */
-  
-  overflow-y: auto; /* permite scroll general si hace falta */
+  padding-top: 40px;
+
+  /* 🔥 SCROLL GENERAL */
+  overflow-y: auto;
+
+  /* 🔥 CLAVE PARA MÓVIL */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+
   z-index: 9999;
 }
 
@@ -1124,32 +1130,31 @@ footer::before{
   display: flex;
 }
 
+/* MODAL */
 .modal-box {
   background: #1a1a1a;
   color: #fff;
   width: 100%;
   max-width: 420px;
+
   border-radius: 20px;
 
   display: flex;
   flex-direction: column;
 
-  /* 🔥 clave: mejor altura dinámica */
-  max-height: calc(100vh - 80px);
-
-  overflow: hidden;
-
-  box-shadow: 0 20px 45px rgba(0,0,0,.7),
-              inset 0 0 0 1px rgba(244,196,48,.2);
+  /* ❌ sin scroll interno */
+  overflow: visible;
 }
 
-/* HEADER FIJO */
+/* 🔥 MEJORA TOUCH EN CONTENIDO */
+.modal-box * {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* HEADER */
 .modal-box .modal-header-estatico {
   padding: 22px 22px 10px;
   background: #1a1a1a;
-  position: sticky;
-  top: 0;
-  z-index: 10;
 }
 
 .modal-box h3 {
@@ -1161,37 +1166,7 @@ footer::before{
   text-shadow: 2px 2px 0 #000;
 }
 
-/* 🔥 ÁREA SCROLL REAL */
-.modal-body-scroll {
-  flex: 1;
-  overflow-y: auto;
-  padding: 0 22px 22px;
-
-  /* mejora en móvil */
-  -webkit-overflow-scrolling: touch;
-}
-
-/* SCROLL bonito */
-.modal-body-scroll::-webkit-scrollbar {
-  width: 5px;
-}
-.modal-body-scroll::-webkit-scrollbar-track {
-  background: rgba(255,255,255,.05);
-}
-.modal-body-scroll::-webkit-scrollbar-thumb {
-  background: #f4c430;
-  border-radius: 10px;
-}
-
-/* texto */
-.subtitulo {
-  text-align: center;
-  font-size: .9rem;
-  opacity: .85;
-  margin-bottom: 14px;
-}
-
-/* grupos */
+/* LISTA */
 .grupo {
   margin-bottom: 16px;
 }
@@ -1204,58 +1179,76 @@ footer::before{
   padding-bottom: 4px;
 }
 
-/* items */
+/* ITEMS TOUCH FRIENDLY */
 .modal-box label {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px;
-  border-radius: 10px;
+
+  padding: 14px; /* 🔥 más grande para dedo */
+  border-radius: 12px;
+
   font-size: .95rem;
   cursor: pointer;
+
   background: rgba(255,255,255,.04);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+
   transition: background 0.2s;
 }
 
-.modal-box label:hover {
-  background: rgba(255,255,255,.08);
+.modal-box label:active {
+  background: rgba(244,196,48,.15);
 }
 
 .modal-box input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+
   accent-color: #f4c430;
-  width: 18px;
-  height: 18px;
 }
 
+/* TEXTO */
 .modal-box textarea {
   width: 100%;
   margin-top: 10px;
-  padding: 12px;
+  padding: 14px;
+
   border-radius: 12px;
+
   border: 1px solid rgba(255,255,255,.1);
   background: #111;
   color: #fff;
-  font-size: .9rem;
+
+  font-size: 1rem;
+
+  /* 🔥 mejor escritura en móvil */
+  resize: none;
 }
 
-/* BOTONES FIJOS */
+/* BOTONES */
 .modal-actions {
   display: flex;
   gap: 12px;
+
   padding: 15px 22px 22px;
+
   background: #1a1a1a;
   border-top: 1px solid rgba(255,255,255,.1);
 }
 
 .modal-actions button {
   flex: 1;
-  padding: 14px;
+  padding: 16px;
+
   border: none;
   border-radius: 999px;
-  cursor: pointer;
+
   font-weight: 800;
-  transition: transform 0.2s;
+  cursor: pointer;
+
+  /* 🔥 touch mejor */
+  touch-action: manipulation;
 }
 
 .modal-actions button:active {
@@ -1271,6 +1264,7 @@ footer::before{
   background: linear-gradient(180deg, #34e17a 0%, #1fa855 100%);
   color: #0b3d1d;
 }
+
 /* =========================
    ⏰ HORARIO / RELOJ — VISIBILIDAD UNIVERSAL
 ========================= */
@@ -1448,7 +1442,7 @@ CONTENEDOR GENERAL
 @media (max-width: 640px){
   .book{
     width: 85vw;        /* casi toda la pantalla */
-    max-width: 320px;   /* nunca se hace gigante */
+    max-width: 420px;   /* nunca se hace gigante */
     margin: 0 auto;     /* centrado */
     aspect-ratio: 3 / 4;
   }
