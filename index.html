@@ -3,213 +3,443 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Inicio | Dulce Postre</title>
+  <title>Dulce Postre</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="img/TIII.png" type="image/png">
+
+  <!-- CSS externo -->
   <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+
+ 
+  
 </head>
 <body>
 
-<header>
-  <img src="img/logo.png" alt="Logo" class="logo">
-  <div>
-    <h2 style="margin:0; color:white;">POSTRES Y SNACKS</h2>
-  </div>
-</header>
-
-<!-- Navegación -->
-<nav>
-  <a href="index.html">Inicio</a>
-  <a href="postres.html">Postres</a>
-  <a href="snacks.html">Snacks</a>
-</nav>
-
-<main>
-
-  <div class="welcome-text">
-    <h2 style="color:#FF0000;">¡BIENVENIDOS!</h2>
-  </div>
-   <h3 style="color:white;">"Envíos a domicilio sin costo adicional"</h3>
-  <section class="hero">
-    <img src="img/principal.jpg" class="img-bienvenida" alt="Bienvenida">
-  </section>
-
-  <h2 style="color:white;">Descubre nuestro menú</h2>
-
-<p style="color:white;">Explora sabores únicos en nuestra sección de POSTRES y SNACKS.</p>
-
-  <!-- Horario Compacto -->
-  <div id="horario-compacto" style="text-align:center; font-family: Arial, sans-serif; padding:8px 0;">
-  <div id="reloj"></div>
-<div id="estado"></div>
-<h2 id="titulo">Horario de servicio</h2>
- <ul id="dias" style="list-style:none; padding:0; margin:8px 0 0 0;">
-      <li data-dia="5,6,0">Viernes a Domingo de: <strong>17:00 a 23:00 hrs</strong></li>
-    </ul>
-  </div>
 
 
-  <style>
-    #horario-compacto h2 { margin:4px 0; font-size:1em; }
-    #horario-compacto #reloj { font-size:1em; margin:4px 0; }
-    #horario-compacto #estado {
-      font-weight:bold;
-      font-size:1em;
-      margin:4px 0;
-      padding:3px 8px;
-      border-radius:4px;
-      display:inline-block;
-      transition: all 0.3s ease;
-    }
-    .open-anim { animation: zoomEstado 0.5s ease forwards; }
-    @keyframes zoomEstado {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); }
-    }
-    #horario-compacto li { 
-      display:flex; 
-      align-items:center; 
-      justify-content:center; 
-      padding:4px 0; 
-      font-size:0.95em; 
-    }
-    @keyframes brillo {
-      0% { box-shadow: 0 0 3px var(--brillo-color); }
-      50% { box-shadow: 0 0 6px var(--brillo-color); }
-      100% { box-shadow: 0 0 3px var(--brillo-color); }
-    }
-    .dia-actual {
-      border-radius:4px;
-      font-weight:bold;
-      animation: brillo 1.5s infinite;
-      padding:1px 4px;
-    }
-  </style>
+  <!-- ✨ BOTONES FLOTANTES DE REDES -->
+<div class="redes-flotantes">
 
-  <script>
-    function actualizarReloj() {
-      const reloj = document.getElementById("reloj");
-      const ahora = new Date();
-      let h = ahora.getHours(), m = ahora.getMinutes(), s = ahora.getSeconds();
-      h = h < 10 ? "0" + h : h;
-      m = m < 10 ? "0" + m : m;
-      s = s < 10 ? "0" + s : s;
-      reloj.textContent = `${h}:${m}:${s}`;
-    }
 
-    let ultimoEstado = "";
-    function actualizarEstado() {
-      const ahora = new Date();
-      const hoy = ahora.getDay();
-      const estado = document.getElementById("estado");
-      let abierto = false;
 
-      if ([5,6,0].includes(hoy)) {
-        const ahoraMin = ahora.getHours() * 60 + ahora.getMinutes();
-        const abreMin = 17 * 60;
-        const cierraMin = 23 * 60;
-        if (ahoraMin >= abreMin && ahoraMin <= cierraMin) abierto = true;
-      }
-
-      if (abierto) {
-        estado.textContent = "🟢 Abierto";
-        estado.style.color = "green";
-        estado.style.boxShadow = "0 0 8px green";
-        if (ultimoEstado !== "abierto") {
-          estado.classList.add("open-anim");
-          setTimeout(() => estado.classList.remove("open-anim"), 500);
-        }
-        ultimoEstado = "abierto";
-      } else {
-        estado.textContent = "🔴 Cerrado";
-        estado.style.color = "red";
-        estado.style.boxShadow = "0 0 8px red";
-        ultimoEstado = "cerrado";
-      }
-    }
-
-    function resaltarDia() {
-      const dias = document.querySelectorAll("#dias li");
-      const hoy = new Date().getDay();
-      dias.forEach(li => {
-        const diasArray = li.dataset.dia.split(",").map(Number);
-        if (diasArray.includes(hoy)) {
-          li.classList.add("dia-actual");
-        }
-      });
-      ajustarColores();
-      actualizarEstado();
-    }
-
-    function ajustarColores() {
-      let bodyStyles = window.getComputedStyle(document.body);
-      let bgColor = bodyStyles.backgroundColor || "rgb(255,255,255)";
-      let rgb = bgColor.match(/\d+/g);
-      let brightness = (parseInt(rgb[0]) * 299 + parseInt(rgb[1]) * 587 + parseInt(rgb[2]) * 114) / 1000;
-      let textoColor = brightness > 128 ? "#000" : "#fff";
-      let brilloColor = brightness > 128 ? "rgba(241,196,15,1)" : "rgba(255,255,0,1)";
-      document.getElementById("titulo").style.color = textoColor;
-      document.getElementById("reloj").style.color = textoColor;
-      document.querySelectorAll("#dias li").forEach(li => li.style.color = textoColor);
-      document.documentElement.style.setProperty("--brillo-color", brilloColor);
-      document.querySelectorAll(".dia-actual").forEach(li => {
-        li.style.backgroundColor = brightness > 128 ? "rgba(241,196,15,0.5)" : "rgba(255,255,0,0.5)";
-      });
-    }
-
-    setInterval(() => {
-      actualizarReloj();
-      actualizarEstado();
-    }, 1000);
-
-    window.onload = () => {
-      actualizarReloj();
-      resaltarDia();
-    };
-  </script>
-
-</main>
-
-<!-- Footer -->
-<footer class="footer">
-  <div class="footer-direccion">
-    <p>
-      Calle Emiliano Zapata, San Pedro Abajo 1.ª sección<br>
-      (Frente al centro de salud)<br>
-      Temoaya, Estado de México
-    </p>
-  </div>
-<div class="footer-botones">
-
-  <!-- WHATSAPP -->
-  <a href="https://wa.me/5217203173783?text=¡Hola!%20me%20podria%20hacer%20un%20pedido%20a%20domicilio"
+  <!-- 📍 MAPS — RUTA DESDE UBICACIÓN REAL DEL USUARIO -->
+<a href="https://www.google.com/maps/dir/Current+Location/19.4788806,-99.5798941"
+     class="redes-flotantes-icono"
      target="_blank"
-     class="btn-whatsapp">
-    <img src="img/WAA.png" alt="Whatsapp"> <!-- TU IMAGEN DE WHATSAPP -->
-    <span>Ordenar</span>
+     rel="noopener">
+
+    <img src="img/UB.png"
+         class="img-red"
+         alt="Cómo llegar a La Chona"
+         onerror="this.style.display='none';">
   </a>
- <!-- MAPAS -->
-  <a href="https://www.google.com/maps/dir/Current+Location/19.4788806,-99.5798941"
-     target="_blank"
-     class="btn-mapa">
-    <img src="img/UB.png" alt="Mapa">   <!-- TU IMAGEN DE MAPA -->
-    <span>Cómo llegar</span>
-  </a>
-  <!-- FACEBOOK -->
+
+
+
+  <!-- whatsapp -->
+  <a href="https://wa.me/5217203173783?text=¡Hola!%20me%20podria%20hacer%20un%20pedido%20a%20domicilio" target="_blank"
+   class="icono">
+
+  <img src="img/WAA.png"
+       class="img-red"
+       alt="WhatsApp"
+       onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'fa-brands fa-whatsapp\'></i>';">
+</a>
+
+
+
+
+
+
+  <!-- Facebook -->
   <a href="https://www.facebook.com/profile.php?id=61582860179807"
      target="_blank"
      class="icono">
-    <img src="img/facce.png" alt="Facebook">
-    <span>Facebook</span>
+
+    <img src="img/facce.png"
+         class="img-red"
+         alt="Facebook"
+         onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'fa-brands fa-facebook-f\'></i>';">
   </a>
 
 </div>
 
 
+  <!-- HEADER UNIFICADO -->
+  <div class="header-unificado">
+    <div class="header-top">
+      <img src="img/TIII.png" alt="Logo" class="logo">
+      <h2 class="titulo">Postres y Snacks</h2>
 
+    </div>
+
+    <nav>
+      <a href="#inicio" data-target="inicio">Bienvenida</a>
+      <a href="#carta" data-target="carta">Menu Postres</a>
+      <a href="#eventos" data-target="eventos">Menu Snacks</a>
+    
+    
+
+    </nav>
   </div>
 
-</footer>
+  <!-- ========================================================= -->
+  <!-- SECCIÓN 1 — INICIO -->
+  <!-- ========================================================= -->
+  <section id="inicio" class="page-section active">
+    <main class="contenido">
+      <div class="welcome-text">
+  
+    <h3 style="color:white;">"Envíos a domicilio sin costo adicional"</h3>
+      <section class="hero">
+        <img src="img/TIII.png" class="img-bienvenida" alt="Bienvenida">
+
+      </section>
+    
+
+
+  <h1 class="texto-corporativo">
+  Descubre nuestro menú, explora sabores únicos en nuestra sección de POSTRES y SNACKS.
+</h1>
+<!-- Horario compacto -->
+<div id="horario-compacto" style="text-align:center; font-family:Arial,sans-serif; margin-bottom:20px; font-size:0.95em;">
+  <div id="reloj" style="margin-bottom:4px; font-weight:bold;"></div>
+
+  <div id="estado"
+       style="margin-bottom:4px; font-weight:bold; display:inline-block; padding:2px 6px; border-radius:4px; transition: all 0.3s;">
+  </div>
+
+  
+    <li style="padding:1px 0;">
+  <strong>Horario de atención</strong>
+</li>
+<ul id="dias" style="list-style:none; padding:0; margin:0;">
+  <li style="padding:1px 0;">
+    <strong>Viernes a lunes:</strong> 5:00 p.m. a 12:00 a.m.
+  </li>
+</ul>
+</div>
+    </main>
+  </section>
+<!-- ========================================================= -->
+<!-- SECCIÓN 2 — CARTA -->
+<!-- ========================================================= -->
+<section id="carta" class="page-section">
+
+  <main class="contenido">
+<h4 style="color:white;">
+  Paquete Dulce Tentación
+“¡Déjate consentir! Elige y combina tus sabores favoritos en un solo domo con tres deliciosas divisiones, pensadas para que disfrutes cada bocado al máximo. Perfecto para darte un gustito o compartir. ¡Cada domo por solo
+  <span style="background: #FFD700; color: #000; padding: 2px 8px; border-radius: 4px; font-weight: 900;">$35</span>
+  
+</h4>
+    <!-- 📖 MENÚ TIPO LIBRO -->
+    <div class="menu-book">
+
+      <button class="nav prev" aria-label="Página anterior">‹</button>
+
+      <div class="book">
+<div class="page"><img src="img/menu postres.png" alt="Desayunos"></div>
+
+<div class="page"> <div class="titulo-imagen">
+   ✨ Paquete Dulce Tentación
+    </div><img src="img/domo.jpg" alt="Desayunos"><div class="descripcion-imagen">
+     “¡Elige y combina! En nuestro contenedor puedes disfrutar tres sabores diferentes, perfectamente separados en tres divisiones para que cada bocado sea único.”
+    </div></div>
+
+
+
+
+
+        <div class="page"> <div class="titulo-imagen">
+    ✨ Flan Casero
+    </div><img src="img/flan.jpg" alt="Desayunos"><div class="descripcion-imagen">
+     “Flan cremoso y delicado, con un sabor tradicional que conquista paladares.”
+    </div></div>
+
+
+
+
+        <div class="page"> <div class="titulo-imagen">
+   🍬 Gelatina de Mosaico
+    </div><img src="img/MOSAICO.jpg" alt="Desayuno especial"><div class="descripcion-imagen">
+     “¡Dulce, cremosa y llena de color! Nuestra gelatina de mosaico es el postre perfecto.”
+    </div></div>
+
+
+
+
+        <div class="page"> <div class="titulo-imagen">
+   🍎Manzana con Crema
+    </div><img src="img/MANZANA.jpg" alt="Comida corrida"><div class="descripcion-imagen">
+    “¡Fresca, cremosa y deliciosa! Nuestra manzana con crema te encantará.”
+    </div></div>
+
+
+
+
+
+        <div class="page"> <div class="titulo-imagen">
+   🍪 Pay de Galleta Casero!
+    </div><img src="img/GALLETA.jpg" alt="Hamburguesas"><div class="descripcion-imagen">
+     “¡Dulce y cremoso! Nuestro pay de galleta es pura tentación.”
+    </div></div>
+
+
+
+
+        <div class="page"> <div class="titulo-imagen">
+ 🔵 Gelatina Blueberry Premium
+    </div><img src="img/BLUE.jpg" alt="Tortas"><div class="descripcion-imagen">
+     “¡Fresca, frutal y deliciosa! Nuestra gelatina con blueberry te encantará.”
+    </div></div>
+
+
+
+
+        <div class="page"> <div class="titulo-imagen">
+    🍇 Gelatina con Uvas Frescas
+    </div><img src="img/UVAS.jpg" alt="Hot cakes"><div class="descripcion-imagen">
+    “¡Colorida, fresca y deliciosa! Nuestra gelatina con uvas es el postre perfecto.”
+    </div></div>
+
+
+
+
+        <div class="page"> <div class="titulo-imagen">
+    Gelatina con frutos rojos
+    </div><img src="img/FRUTOS.jpg" alt="Enchiladas"><div class="descripcion-imagen">
+     “Gelatina fresca con mezcla de frutos rojos, un postre colorido y elegante.”
+    </div></div>
+
+
+
+
+        <div class="page"> <div class="titulo-imagen">
+ 🍓 Gelatina con Fresas Naturales
+    </div><img src="img/FRESA.jpg" alt="Chilaquiles"><div class="descripcion-imagen">
+     “Gelatina suave con trozos de fresa fresca, un postre dulce y sofisticado.”
+    </div></div>
+
+
+
+
+        <div class="page"> <div class="titulo-imagen">
+   🥥 Tapioca Cremosa Tradicional
+    </div><img src="img/TAPIOCA.jpg" alt="Sándwiches"><div class="descripcion-imagen">
+     “Tapioca cremosa y delicada, un postre suave y exquisito que conquista paladares.”
+    </div></div>
+
+
+
+
+        <div class="page"> <div class="titulo-imagen">
+   🍑 Gelatina con Durazno Jugoso
+    </div><img src="img/DURAZNO.jpg" alt="Pasteles"><div class="descripcion-imagen">
+    “Gelatina delicada con trozos de durazno jugoso, un postre fresco y sofisticado que conquista paladares.”
+    </div></div>
+
+
+
+        <div class="page"> <div class="titulo-imagen">
+  Gelatina convinada
+    </div><img src="img/CONVINADO.jpg" alt="Waffles"><div class="descripcion-imagen">
+     “¡Color, frescura y sabor en cada bocado! Nuestra gelatina combinada es el postre perfecto para consentirte.”
+    </div></div>
+
+
+
+      </div>
+
+      <button class="nav next" aria-label="Página siguiente">›</button>
+
+    </div>
+     <div class="overlay-content">
+        <a href="#" class="btn-cotiza"
+           data-evento="Lista de P"
+           data-productos='[
+"Flan",
+"Gelatina mosaico",
+"Manzana con crema",
+"Pay de galleta",
+"Gelatina blueberry",
+"Gelatina con uvas",
+"Gelatina frutos rojos",
+"Gelatina fresas",
+"Tapioca",
+"Gelatina con durazno",
+"Gelatina combinada"
+]'>
+          Envio a domicilo
+        </a>
+     
+
+  </main>
+</section>
+
+ <!-- ========================================================= -->
+<!-- SECCIÓN 4 — EVENTOS -->
+<!-- ========================================================= -->
+<section id="eventos" class="page-section">
+  
+  
+  <main class="contenido">
+<h4 style="color:white; font-weight: 300; line-height: 1.6;">
+  <span style="color: #FFD700; font-weight: bold; font-size: 1.3em; letter-spacing: 1px;">
+    COMBO SNACK MANÍA
+  </span><br>
+  “¡Arma tu antojo a tu gusto! Elige tus botanas favoritas y combínalas como más te guste. 
+  Desde alitas crujientes hasta nuestros famosos salchipulpos, tenemos el bocado perfecto 
+  para cada momento. ¡Tú decides la combinación, nosotros ponemos el sabor!”
+</h4>
+   
+    <!-- 📖 MENÚ TIPO LIBRO -->
+    <div class="menu-book">
+
+      <button class="nav prev" aria-label="Página anterior">‹</button>
+
+      <div class="book">
+<div class="page"><img src="img/MENUS.png" alt="Desayunos"></div>
+
+<div class="page"> <div class="titulo-imagen">
+   ¡Alitas fritas o al carbón!
+    </div><img src="img/alitas2.jpg" alt="Desayunos"><div class="descripcion-imagen">
+     ¡Jugosas, irresistibles y listas para que vengas por las tuyas! Elige entre nuestros sabores: a la diabla, BBQ, mango, pelón pelo rico y skuincles."
+     <h3 class="price">$65</h3>
+    </div></div>
+
+
+
+
+
+        <div class="page"> <div class="titulo-imagen">
+  ¡Sopa Maruchan al instante! 
+    </div><img src="img/maruchan.webp" alt="Desayunos"><div class="descripcion-imagen">
+     ¡lista en minutos! Calientita, rápida y deliciosa. <h3 class="price">$25</h3>
+    </div></div>
+
+
+
+
+        <div class="page"> <div class="titulo-imagen">
+      ¡Salchi Pulpos irresistibles!
+    </div><img src="img/pulpos.png" alt="Desayuno especial"><div class="descripcion-imagen">
+     ¡Salchi Pulpos divertidos y sabrosos! Perfectos para cualquier antojo.<h3 class="price">$35</h3>
+    </div></div>
+
+
+
+
+        <div class="page"> <div class="titulo-imagen">
+   ¡Plátanos Fritos!
+    </div><img src="img/platanos.jpg" alt="Comida corrida"><div class="descripcion-imagen">
+    ¡Plátanos doraditos y dulces! Crujientes por fuera, suaves por dentro.<h3 class="price">$35</h3>
+    </div></div>
+
+
+
+
+
+        <div class="page"> <div class="titulo-imagen">
+  ¡Hot Dogs que Enamoran!
+    </div><img src="img/hoc.jpg" alt="Hamburguesas"><div class="descripcion-imagen">
+    Orden sencilla de 3 pz.<h3 class="price">$50</h3>Con tocino 1 pz..<h3 class="price">$25</h3>
+    </div></div>
+
+
+
+
+        <div class="page"> <div class="titulo-imagen">
+ ¡Hamburguesas!
+    </div><img src="img/ambu.jpg" alt="Tortas"><div class="descripcion-imagen">
+     ¡La mejor hamburguesa te espera!"sencilla".<h3 class="price">$50</h3>Combo hamburguesa con papas.<h3 class="price">$70</h3>
+
+
+    </div></div>
+
+
+
+
+        <div class="page"> <div class="titulo-imagen">
+   ¡Papas a la francesa!
+    </div><img src="img/papas.jpg" alt="Hot cakes"><div class="descripcion-imagen">
+    ¡Doradas, crujientes y deliciosas! ¡No esperes más y ven por tus papas a la francesa!<h3 class="price">$40</h3>
+    </div></div>
+
+
+
+
+
+      </div>
+
+      <button class="nav next" aria-label="Página siguiente">›</button>
+
+    </div>
+     <div class="overlay-content">
+        <a href="#" class="btn-cotiza"
+           data-evento="Lista de Snacks"
+          data-productos='[
+"Alitas fritas",
+"Alitas al carbón",
+"Sopa Maruchan",
+"Salchipulpos",
+"Plátanos fritos",
+"Hot dog sencillo 3 pz",
+"Hot dog sencillo 1 pz",
+"Hamburguesa sencilla",
+"Hamburguesa con papas",
+"Papas a la francesa"
+]'>
+          Envio a domicilo
+        </a>
+     
+
+  </main>
+</section>
+
+
+
+
+  <!-- FOOTER -->
+  <footer style="width:100%; background:rgba(0,0,0,0.5); color:#fff; text-align:center; padding:12px 8px; box-sizing:border-box; font-family:Arial,sans-serif;">
+    <div class="footer-direccion" style="margin-bottom:10px; font-size:14px; line-height:1.4;">
+      
+
+<p>
+      Calle Emiliano Zapata, San Pedro Abajo 1.ª sección<br>
+      (Frente al centro de salud)<br>
+      Temoaya, Estado de México
+    </p></div>
+    <div>© <span id="year"></span> . ❤</div>
+  </footer>
+<!-- JS externo -->
+<script src="script.js" defer></script>
+
+
+
+<div class="modal-cotiza" id="modalCotiza">
+  <div class="cotiza-box elegante">
+
+    <div class="cotiza-header">
+      <h3 id="tituloEvento">Cotización</h3>
+      <button id="cerrarCotiza" class="cerrar">✕</button>
+    </div>
+
+    <div id="listaProductos" class="lista-elegante"></div>
+
+    <div class="resumen elegante">
+      <h4>Resumen de cotización</h4>
+      <ul id="resumenLista"></ul>
+    </div>
+
+    <button id="enviarWhats" class="btn-whatsapp">
+      Enviar cotización por WhatsApp
+    </button>
+
+  </div>
+</div>
+
 
 </body>
 </html>
