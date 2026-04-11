@@ -349,7 +349,12 @@ main {
   }
 }
 
-  .img-bienvenida{
+  
+/* =================================================
+   🖼️ IMAGEN BIENVENIDA — LUJO EDITORIAL REAL
+================================================= */
+
+.img-bienvenida{
   display:block;
   width:85%;
   max-width:clamp(230px, 40vw, 420px);
@@ -371,8 +376,7 @@ main {
   will-change:transform, opacity;
 }
 
-
-
+/* 🌊 ANIMACIÓN PREMIUM */
 @keyframes heroLuxury{
   0%{
     opacity:0;
@@ -391,17 +395,11 @@ main {
     transform:translateY(0) scale(1);
   }
 }
-@keyframes heroLuxury{
-  to{
-    opacity:1;
-    transform:translateY(0) scale(1);
-  }
-}
 
 /* 💻 LAPTOP / TABLET */
 @media (max-width:1200px){
   .img-bienvenida{
-    max-width:clamp(440px, 70vw, 680px);
+    max-width:clamp(320px, 70vw, 680px);
   }
 }
 
@@ -412,7 +410,7 @@ main {
     margin:10px auto 4px;
 
     filter:drop-shadow(0 4px 10px rgba(0,0,0,.35));
-    transform:translateY(6px) scale(.99);
+    transform:translateY(10px) scale(.98);
   }
 }
 
@@ -423,8 +421,6 @@ main {
     margin:12px auto 6px;
   }
 }
-
-
 
 /* =========================
    GRID — LIMPIO Y AIREADO
