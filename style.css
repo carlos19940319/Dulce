@@ -1423,10 +1423,6 @@ footer::before{
 }
 
 /* =========================
-📖 LIBRO / CARTA VIRTUAL — HOJA REAL (ELEGANTE)
-========================= */
-
-/* =========================
 CONTENEDOR GENERAL
 ========================= */
 .menu-book{
@@ -1440,24 +1436,38 @@ CONTENEDOR GENERAL
   overflow:visible;
 }
 
+/* =========================
+📖 LIBRO / MENÚ (LUJO EDITORIAL)
+========================= */
 .book{
-  width: clamp(170px, 60vw, 300px); /* 👈 CLAVE: mejor en celular */
+  width: clamp(170px, 60vw, 300px);
   aspect-ratio: 3 / 4;
 
   position: relative;
-
   max-width: 100%;
-  margin: 0 auto; /* 👈 centra en celular */
+  margin: 0 auto;
 
   transform-style: preserve-3d;
   overflow: visible;
+
+  /* 💎 CONTORNO LUJO RESTAURANTE */
+  border: 1px solid rgba(255, 215, 160, 0.35);
+  border-radius: 20px;
+
+  box-shadow:
+    0 18px 40px rgba(0,0,0,.45),
+    inset 0 0 0 1px rgba(255,255,255,.08),
+    inset 0 0 18px rgba(255, 200, 120, .10);
 }
+
+/* 📱 MÓVIL */
 @media (max-width: 640px){
   .book{
-    width: 78vw;        /* casi toda la pantalla */
-    max-width: 320px;   /* nunca se hace gigante */
-    margin: 0 auto;     /* centrado */
+    width: 78vw;
+    max-width: 320px;
     aspect-ratio: 3 / 4;
+
+    border-radius: 18px; /* un poco más suave en móvil */
   }
 }
 
