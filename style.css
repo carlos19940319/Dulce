@@ -1454,8 +1454,8 @@ CONTENEDOR GENERAL
 }
 @media (max-width: 640px){
   .book{
-    width: 85vw;        /* casi toda la pantalla */
-    max-width: 420px;   /* nunca se hace gigante */
+    width: 78vw;        /* casi toda la pantalla */
+    max-width: 320px;   /* nunca se hace gigante */
     margin: 0 auto;     /* centrado */
     aspect-ratio: 3 / 4;
   }
