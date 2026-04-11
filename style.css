@@ -354,13 +354,13 @@ main {
 ================================================= */
 .img-bienvenida{
   display:block;
-  width:92%;
-  max-width:clamp(250px, 45vw, 450px);
+  width:85%;
+  max-width:clamp(230px, 40vw, 420px);
   margin:0 auto;
 
   height:auto;
   background:transparent;
-  border-radius:20px;
+  border-radius:25px;
   box-shadow:none;
 
   filter:
