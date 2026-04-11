@@ -1,371 +1,2277 @@
-/* ===============================
-   📌 VARIABLES GLOBALES
-=============================== */
+
+
+/* ==========================
+   style.css — todo tu CSS
+   Incluye: CSS base + carrusel + estilos de SPA (fade)
+   ========================== */
+
+/* 📌 Variables editables */
 :root {
   --color-principal: #C00000;
   --color-secundario: #333333;
   --color-fondo-tarjeta: #ffffff;
-  --navbar-bg: rgba(197, 0, 0, 0.6);
+  --navbar-bg: rgba(197, 0, 0, 0);
   --fondo-img: url("img/fondo44.jpg");
-  --fondo-header-img: url("img/IMG-20251122-WA0151.jpg");
-  --fondo-nav-img: url("img/f9653340-7806-11ee-bcbc-b524174ba5c7jpg"); /* opcional nav */
-  --fondo-opacidad: 0.3;
+  --fondo-header-img: url("img/tituloo.pn");
+  --fondo-nav-img: url("img/tituloo.png");
+  --fondo-opacidad: 0.2;
   --header-height: 64px;
   --nav-height: 60px;
 }
-
-/* ===============================
-   📌 RESET Y CONFIGURACIÓN BASE
-=============================== */
+/* =========================
+   RESET
+========================= */
 *, *::before, *::after {
   box-sizing: border-box;
 }
 
+/* =========================
+   BODY Y FONDO — MODERNO ELEGANTE (ADAPTADO)
+========================= */
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Inter', Arial, sans-serif;
   color: var(--color-secundario);
   position: relative;
   overflow-x: hidden;
-  overscroll-behavior: none;
+
+  background: #0b0f14;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  transition: opacity .1s ease-out;
 }
 
 /* =========================
-   FONDO FIJO ESTABLE (SIN ANIMACIÓN)
-   NO CAMBIA CON BARRA URL
+   FONDO ESTABLE — FIX ANDROID / iOS
 ========================= */
-body::before{
-  content:"";
-  position:fixed;
-  top:0;
-  left:0;
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
 
-  /* 🔒 viewport estable (NO depende del navegador) */
-  width:100vw;
-  height:100svh;
+  width: 100vw;
+  height: 100svh; /* 🔑 CLAVE: evita cambios al ocultar barra */
 
-  /* 🎨 fondo real con tu imagen */
+  z-index: -1;
+
+ background:
+  radial-gradient(
+    ellipse at center,
+    rgba(255,255,255,.12) 0%,
+    rgba(255,255,255,0) 0%,
+    rgba(255,0,0,0) 70%
+  ),
+  linear-gradient(
+    180deg,
+    rgba(0,0,0,.25),
+    rgba(0,0,0,.50)
+  ),
+  var(--fondo-img);
+
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+
+filter: brightness(1.05) contrast(1.20) saturate(1.30);
+  /* ❌ eliminamos animaciones que rompen Android */
+  animation: none;
+
+  /* 🔒 estabilidad total */
+  transform: translateZ(0);
+  will-change: auto;
+}
+
+
+/* =================================================
+   HEADER "LA CHONA" — NEGRO ELEGANTE PREMIUM
+================================================= */
+.header-unificado {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1002;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+
+  /* 🖤 NEGRO PROFUNDO ELEGANTE */
   background:
     linear-gradient(
       180deg,
-      rgba(7,16,33,var(--fondo-opacidad)) 0%,
-      rgba(12,19,32,var(--fondo-opacidad)) 100%
+      rgba(0,0,0,.65),
+      rgba(0,0,0,.85)
     ),
-    var(--fondo-img);
+    radial-gradient(
+      ellipse at center,
+      rgba(255,255,255,.04),
+      transparent 65%
+    );
 
-  background-position:center;
-  background-size:cover;
-  background-repeat:no-repeat;
+  border: none !important;
+  outline: none !important;
 
-  z-index:-1;
+  box-shadow:
+    0 12px 35px rgba(0,0,0,.85);
 
-  /* 🧠 evita repaints y saltos */
-  transform:translateZ(0);
-  backface-visibility:hidden;
-  will-change:transform;
+  backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
 }
 
-/* ===============================
-   📌 HEADER
-=============================== */
-header {
+/* =================================================
+   LÍNEA DIVISORA INFERIOR
+================================================= */
+.header-unificado::after{
+  content:"";
+  position:absolute;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:84%;
+  max-width:900px;
+  height:1.5px;
+
+ background:
+  linear-gradient(
+    90deg,
+    transparent,
+    #E6B8A9,
+    #F2C6B8,
+    #E6B8A9,
+    transparent
+  );
+
+  box-shadow: 0 0 10px rgba(201,162,39,3);
+}
+
+/* ORNAMENTO */
+.header-unificado::before{
+  content:"✦";
+  position:absolute;
+  bottom:-11px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:20px;
+  color:#E6B8A9;
+  padding:0 6px;
+}
+
+/* =================================================
+   LOGO + TÍTULO
+================================================= */
+.header-unificado .header-top {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 8px 16px;
-  color: #fff;
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: var(--header-height);
-  z-index: 1002;
-  background-color: rgba(0,0,0,0.7);
-  background-image: var(--fondo-header-img);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-blend-mode: overlay;
-}
-
-header img.logo {
-  width: 60px;
-  height: auto;
-  border-radius: 50px;
-  box-shadow: 0px 1px 5px #000 inset, 0 0 10px 1px #fff;
-}
-
-header h1, header h2, header .titulo {
-  margin: 0;
-  font-size: clamp(1rem, 1.8vw, 1.8rem);
-  color: #fff;
-  text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
-  animation: brilloSuave 3s infinite alternate;
-}
-
-/* Redes */
-header .redes {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-header .redes img {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  transition: transform 0.3s ease;
-}
-header .redes img:hover {
-  transform: scale(1.1);
-}
-
-/* ===============================
-   📌 NAV
-=============================== */
-nav {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  gap: 10px;
-  padding: 7px;
-  border-radius: 8px;
-  box-shadow: 1px 8px 20px #320000 inset, 0 0 8px -6px #fff;
-  position: fixed;
-  top: calc(var(--header-height));
-  left: 50%;
-  transform: translateX(-50%);
-  width: 85%;
-  max-width: 1200px;
-  height: 5vh;
-  z-index: 1001;
-  background-color: var(--navbar-bg);
-  background-image: var(--fondo-nav-img);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-blend-mode: overlay;
-  backdrop-filter: blur(20px);
-  flex-wrap: nowrap;
-  overflow: hidden;
-}
-
-nav a {
-  flex: 1 1 auto;
-  min-width: 64px;
-  max-width: 240px;
-  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  white-space: nowrap;
+  gap: 24px;
+  width: 100%;
+}
+
+.header-unificado .header-top img.logo {
+  width: clamp(70px, 6vw, 90px);
+  height: auto;
+  border-radius: 50%;
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.85),
+    0 0 14px rgba(31,182,201,.35);
+}
+
+.header-unificado .header-top .titulo {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+
+  letter-spacing: 0.12em;
+  font-weight: 600;
+
+  color: #f5f5f5;
+
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+/* =================================================
+   NAV — AUTOADAPTATIVO / NO SE JUNTAN
+================================================= */
+.header-unificado nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* 🔑 ajuste automático real */
+  flex-wrap: wrap;
+  gap: clamp(8px, 2.5vw, 22px);
+
+  width: 100%;
+  max-width: 1100px;
+}
+
+/* =================================================
+   LINKS DEL NAV (AUTO TAMAÑO + ESPACIO)
+================================================= */
+.header-unificado nav a {
+  position: relative;
+
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+
+  /* 🔑 evita que se junten */
+  min-width: max-content;
+
+  padding: clamp(4px, 0.8vw, 6px) clamp(2px, 0.6vw, 4px);
   text-decoration: none;
-  color: var(--color-secundario);
-  font-weight: 700;
-  font-size: clamp(0.8rem,1.6vw,1rem);
-  padding: 10px 14px;
-  border-radius: 8px;
-  background: linear-gradient(145deg,#fff,#e6e6e6);
-  box-shadow: 0px 0px 7px #000 inset, 0 6px 8px -3px #000;
-  transition: transform 0.18s ease-in-out, box-shadow 0.18s ease-in-out;
+
+  font-family: 'Playfair Display', serif;
+
+  /* 🔑 texto autoajustable */
+  font-size: clamp(0.95rem, 2.6vw, 1.45rem);
+  letter-spacing: clamp(0.08em, 0.6vw, 0.18em);
+
+  font-weight: 500;
+  color: #f5f5f5;
+
+  text-shadow:
+    0 2px 8px rgba(0,0,0,.95),
+    0 0 16px rgba(0,0,0,.85);
+
+  transition: color .25s ease;
+
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+}
+/* =================================================
+   BLOQUES CON CONTORNO (SIN MODIFICAR LO ANTERIOR)
+================================================= */
+.header-unificado nav a {
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.04);
 }
 
-nav a:hover {
-  transform: translateY(-4px) scale(1.03);
-  box-shadow: 1px 5px 10px #000 inset, 0 0 8px -6px #fff;
+/* ✨ HOVER MÁS ELEGANTE */
+.header-unificado nav a:hover {
+  border-color: rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.10);
 }
 
-nav a:active {
-  transform: translateY(1px) scale(0.97);
+
+
+
+/* =================================================
+   LÍNEA ACTIVA
+================================================= */
+.header-unificado nav a::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-6px;
+  width:0;
+  height:1px;
+  background:#1fb6c9;
+  transform:translateX(-50%);
+  transition:width .3s ease;
 }
 
-nav a.active {
-  color: var(--color-principal);
-  background: linear-gradient(145deg,#fff7f7,#ffecec);
+
+
+/* =================================================
+   LINK ACTIVO
+================================================= */
+.header-unificado nav a.active{
+  color: #f04a3a !important;
 }
 
-nav a:focus {
-  outline: none;
-  box-shadow: none;
-}
-
-/* ===============================
-   📌 MAIN
-=============================== */
+/* =================================================
+   MAIN
+================================================= */
 main {
   max-width: 1100px;
-  margin: 18px auto;
+  margin: 20px auto;
   padding: 0 14px;
-  padding-top: calc(var(--header-height) + var(--nav-height) + 16px);
+  padding-top: calc(var(--header-height) + var(--nav-height) + 22px);
 }
 
-.welcome-text {
-  text-align: center;
-  color: var(--color-principal);
-  margin: 18px 0;
-  text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
-  animation: aparecer 2.5s ease-out;
+
+
+
+/* =================================================
+   RESPONSIVE
+================================================= */
+@media (max-width: 768px) {
+
+  .header-unificado {
+    padding: 8px 12px;
+  }
+
+  .header-unificado .header-top img.logo {
+    width: 48px;
+  }
+
+  .header-unificado .header-top .titulo {
+    font-size: clamp(1.2rem, 4vw, 1.6rem);
+  }
+
+  .header-unificado nav a {
+    padding: 7px 10px;
+    font-size: clamp(.8rem, 3vw, .95rem);
+    transform: none;
+  }
 }
 
-.welcome-text h2 {
-  margin: 1px 0;
-  font-size: 2rem;
-}
 
+
+
+/* =========================
+   HERO
+========================= */
 .hero {
   display: flex;
   justify-content: center;
-  padding: 5px;
-}
-
-.img-bienvenida {
+  align-items: center;
+  padding: clamp(10px, 3vw, 30px);
   width: 100%;
-  max-width: 300px;
-  height: auto;
-  border-radius: 50px;
-  box-shadow: 0 0px 15px 1px rgba(255,255,255,1);
-  animation: zoom 4.5s ease-out;
 }
 
-/* ===============================
-   📌 GRID DE TARJETAS
-=============================== */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
-  gap: 15px;
-  margin-top: 12px;
+/* =========================
+   AJUSTE EXTRA SOLO MÓVIL
+========================= */
+@media (max-width: 768px) {
+  .welcome-text h2 {
+    margin-top: -26px;
+  }
 }
 
-.card {
-  background: var(--color-fondo-tarjeta) url("img/pngtree-warm-pink-cute-mother-and-baby-background-image_147126.jpg") no-repeat center center;
-  background-size: cover;
-  border-radius: 70px 0 70px 0;
-  padding: 10px;
-  text-align: center;
-  box-shadow: 0 0px 2px 2px rgba(178,34,34,1);
+  /* =================================================
+   🖼️ IMAGEN BIENVENIDA — LUJO EDITORIAL REAL
+================================================= */
+.img-bienvenida{
+  display:block;
+  width:92%;
+  max-width:clamp(300px, 50vw, 520px);
+  margin:0 auto;
+
+  height:auto;
+  background:transparent;
+  border-radius:0;
+  box-shadow:none;
+
+  filter:
+    drop-shadow(0 6px 16px rgba(0,0,0,.35))
+    drop-shadow(0 1px 3px rgba(255,255,255,.15));
+
+  opacity:0;
+  transform:translateY(14px) scale(.965);
+  animation:heroLuxury 1.35s cubic-bezier(.4,0,.2,1) forwards;
+
+  will-change:transform, opacity;
+}
+
+@keyframes heroLuxury{
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+/* 💻 LAPTOP / TABLET */
+@media (max-width:1200px){
+  .img-bienvenida{
+    max-width:clamp(440px, 70vw, 680px);
+  }
+}
+
+/* 📱 MÓVIL */
+@media (max-width:768px){
+  .img-bienvenida{
+    max-width:90%;
+    margin:10px auto 4px;
+
+    filter:drop-shadow(0 4px 10px rgba(0,0,0,.35));
+    transform:translateY(6px) scale(.99);
+  }
+}
+
+/* 📱 MÓVIL PEQUEÑO */
+@media (max-width:480px){
+  .img-bienvenida{
+    max-width:92%;
+    margin:12px auto 6px;
+  }
+}
+
+
+
+/* =========================
+   GRID — LIMPIO Y AIREADO
+========================= */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+  gap:clamp(14px, 2.5vw, 26px);
+  margin-top:clamp(18px, 4vw, 42px);
+}
+
+/* =========================
+   CARD — PREMIUM MODERNA
+========================= */
+.card{
+  position:relative;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,.15),
+      rgba(0,0,0,.55)
+    ),
+    url("img/leña.jpg") center/cover no-repeat;
+
+  border-radius:22px;
+  overflow:hidden;
+  aspect-ratio:3 / 4;
+
+  box-shadow:
+    0 18px 38px rgba(0,0,0,.45),
+    inset 0 0 0 1px rgba(255,255,255,.06);
+
+  transition:
+    transform .45s cubic-bezier(.4,0,.2,1),
+    box-shadow .45s ease;
+}
+
+/* HOVER ELEGANTE */
+@media (hover:hover){
+  .card:hover{
+    transform:translateY(-6px) scale(1.035);
+    box-shadow:
+      0 26px 60px rgba(0,0,0,.6),
+      inset 0 0 0 1px rgba(255,255,255,.12);
+  }
+}
+
+/* =========================
+   MEDIA — IMAGEN
+========================= */
+.card img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+
+  background:transparent;
+  padding:12px;
+
+  transition:transform .6s ease;
+}
+
+/* zoom suave imagen */
+@media (hover:hover){
+  .card:hover img{
+    transform:scale(1.05);
+  }
+}
+
+/* =========================
+   OVERLAY TEXTO
+========================= */
+.card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    180deg,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,.55) 70%
+  );
+  pointer-events:none;
+}
+
+/* =========================
+   INFO
+========================= */
+.card-info{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  padding:16px 18px;
+  z-index:2;
+  text-align:center;
+}
+
+/* NOMBRE */
+.card-info .name{
+  font-family:'Inter', sans-serif;
+  font-size:1.05rem;
+  font-weight:700;
+  letter-spacing:.4px;
+  color:#fff;
+
+  text-shadow:0 2px 6px rgba(0,0,0,.8);
+}
+
+/* PRECIO */
+.card-info .price{
+  margin-top:4px;
+  font-size:.95rem;
+  font-weight:800;
+  color:#f4c430;
+
+  text-shadow:0 2px 6px rgba(0,0,0,.9);
+}
+
+/* =========================
+   MOBILE REFINADO
+========================= */
+@media (max-width:640px){
+  .grid{
+    gap:16px;
+  }
+
+  .card{
+    border-radius:18px;
+  }
+
+  .card-info{
+    padding:14px;
+  }
+}
+
+/* =========================
+   FOOTER — CON LÍNEA DIVISORA SUPERIOR
+========================= */
+footer{
   position: relative;
-  overflow: hidden;
-}
 
-.card img {
-  width: 98%;
-  height: 210px;
-  object-fit: cover;
-  border-radius: 70px 0 70px 0;
-  margin-bottom: 5px;
-  box-shadow: 0 0px 9px 2px rgba(0,0,0,1);
-}
-
-.price {
-  color: var(--color-principal);
-  font-weight: 800;
-}
-
-/* ===============================
-   📌 FOOTER
-=============================== */
-footer {
-  text-align: center;
-  padding: 4px;
+  width: 100%;
+  background: rgba(0,0,0,0.6);
   color: #fff;
-  margin-top: -10px;
-  background: rgba(0,0,0,0.7);
-  border-top-left-radius: 8px;
-  border-top-right-radius: 1px;
+  text-align: center;
+  padding: 14px 10px 10px; /* más espacio arriba para la línea */
+  font-family: Arial, sans-serif;
+}
+/* ✨ LÍNEA DIVISORA SUPERIOR DORADA */
+footer::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+
+  width:84%;
+  max-width:900px;
+  height:2px;
+
+ background:
+  linear-gradient(
+    90deg,
+    transparent,
+    #E6B8A9,
+    #F2C6B8,
+    #E6B8A9,
+    transparent
+  );
+
+  box-shadow: 0 0 6px rgba(212,175,55,.45);
 }
 
-/* ===============================
-   📌 BOTONES FIJOS (Footer) 
-=============================== */
-.footer-botones {
+/* Redes flotantes */
+.redes-flotantes {
   position: fixed;
-  right: 18px;
-  bottom: 18px;
-  z-index: 9999;
+  bottom: 15px;
+  right: 15px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
+  z-index: 9999;
+}
+.redes-flotantes a { width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; background: transparent; border: none; }
+.redes-flotantes img { width: 48px; height: 48px; object-fit: contain; filter: none; border-radius: 50%; transition: transform 0.2s ease-in-out; }
+.redes-flotantes img:hover { transform: scale(1.15); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header-unificado .header-top img.logo { width: 48px; }
+  .header-unificado .header-top .titulo { font-size: clamp(0.9rem, 4vw, 1.6rem); }
+  .header-unificado nav a { font-size: clamp(0.7rem, 2.5vw, 0.95rem); padding: 8px 10px; }
+  .img-bienvenida { width: 95%; }
 }
 
-.footer-botones a {
-  position: relative;
+/* Quitar tap highlight para móviles */
+* { -webkit-tap-highlight-color: transparent; }
+
+/* =================================================
+   ✨ CARRUSEL EVENTOS / CARTA — SÓLIDO & PREMIUM
+================================================= */
+
+/* =========================
+   SECCIÓN EVENTOS
+========================= */
+#eventos,
+#empresa{
+  width:100%;
+  font-family:Inter, system-ui, Roboto, Arial;
+  padding-top:12px;
+  padding-bottom:48px;
+}
+
+/* =========================
+   CONTENEDOR
+========================= */
+.carousel-wrap{
+  max-width:1180px;
+  margin:-10px auto 0;
+  position:relative;
+  padding:0 16px;
+}
+
+/* =========================
+   CARRUSEL
+========================= */
+.carousel{
+  display:flex;
+  gap:22px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  padding:18px 0;
+
+  scrollbar-width:none;
+}
+.carousel::-webkit-scrollbar{ display:none; }
+
+/* =========================
+   SLIDE — TARJETA SÓLIDA
+========================= */
+.slide{
+  min-width:90%;
+  background:#0e0e0e; /* 🔥 fondo real */
+  border-radius:22px;
+  overflow:hidden;
+  position:relative;
+  scroll-snap-align:center;
+
+  border:2px solid rgba(255,255,255,.12);
+
+  box-shadow:
+    0 28px 70px rgba(0,0,0,.85);
+
+  transition:
+    transform .35s cubic-bezier(.4,0,.2,1),
+    box-shadow .35s ease;
+
+  transform:scale(.95);
+}
+
+/* Activo */
+.slide.active{
+  transform:scale(1.04);
+  border-color:#ffffff;
+
+  box-shadow:
+    0 40px 95px rgba(0,0,0,.95);
+}
+
+/* ===== DESKTOP ===== */
+@media(min-width:900px){ .slide{ min-width:45%; } }
+@media(min-width:1200px){ .slide{ min-width:32%; } }
+
+/* =========================
+   MEDIA (IMAGEN) — SÓLIDA
+========================= */
+.media{
+  position:relative;
+  background:#000; /* 🔑 respaldo sólido */
+  aspect-ratio:4 / 5;
+}
+
+.media img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+
+  /* 🔥 SIN TRANSPARENCIA */
+  opacity:1;
+  filter:none;
+
+  transition:transform .5s ease;
+}
+
+.slide.active img{
+  transform:scale(1.08);
+}
+
+/* =========================
+   OVERLAY — FUERTE
+========================= */
+.overlay{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:26px;
+
+ background:linear-gradient(
+  180deg,
+  rgba(0,0,0,0) 35%,
+  rgba(0,0,0,.55) 70%,
+  rgba(0,0,0,.75) 100%
+);
+
+
+  color:#fff;
+  text-align:center;
+}
+
+/* =========================
+   TEXTO
+========================= */
+.title{
+  font-size:1.4rem;
+  font-weight:900;
+  letter-spacing:.4px;
+  margin:4px 0;
+}
+
+.desc{
+  font-size:.95rem;
+  line-height:1.45;
+  opacity:1;
+}
+
+/* =========================
+   CONTROLES — CARRUSEL
+========================= */
+.controls{
+  position:absolute;
+  inset:0;
+  z-index:30;
+  pointer-events:none;
+}
+
+/* =========================
+   BOTÓN IZQ / DER
+========================= */
+.btn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  pointer-events:auto;
+
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  border:none;
+  cursor:pointer;
+
+  /* 🖤 NEGRO DIFUMINADO (VIDRIO) */
+  background:rgba(0,0,0,.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  /* ✨ profundidad premium */
+  box-shadow:
+    0 12px 30px rgba(0,0,0,.85),
+    inset 0 0 0 1.5px rgba(255,255,255,.25);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  /* 🔑 FLECHA DE TEXTO */
+  color:#ffffff;            /* 👈 flecha blanca */
+  font-size:26px;
+  font-weight:600;
+  line-height:1;
+
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    background .25s ease;
+}
+
+/* =========================
+   FLECHA SVG (SI EXISTE)
+========================= */
+.btn svg{
+  width:22px;
+  height:22px;
+  stroke:#ffffff;           /* 👈 flecha SVG blanca */
+  stroke-width:3;
+  fill:none;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+/* =========================
+   POSICIÓN
+========================= */
+.btn.left{ left:10px; }
+.btn.right{ right:10px; }
+
+/* =========================
+   HOVER (PC)
+========================= */
+@media (hover:hover){
+  .btn:hover{
+    background:rgba(0,0,0,.75);
+    transform:translateY(-50%) scale(1.1);
+    box-shadow:
+      0 18px 42px rgba(0,0,0,.95),
+      inset 0 0 0 1.5px rgba(255,255,255,.35);
+  }
+}
+
+/* =========================
+   ACTIVE (TOQUE)
+========================= */
+.btn:active{
+  transform:translateY(-50%) scale(.96);
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media(max-width:640px){
+  .btn{
+    width:40px;
+    height:40px;
+    font-size:22px;
+  }
+
+  .btn svg{
+    width:20px;
+    height:20px;
+    stroke-width:2.6;
+  }
+}
+
+
+/* =========================
+   BOTÓN COTIZA TU EVENTO — ROJO 3D PREMIUM
+========================= */
+
+.overlay-content {
+  width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
-  width: 72px;
-  height: 72px;
-  background: rgba(255,255,255,0.18);
-  border-radius: 50%;
-  overflow: hidden;
-  backdrop-filter: blur(3px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-  transition: 0.18s ease;
+  align-items: flex-end;
 }
 
-.footer-botones a:hover {
-  transform: translateY(-4px) scale(1.08);
+.btn-cotiza {
+  margin-bottom: 14px;
+  padding: 13px 28px;
+
+  /* 🔴 rojo elegante tipo marca */
+  background: linear-gradient(
+    180deg,
+    #ff5a4a 0%,
+    #f04a3a 55%,
+    #c93428 100%
+  );
+
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: .4px;
+  text-decoration: none;
+
+  border-radius: 999px;
+  border: none;
+
+  /* 🧱 efecto 3D real */
+  box-shadow:
+    0 10px 22px rgba(0,0,0,.45),
+    inset 0 2px 0 rgba(255,255,255,.25),
+    inset 0 -3px 0 rgba(0,0,0,.25);
+
+  transition:
+    transform .2s ease,
+    box-shadow .25s ease,
+    filter .25s ease;
 }
 
-.footer-botones img {
-  width: 85%;
-  height: 85%;
-  object-fit: contain;
-  object-position: center;
+/* ✨ HOVER — SE ELEVA (PC) */
+@media (hover:hover){
+  .btn-cotiza:hover{
+    transform: translateY(-2px);
+    filter: brightness(1.05);
+    box-shadow:
+      0 16px 34px rgba(0,0,0,.55),
+      inset 0 2px 0 rgba(255,255,255,.35),
+      inset 0 -3px 0 rgba(0,0,0,.3);
+  }
+}
+
+/* 📱 ACTIVE — PRESIONADO REAL */
+.btn-cotiza:active{
+  transform: translateY(1px);
+  box-shadow:
+    0 6px 14px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,.15),
+    inset 0 -1px 0 rgba(0,0,0,.45);
+}
+
+/* 📱 MOBILE */
+@media (max-width: 640px){
+  .btn-cotiza{
+    font-size: .95rem;
+    padding: 12px 24px;
+    letter-spacing: .3px;
+  }
+}
+
+/* =========================
+   🎞️ ANIMACIÓN DE ENTRADA
+========================= */
+
+.menu-book{
+  opacity: 0;
+  transform: translateY(30px) scale(.96);
+  animation: entradaLibro 1.4s cubic-bezier(.4,0,.2,1) forwards;
+}
+
+@keyframes entradaLibro{
+  to{
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+/* =========================
+   🔔 ANIMACIÓN BOTÓN ACTIVO
+========================= */
+
+.header-unificado nav a.active::after{
+  content:"";
+  position:absolute;
+  inset:-6px;
+  border-radius:inherit;
+  pointer-events:none;
+
+  background: radial-gradient(
+    circle at center,
+    rgba(244,196,48,.35) 0%,
+    rgba(244,196,48,.15) 35%,
+    rgba(244,196,48,0) 70%
+  );
+
+  animation: activeGlow 1.8s ease-in-out infinite;
+}
+
+
+/* brillo suave */
+.header-unificado nav a.active::after{
+  content:"";
+  position:absolute;
+  inset:-6px;
+  border-radius:inherit;
+  pointer-events:none;
+
+  background: radial-gradient(
+    circle at center,
+    rgba(244,196,48,.35) 0%,
+    rgba(244,196,48,.15) 35%,
+    rgba(244,196,48,0) 70%
+  );
+
+  animation: activeGlow 1.8s ease-in-out infinite;
+}
+
+
+/* =========================
+   BOTONES DELIVERY — ESTILO PREMIUM (COMPACTO)
+========================= */
+
+.delivery-buttons{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;              /* 🔽 antes 16px */
+  margin:22px auto;      /* 🔽 antes 26px */
+  flex-wrap:wrap;
+}
+
+/* 🔘 BOTÓN BASE */
+.btn-delivery{
+  position:relative;
+  padding:10px 18px;     /* 🔽 antes 13px 22px */
+  border-radius:999px;
+
+  font-weight:800;
+  font-size:.85rem;      /* 🔽 antes .95rem */
+  letter-spacing:.35px;
+  text-decoration:none;
+  color:#fff;
+
+  min-width:110px;       /* 🔽 antes 130px */
+  text-align:center;
+
+  backdrop-filter: blur(6px);
+  box-shadow:
+    0 6px 18px rgba(0,0,0,.35),
+    inset 0 0 0 1px rgba(255,255,255,.18);
+
+  transition:
+    transform .25s ease,
+    box-shadow .3s ease,
+    filter .3s ease;
+}
+
+/* ✨ brillo suave superior */
+.btn-delivery::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+
+  background:linear-gradient(
+    180deg,
+    rgba(255,255,255,.35),
+    rgba(255,255,255,0) 55%
+  );
+
+  opacity:.3;            /* 🔽 un poco más sutil */
+}
+
+/* =========================
+   COLORES POR PLATAFORMA
+========================= */
+
+/* 🖤 UBER EATS */
+.btn-delivery.uber{
+  background:linear-gradient(
+    180deg,
+    #111 0%,
+    #000 100%
+  );
+}
+
+/* 🟠 DIDI FOOD */
+.btn-delivery.didi{
+  background:linear-gradient(
+    180deg,
+    #ff8a1d 0%,
+    #ff6a00 100%
+  );
+}
+
+/* 🟢 WHATSAPP */
+.btn-delivery.whatsapp{
+  background:linear-gradient(
+    180deg,
+    #34e17a 0%,
+    #1fa855 100%
+  );
+}
+
+/* =========================
+   ✨ HOVER / ACTIVE
+========================= */
+@media (hover:hover){
+  .btn-delivery:hover{
+    transform:translateY(-2px) scale(1.05); /* 🔽 menos exagerado */
+    box-shadow:
+      0 12px 28px rgba(0,0,0,.45),
+      inset 0 0 0 1px rgba(255,255,255,.25);
+    filter:brightness(1.04);
+  }
+}
+
+.btn-delivery:active{
+  transform:scale(.96);
+}
+
+/* =========================
+   📱 MOBILE
+========================= */
+@media (max-width:640px){
+  .btn-delivery{
+    font-size:.82rem;
+    padding:9px 16px;
+    min-width:100px;
+  }
+}
+/* =================================================
+   MODAL COTIZADOR – LA CHONA (CORREGIDO)
+   ================================================= */
+
+.modal-cotiza {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.75);
+  backdrop-filter: blur(4px);
+  display: none;
+  justify-content: center;
+  align-items: center; /* Centrado perfecto */
+  padding: 20px;
+  z-index: 9999;
+}
+
+.modal-cotiza.activo {
+  display: flex;
+}
+
+.modal-box {
+  background: #1a1a1a;
+  color: #fff;
+  width: 92%;
+  max-width: 420px;
+  border-radius: 20px;
+  
+  /* 🔥 CAMBIO CLAVE: Quitamos el scroll de la caja principal */
+  display: flex;
+  flex-direction: column;
+  max-height: 85vh; 
+  padding: 0; /* Quitamos el padding global para que el scroll llegue al borde */
+  
+  overflow: hidden; 
+  box-shadow: 0 20px 45px rgba(0,0,0,.7), inset 0 0 0 1px rgba(244,196,48,.2);
+}
+
+/* Header del modal fijo arriba */
+.modal-box .modal-header-estatico {
+  padding: 22px 22px 10px;
+  background: #1a1a1a;
+  z-index: 10;
+}
+
+.modal-box h3 {
+  margin: 0;
+  text-align: center;
+  font-family: 'Pacifico', cursive;
+  font-size: 1.7rem;
+  color: #f4c430;
+  text-shadow: 2px 2px 0 #000;
+}
+
+/* 🔥 ÁREA DE CONTENIDO CON SCROLL INTELIGENTE */
+.modal-body-scroll {
+  padding: 0 22px 22px;
+  overflow-y: auto;
+  flex: 1; /* Toma todo el espacio sobrante */
+}
+
+/* 🎨 BARRA DE SCROLL PREMIUM */
+.modal-body-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+.modal-body-scroll::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+.modal-body-scroll::-webkit-scrollbar-thumb {
+  background: #f4c430;
+  border-radius: 10px;
+}
+
+.subtitulo {
+  text-align: center;
+  font-size: .9rem;
+  opacity: .85;
+  margin-bottom: 14px;
   display: block;
 }
 
-.footer-botones span {
-  display: none !important;
+/* Grupos de productos */
+.grupo { margin-bottom: 16px; }
+.grupo h4 { margin: 8px 0; font-size: 1rem; color: #f4c430; border-bottom: 1px dashed rgba(244,196,48,.3); padding-bottom: 4px; }
+
+.modal-box label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: .95rem;
+  cursor: pointer;
+  background: rgba(255,255,255,.04);
+  margin-bottom: 6px;
+  transition: background 0.2s;
 }
 
-/* ===============================
-   📌 ANIMACIONES
-=============================== */
-@keyframes aparecer {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
+.modal-box label:hover { background: rgba(255,255,255,.08); }
+
+.modal-box input[type="checkbox"] { accent-color: #f4c430; width: 18px; height: 18px; }
+
+.modal-box textarea {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.1);
+  background: #111;
+  color: #fff;
+  font-size: .9rem;
 }
 
-@keyframes zoom {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
+/* Botones de acción fijos abajo */
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  padding: 15px 22px 22px;
+  background: #1a1a1a;
+  border-top: 1px solid rgba(255,255,255,.1);
 }
 
-@keyframes brilloSuave {
-  0% { text-shadow: 0 0 5px var(--color-secundario); }
-  50% { text-shadow: 0 0 20px var(--color-secundario), 0 0 30px var(--color-principal); }
-  100% { text-shadow: 0 0 5px var(--color-secundario); }
+.modal-actions button {
+  flex: 1;
+  padding: 14px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 800;
+  transition: transform 0.2s;
 }
 
-/* ===============================
-   📌 HOVER ADICIONAL
-=============================== */
-nav a:hover,
-.card button:hover {
-  background-color: var(--color-secundario);
-  color: #b22222;
-  box-shadow: 0 0 10px var(--color-secundario);
-  transform: scale(1.15);
-  transition: all 0.3s ease-in-out;
+.modal-actions button:active { transform: scale(0.96); }
+
+.modal-actions button:first-child { background: #333; color: #fff; }
+.modal-actions button:last-child {
+  background: linear-gradient(180deg, #34e17a 0%, #1fa855 100%);
+  color: #0b3d1d;
+}
+/* =========================
+   ⏰ HORARIO / RELOJ — VISIBILIDAD UNIVERSAL
+========================= */
+
+#horario-compacto{
+  display:inline-block;
+  padding:10px 16px;
+  border-radius:12px;
+
+  /* fondo adaptable a cualquier imagen */
+  background:rgba(0,0,0,.55);
+  backdrop-filter: blur(6px);
+
+  /* borde sutil */
+  box-shadow:
+    0 8px 22px rgba(0,0,0,.45),
+    inset 0 0 0 1px rgba(255,255,255,.12);
 }
 
-/* ===============================
-   📌 RESPONSIVE
-=============================== */
-@media(max-width:768px){
-  .img-bienvenida { width: 92%; }
-  nav { gap: 6px; top: var(--header-height); }
-  header img.logo { width: 64px; }
+#reloj,
+#estado,
+#horario-compacto h2,
+#horario-compacto li{
+  color:#fff;
+
+  /* sombra de texto para contraste real */
+  text-shadow:
+    0 1px 2px rgba(0,0,0,.9),
+    0 0 8px rgba(0,0,0,.6);
 }
 
-@media(max-width:480px){
-  nav a { font-size: 0.8rem; padding: 6px 8px; }
-  .grid { gap: 10px; }
-  header h1 { font-size: 1.5rem; }
-  header img.logo { width: 50px; }
-  main { padding-top: calc(var(--header-height) + var(--nav-height) + 12px); }
-  .footer-botones a { width: 62px; height: 62px; }
-  .footer-botones img { width: 86%; height: 86%; }
+/* Estado Abierto */
+#estado.abierto{
+  background:rgba(0,128,0,.25);
+  border:1px solid rgba(0,255,0,.4);
+}
+
+/* Estado Cerrado */
+#estado.cerrado{
+  background:rgba(128,0,0,.25);
+  border:1px solid rgba(255,0,0,.4);
+}
+
+/* =========================
+   📍 CONTENEDOR CENTRADO
+========================= */
+.btn-center{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width:100%;
+  margin:24px auto;
+}
+
+/* =========================
+   🔴 BOTÓN PREMIUM — ROJO ELEGANTE
+========================= */
+.btn-bonito{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:14px 30px;
+  border-radius:999px;
+
+  font-family:'Pacifico', cursive;
+  font-size:1.05rem;
+  letter-spacing:.6px;
+  text-align:center;
+
+  color:#ffffff;
+  text-decoration:none;
+
+  /* 🔴 rojo corporativo */
+  background:linear-gradient(
+    180deg,
+    #ff5a4a 0%,
+    #f04a3a 55%,
+    #c93428 100%
+  );
+
+  /* 🧱 profundidad premium */
+  box-shadow:
+    0 10px 26px rgba(0,0,0,.55),
+    inset 0 2px 0 rgba(255,255,255,.25),
+    inset 0 -3px 0 rgba(0,0,0,.25);
+
+  transition:
+    transform .25s ease,
+    box-shadow .3s ease,
+    filter .3s ease;
+
+  overflow:hidden;
+}
+
+/* ✨ BRILLO SUPERIOR SUAVE */
+.btn-bonito::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+
+  background:linear-gradient(
+    180deg,
+    rgba(255,255,255,.45),
+    rgba(255,255,255,0) 60%
+  );
+
+  opacity:.35;
+}
+
+/* ⭐ HOVER — PC */
+@media (hover:hover){
+  .btn-bonito:hover{
+    transform:translateY(-2px) scale(1.05);
+    filter:brightness(1.06);
+
+    box-shadow:
+      0 16px 36px rgba(0,0,0,.65),
+      inset 0 2px 0 rgba(255,255,255,.35),
+      inset 0 -3px 0 rgba(0,0,0,.3);
+  }
+}
+
+/* 📱 ACTIVE — TOQUE REAL */
+.btn-bonito:active{
+  transform:scale(.96);
+  box-shadow:
+    0 6px 14px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,.15),
+    inset 0 -1px 0 rgba(0,0,0,.45);
+}
+
+/* 📱 MOBILE */
+@media (max-width:640px){
+  .btn-bonito{
+    font-size:.95rem;
+    padding:13px 24px;
+    letter-spacing:.45px;
+  }
+}
+
+/* =========================
+📖 LIBRO / CARTA VIRTUAL — HOJA REAL (ELEGANTE)
+========================= */
+
+/* =========================
+CONTENEDOR GENERAL
+========================= */
+.menu-book{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  perspective:1800px;
+  margin:clamp(20px, 4vw, 40px) auto;
+  width:100%;
+  position:relative;
+  overflow:visible;
+}
+
+/* =========================
+LIBRO
+========================= */
+.book{
+  width:clamp(260px, 50vw, 420px); /* 🔥 más angosto */
+  aspect-ratio: 3/4; /* 🔥 forma vertical tipo menú */
+
+  position:relative;
+  max-width:100vw;
+
+  transform-style:preserve-3d;
+  overflow:visible;
+}
+
+/* =========================
+📄 PÁGINA — HOJA LIMPIA
+========================= */
+.page{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:none;
+  overflow:visible;
+
+  transform-origin:left center;
+  transform:rotateY(0deg);
+
+  transition:transform 1s cubic-bezier(.4,0,.2,1);
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  transform-style:preserve-3d;
+
+  will-change:transform;
+}
+
+.page img{
+  width:100%;
+  height:100%;
+
+  object-fit:fill; /* 🔥 estira la imagen */
+
+  display:block;
+  border-radius:12px;
+
+  outline: 0.5px solid rgba(255,255,255,.65);
+  outline-offset: -0.5px;
+}
+
+
+
+/* =========================
+🔘 BOTONES DE NAVEGACIÓN
+========================= */
+.nav{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:20;
+
+  background:rgba(20,32,40,.85);
+  backdrop-filter:blur(6px);
+  border:none;
+
+  width:clamp(44px, 6vw, 60px);
+  height:clamp(44px, 6vw, 60px);
+  border-radius:50%;
+  cursor:pointer;
+
+  color:#e6f2f5;
+  font-size:clamp(2rem, 5vw, 2.8rem);
+
+  box-shadow:
+    0 10px 26px rgba(0,0,0,.55),
+    inset 0 0 0 1px rgba(255,255,255,.18);
+
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    filter .25s ease;
+}
+
+.nav.prev{ left:10px; }
+.nav.next{ right:10px; }
+
+/* Hover solo en PC */
+@media (hover:hover){
+  .nav:hover{
+    transform:translateY(-50%) scale(1.12);
+    filter:brightness(1.1);
+    box-shadow:
+      0 14px 34px rgba(0,0,0,.75),
+      inset 0 0 0 1px rgba(255,255,255,.3);
+  }
+}
+
+/* Active */
+.nav:active{
+  transform:translateY(-50%) scale(.96);
+}
+
+/* =========================
+📱 REDUCCIÓN DE MOVIMIENTO
+========================= */
+@media (prefers-reduced-motion: reduce){
+  .menu-book,
+  .book,
+  .page{
+    animation:none !important;
+    transition:none !important;
+  }
+}
+.nav.disabled{
+  opacity: 0.35;
+  pointer-events: none;
+  filter: grayscale(100%);
+  box-shadow: none;
+  transform: translateY(-50%) scale(0.95);
+}
+
+/* =========================
+⏰ HORARIO — CENTRADO + LÍNEA SOLO ABAJO
+========================= */
+#horario-compacto{
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: fit-content;
+  margin: 12px auto 0;
+  padding: 12px 18px 14px; /* espacio para la línea */
+
+  text-align: center;
+
+  outline: none; /* ❌ sin contorno */
+}
+
+/* 🔶 LÍNEA INFERIOR DORADA */
+#horario-compacto::after{
+  content:"";
+  position:absolute;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+
+  width:100%;
+  max-width:360px;
+  height:2px;
+
+  background:linear-gradient(
+    90deg,
+    transparent,
+    #E6B8A9,
+    #F2C6B8,
+    #E6B8A9,
+    transparent
+  );
+}
+
+/* =================================================
+   TEXTO CORPORATIVO — ANCHO REAL / FLUIDO
+================================================= */
+.texto-corporativo{
+  color:#ffffff;
+
+  /* 🔑 OCUPA CASI TODO EL ANCHO REAL */
+  width: 100%;
+  max-width: min(1200px, 96vw);
+  margin: 0 auto 18px;
+
+  /* menos aire lateral */
+  padding: 0 clamp(12px, 2.5vw, 24px);
+
+  /* tipografía */
+  font-family: 'Inter', system-ui, Arial, sans-serif;
+  font-weight: 400;
+
+  /* tamaño correcto (ya aprobado) */
+  font-size: clamp(0.98rem, 2.2vw, 1.08rem);
+
+  /* 🔑 MENOS ALTURA ENTRE LÍNEAS */
+  line-height: 1.45;
+  letter-spacing: 0.008em;
+
+  /* 🔑 MÁS HORIZONTAL */
+  text-align: center;
+  text-wrap: normal;   /* 👈 CLAVE: permite líneas largas */
+
+  /* contraste elegante */
+  text-shadow:
+    0 1px 2px rgba(0,0,0,.85),
+    0 0 6px rgba(0,0,0,.4);
+
+  /* entrada suave */
+  opacity: 0;
+  transform: translateY(6px);
+  animation: textoFade .6s ease-out forwards;
+}
+
+@keyframes textoFade{
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =================================================
+   📱 MÓVIL — CASI ANCHO COMPLETO
+================================================= */
+@media (max-width: 768px){
+  .texto-corporativo{
+    max-width: 100%;
+    padding: 0 14px;
+
+    font-size: 0.96rem;
+    line-height: 1.42;
+    letter-spacing: 0.006em;
+
+    text-align: center;
+  }
+}
+
+/* =================================================
+   💻 DESKTOP — SE VE MÁS “LARGO”
+================================================= */
+@media (min-width: 1024px){
+  .texto-corporativo{
+    text-align: justify;
+    text-align-last: center; /* mantiene elegancia */
+  }
+}
+
+
+/* =================================================
+   FIX DEFINITIVO — PARPADEO AMARILLO (FOCUS / TAP)
+================================================= */
+
+/* 🔥 elimina highlight móvil (Chrome / Android / iOS) */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 🔥 elimina foco visual del navegador */
+.header-unificado a,
+.header-unificado a:focus,
+.header-unificado a:active,
+.header-unificado a:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* 🔥 evita flash por estado active */
+.header-unificado nav a:active {
+  background: transparent !important;
+  color: inherit;
+}
+
+/* 🔥 refuerzo extra para Chrome / Edge */
+.header-unificado nav a {
+  -webkit-user-select: none;
+  user-select: none;
+}
+/* =================================================
+   FIX DEFINITIVO — ACTIVE SIN ZOOM EN MÓVIL
+================================================= */
+@media (max-width: 768px) {
+  .header-unificado nav a.active {
+    animation: none !important;
+    transform: none !important;
+    box-shadow:
+      0 0 0 2px rgba(244,196,48,.4),
+      0 6px 16px rgba(0,0,0,.55);
+  }
+
+  .header-unificado nav a.active::after {
+    animation: none !important;
+  }
+}
+/* =================================================
+   FIX DEFINITIVO — ACTIVE SIN ZOOM EN MÓVIL
+   (NO reemplaza nada, solo corrige móviles)
+================================================= */
+@media (max-width: 768px) {
+  .header-unificado nav a.active {
+    animation: none !important;
+    transform: none !important;
+
+    /* mantenemos brillo elegante sin zoom */
+    box-shadow:
+      0 0 0 2px rgba(244,196,48,.4),
+      0 6px 16px rgba(0,0,0,.55);
+  }
+
+  .header-unificado nav a.active::after {
+    animation: none !important;
+  }
+}
+/* =================================================
+   FIX — NAV NO BAJA HASTA EL ÚLTIMO MOMENTO
+   (solo refina, no reemplaza)
+================================================= */
+.header-unificado nav {
+  gap: clamp(4px, 1.2vw, 22px); /* el espacio se reduce más */
+}
+
+/* =================================================
+   FIX — TEXTO SE REDUCE MÁS ANTES DE BAJAR
+================================================= */
+.header-unificado nav a {
+  white-space: nowrap;        /* nunca se parte el texto */
+  min-width: max-content;     /* no se aplasta */
+
+  /* ↓ deja que el texto baje MÁS antes de wrap */
+  font-size: clamp(0.78rem, 2.1vw, 1.45rem);
+  letter-spacing: clamp(0.05em, 0.45vw, 0.18em);
+}
+
+/* ==============================
+   MODAL COTIZACIÓN — PREMIUM
+============================== */
+
+.modal-cotiza{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.7);
+  backdrop-filter: blur(3px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+.modal-cotiza.activo{
+  display:flex;
+}
+
+/* ==============================
+   TARJETA PRINCIPAL
+============================== */
+.cotiza-box.elegante{
+  position:relative;
+  width:min(480px,94%);
+  border-radius:22px;
+  overflow:hidden;
+
+  /* 🖼️ IMAGEN DE FONDO */
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,.55),
+      rgba(0,0,0,.75)
+    ),
+    url("img/fondo44.jpg"); /* 👈 CAMBIA AQUÍ TU IMAGEN */
+  background-size:cover;
+  background-position:center;
+
+  padding:22px;
+  box-shadow:0 35px 90px rgba(0,0,0,.45);
+
+  font-family:'Libre Baskerville', serif;
+  color:#fff;
+
+  animation:modalEntrada .5s ease;
+}
+
+/* Animación entrada */
+@keyframes modalEntrada{
+  from{
+    opacity:0;
+    transform:translateY(20px) scale(.96);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
+
+/* ==============================
+   HEADER
+============================== */
+.cotiza-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding-bottom:12px;
+  margin-bottom:8px;
+  border-bottom:1px solid rgba(255,255,255,.25);
+}
+
+.cotiza-header h3{
+  font-size:1.35rem;
+  font-weight:600;
+  color:#fff;
+}
+
+.cerrar{
+  background:rgba(255,255,255,.15);
+  border:none;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  font-size:1.1rem;
+  cursor:pointer;
+  color:#fff;
+  transition:.25s;
+}
+.cerrar:hover{
+  background:rgba(255,255,255,.3);
+}
+
+/* ==============================
+   LISTA PRODUCTOS
+============================== */
+.lista-elegante .producto{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 0;
+  border-bottom:1px dashed rgba(255,255,255,.25);
+}
+
+.lista-elegante span{
+  font-size:.95rem;
+  line-height:1.3;
+  color:#fff;
+}
+
+.lista-elegante small{
+  font-size:.8rem;
+  opacity:.85;
+}
+
+/* ==============================
+   CONTROLES
+============================== */
+.controles{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.controles span{
+  min-width:18px;
+  text-align:center;
+}
+
+.controles button{
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  border:none;
+  font-weight:bold;
+  font-size:1rem;
+  cursor:pointer;
+}
+
+.mas{
+  background:#25D366;
+  color:#fff;
+}
+
+.menos{
+  background:rgba(255,255,255,.75);
+  color:#222;
+}
+
+/* ==============================
+   RESUMEN — LISTA PREMIUM (CORREGIDO)
+============================== */
+.resumen.elegante {
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,.25);
+  
+  /* 🔥 Esto permite que el contenido respire y no se trabe */
+  display: flex;
+  flex-direction: column;
+  max-height: 300px; 
+}
+
+.resumen.elegante h4 {
+  font-size: .85rem;
+  margin-bottom: 12px;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+  color: #f4c430;
+  opacity: .9;
+  
+  /* 🔥 Fijamos el título para que nunca se tape */
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding-bottom: 5px;
+}
+
+/* 🔥 CONTENEDOR DE LA LISTA (Aquí es donde ocurre la magia del scroll) */
+.resumen.elegante ul {
+  list-style: none;
+  padding: 0 8px 0 0; /* Espacio a la derecha para la barra */
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  /* 🔥 Scroll suave y controlado */
+  overflow-y: auto; 
+  overflow-x: hidden;
+  overscroll-behavior: contain; /* Evita que el scroll "rebote" al fondo */
+}
+
+/* 🎨 BARRA DE SCROLL ESTILIZADA */
+.resumen.elegante ul::-webkit-scrollbar {
+  width: 5px;
+}
+.resumen.elegante ul::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+.resumen.elegante ul::-webkit-scrollbar-thumb {
+  background: #f4c430;
+  border-radius: 10px;
+}
+
+/* ITEM */
+.resumen.elegante li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.08);
+  backdrop-filter: blur(8px);
+  font-size: .9rem;
+  color: #ffffff;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.1);
+  
+  /* Asegura que la animación no trabe el scroll */
+  animation: itemIn .3s ease forwards;
+}
+
+/* nombre producto */
+.resumen.elegante li span {
+  opacity: .95;
+  padding-right: 10px;
+}
+
+/* cantidad */
+.resumen-elegante-cant {
+  font-weight: 700;
+  font-size: .85rem;
+  color: #f4c430;
+  white-space: nowrap;
+}
+
+@keyframes itemIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* TOTAL */
+.total {
+  margin-top: 15px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,.25);
+  text-align: right;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #fff;
+}
+/* ==============================
+   BOTÓN WHATSAPP — ELEGANTE / SOBRIO
+============================== */
+.btn-whatsapp{
+  width:100%;
+  margin-top:20px;
+  padding:14px;
+  border:none;
+  border-radius:999px;
+
+  /* verde más apagado */
+  background:linear-gradient(
+    180deg,
+    #2fbf71,
+    #1e9f5a
+  );
+
+  color:#ffffff;
+  font-weight:600;
+  font-size:.95rem;
+  cursor:pointer;
+
+  /* sombra neutra (NO verde) */
+  box-shadow:
+    0 8px 18px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.18);
+
+  transition:
+    transform .2s ease,
+    box-shadow .25s ease,
+    filter .25s ease;
+}
+
+/* Hover PC */
+@media (hover:hover){
+  .btn-whatsapp:hover{
+    transform:translateY(-1px);
+    filter:brightness(1.04); /* leve */
+    box-shadow:
+      0 12px 26px rgba(0,0,0,.45),
+      inset 0 1px 0 rgba(255,255,255,.22);
+  }
+}
+
+/* Active móvil */
+.btn-whatsapp:active{
+  transform:translateY(0);
+  box-shadow:
+    0 6px 14px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,.12);
+}
+
+
+/* =================================================
+   📱 AJUSTE FINO SECCIONES BAJO HEADER (MÓVIL)
+================================================= */
+@media (max-width: 640px){
+
+  /* todas las secciones */
+  .page-section{
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  /* sección eventos específicamente */
+  #eventos{
+    padding-top: 6px !important;   /* pegado visual */
+  }
+
+}
+
+
+
+
+}
+
+/* =================================================
+   🧩 NORMALIZADOR VERTICAL GLOBAL — LA CHONA
+   (evita espacios fantasmas entre bloques)
+================================================= */
+
+/* 🔑 Regla base: nada exagerado en vertical */
+section,
+main,
+.page-section,
+.hero,
+.grid,
+.menu-book,
+.carousel-wrap,
+footer {
+  margin-top: clamp(6px, 1.2vh, 20px);
+  margin-bottom: clamp(10px, 2vh, 32px);
+}
+
+/* =================================================
+   HEADER → CONTENIDO (AJUSTE FINO)
+================================================= */
+main {
+  padding-top: calc(var(--header-height) + var(--nav-height) + clamp(10px, 2vh, 20px));
+}
+
+
+
+/* =================================================
+   CARRUSEL — MÁS PEGADO AL TEXTO
+================================================= */
+#eventos-carrusel,
+#empresa-carrusel {
+  margin-top: clamp(4px, 1vh, 14px);
+}
+
+/* =================================================
+   HERO / BIENVENIDA
+================================================= */
+.hero {
+  padding-top: clamp(6px, 1.5vh, 18px);
+  padding-bottom: clamp(10px, 2vh, 26px);
+}
+
+/* =================================================
+   GRID / CARDS
+================================================= */
+.grid {
+  margin-top: clamp(10px, 2vh, 28px);
+}
+
+/* =================================================
+   FOOTER — COMPACTO
+================================================= */
+footer {
+  padding-top: clamp(10px, 2vh, 18px);
+  padding-bottom: clamp(8px, 1.5vh, 14px);
+}
+
+/* =================================================
+   📱 MÓVIL — COMPACTACIÓN REAL
+================================================= */
+@media (max-width: 640px) {
+
+  section,
+  main,
+  .page-section,
+  .hero,
+  .grid,
+  .menu-book,
+  .carousel-wrap {
+    margin-top: 4px !important;
+    margin-bottom: 10px !important;
+  }
+
+  main {
+    padding-top: calc(var(--header-height) + var(--nav-height) + 6px);
+  }
+
+  .
+   {
+    margin-top: 2px !important;
+    margin-bottom: 10px !important;
+    line-height: 1.45;
+  }
+
+  #eventos-carrusel,
+  #empresa-carrusel {
+    margin-top: 4px !important;
+  }
+
+  .hero {
+    padding-top: 4px;
+    padding-bottom: 10px;
+  }
+}
+
+/* =================================================
+   🖥️ PANTALLAS MUY ALTAS (tablets verticales)
+================================================= */
+@media (min-height: 900px) {
+
+  section,
+  .page-section {
+    margin-top: clamp(8px, 1.5vh, 18px);
+    margin-bottom: clamp(14px, 2.5vh, 30px);
+  }
+}
+/* =================================================
+   🏷️ TÍTULO SOBRE IMAGEN — EVENTOS (COLOR ROJO)
+   ================================================= */
+.titulo-imagen {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+
+  padding: 10px 22px;
+  border-radius: 999px;
+
+  /* 🖤 Mantenemos tu fondo original */
+  background: rgba(0, 0, 0, 0.7); 
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  /* ✨ CAMBIO SOLO DE COLOR: ROJO LLAMATIVO */
+  background-image: linear-gradient(
+    to bottom,
+    #ffffff 0%,    /* Brillo de luz arriba */
+    #ff3a2d 45%,   /* Rojo vibrante central */
+    #ff2211 55%,   /* Rojo intenso */
+    #990000 100%   /* Rojo oscuro base */
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #ff3a2d; /* Fallback */
+  
+  font-family: 'Inter', system-ui, Arial, sans-serif;
+  font-weight: 800;
+  font-size: 1.1rem; 
+  letter-spacing: 1px; 
+  text-align: center;
+  white-space: nowrap;
+  text-transform: uppercase; /* Mayúsculas para que resalte más el color */
+
+  /* 🔍 Mantenemos tu truco de visibilidad con sombra */
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8)) 
+          drop-shadow(0 0 1px rgba(0,0,0,1));
+
+  box-shadow:
+    0 6px 18px rgba(0,0,0,0.6),
+    /* Brillo interno ahora en rojo suave para armonizar */
+    inset 0 0 0 1px rgba(255, 58, 45, 0.3); 
+
+  pointer-events: none;
+}
+
+/* 📱 MÓVIL — Mantenemos tus medidas exactas */
+@media (max-width: 640px) {
+  .titulo-imagen {
+    top: 10px;
+    font-size: .95rem;
+    padding: 8px 18px;
+  }
+}
+
+.media {
+  position: relative;
+}
+.descripcion-imagen {
+  position: absolute;
+  /* 📍 POSICIÓN EN LA BASE */
+  bottom: 15px;      /* Separación del borde inferior */
+  left: 15px;
+  right: 15px;
+  transform: none;   /* Eliminamos el centrado vertical */
+  
+  /* 🖋️ TIPOGRAFÍA */
+  color: #ffffff;
+  font-family: 'Inter', system-ui, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  text-align: center;
+
+  /* 🔥 SOMBRA PARA LEGIBILIDAD */
+  text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+
+  /* 🌫️ FONDO CON TINTE ROJO (Más oscuro abajo para fundirse con la base) */
+  background: linear-gradient(
+    to top,
+    rgba(20, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  
+  padding: 14px 18px;
+  border-radius: 12px;
+
+  /* ✨ DETALLES ROJOS */
+  border: 1px solid rgba(255, 58, 45, 0.3);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+
+  box-sizing: border-box;
+  z-index: 4;
+}
+
+/* 💰 PRECIO — ROJO LLAMATIVO */
+.price {
+  color: #ff3a2d; 
+  font-weight: 800;
+  font-size: 1.1em;
+  text-shadow: 0 0 10px rgba(255, 58, 45, 0.3);
+}
+
+/* 📱 AJUSTE PARA MÓVILES */
+@media (max-width: 640px) {
+  .descripcion-imagen {
+    bottom: 10px;    /* Un poco más pegado en móviles */
+    font-size: 13px; /* Letra un pelín más pequeña para que no tape mucha imagen */
+    padding: 12px;
+    left: 10px;
+    right: 10px;
+  }
 }
