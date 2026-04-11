@@ -349,7 +349,7 @@ main {
   }
 }
 
-  /* .img-bienvenida{
+  .img-bienvenida{
   display:block;
   width:85%;
   max-width:clamp(230px, 40vw, 420px);
