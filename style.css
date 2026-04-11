@@ -1398,18 +1398,25 @@ CONTENEDOR GENERAL
   overflow:visible;
 }
 
-/* =========================
-LIBRO
-========================= */
 .book{
-  width:clamp(260px, 50vw, 420px); /* 🔥 más angosto */
-  aspect-ratio: 3/4; /* 🔥 forma vertical tipo menú */
+  width: clamp(240px, 90vw, 420px); /* 👈 CLAVE: mejor en celular */
+  aspect-ratio: 3 / 4;
 
-  position:relative;
-  max-width:100vw;
+  position: relative;
 
-  transform-style:preserve-3d;
-  overflow:visible;
+  max-width: 100%;
+  margin: 0 auto; /* 👈 centra en celular */
+
+  transform-style: preserve-3d;
+  overflow: visible;
+}
+@media (max-width: 640px){
+  .book{
+    width: 92vw;        /* casi toda la pantalla */
+    max-width: 420px;   /* nunca se hace gigante */
+    margin: 0 auto;     /* centrado */
+    aspect-ratio: 3 / 4;
+  }
 }
 
 /* =========================
@@ -2177,46 +2184,54 @@ footer {
   /* ✨ CAMBIO SOLO DE COLOR: ROJO LLAMATIVO */
   background-image: linear-gradient(
     to bottom,
-    #ffffff 0%,    /* Brillo de luz arriba */
-    #ff3a2d 45%,   /* Rojo vibrante central */
-    #ff2211 55%,   /* Rojo intenso */
-    #990000 100%   /* Rojo oscuro base */
+    #ffffff 0%,
+    #ff3a2d 45%,
+    #ff2211 55%,
+    #990000 100%
   );
+
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: #ff3a2d; /* Fallback */
-  
+  color: #ff3a2d;
+
   font-family: 'Inter', system-ui, Arial, sans-serif;
   font-weight: 800;
-  font-size: 1.1rem; 
-  letter-spacing: 1px; 
+  font-size: 1.1rem;
+  letter-spacing: 1px;
   text-align: center;
-  white-space: nowrap;
-  text-transform: uppercase; /* Mayúsculas para que resalte más el color */
 
-  /* 🔍 Mantenemos tu truco de visibilidad con sombra */
+  /* ✅ CORRECCIÓN IMPORTANTE */
+  white-space: normal;      /* 👈 ahora puede bajar línea */
+  max-width: 90%;           /* 👈 evita que se salga */
+  word-break: break-word;   /* 👈 rompe palabras largas si hace falta */
+
+  text-transform: uppercase;
+
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8)) 
           drop-shadow(0 0 1px rgba(0,0,0,1));
 
   box-shadow:
     0 6px 18px rgba(0,0,0,0.6),
-    /* Brillo interno ahora en rojo suave para armonizar */
-    inset 0 0 0 1px rgba(255, 58, 45, 0.3); 
+    inset 0 0 0 1px rgba(255, 58, 45, 0.3);
 
   pointer-events: none;
 }
 
-/* 📱 MÓVIL — Mantenemos tus medidas exactas */
+/* 📱 MÓVIL */
 @media (max-width: 640px) {
   .titulo-imagen {
     top: 10px;
     font-size: .95rem;
     padding: 8px 18px;
+
+    max-width: 92%; /* 👈 mejor ajuste en móvil */
   }
 }
 
+/* ✅ CONTENEDOR IMAGEN */
 .media {
   position: relative;
+  overflow: hidden; /* 👈 CLAVE: evita que se salga del cuadro */
 }
 .descripcion-imagen {
   position: absolute;
