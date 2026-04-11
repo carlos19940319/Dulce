@@ -1441,8 +1441,8 @@ CONTENEDOR GENERAL
 }
 
 .book{
-  width: clamp(190px, 70vw, 320px); /* 👈 CLAVE: mejor en celular */
-  aspect-ratio: 3 / 3;
+  width: clamp(170px, 60vw, 300px); /* 👈 CLAVE: mejor en celular */
+  aspect-ratio: 3 / 4;
 
   position: relative;
 
