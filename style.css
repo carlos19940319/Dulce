@@ -1498,14 +1498,31 @@ CONTENEDOR GENERAL
 .page img{
   width:100%;
   height:100%;
-
-  object-fit:fill; /* 🔥 estira la imagen */
+  object-fit:fill;
 
   display:block;
   border-radius:12px;
 
-  outline: 0.5px solid rgba(255,255,255,.65);
-  outline-offset: -0.5px;
+  outline: 2px solid #FFD700;
+  outline-offset: -2px;
+
+  box-shadow:
+    0 0 8px rgba(255, 215, 0, .5),
+    0 0 16px rgba(255, 215, 0, .3);
+
+  animation: brilloDorado 2.5s infinite alternate;
+}
+
+@keyframes brilloDorado{
+  from{
+    box-shadow:
+      0 0 6px rgba(255, 215, 0, .4);
+  }
+  to{
+    box-shadow:
+      0 0 14px rgba(255, 215, 0, .8),
+      0 0 25px rgba(255, 215, 0, .4);
+  }
 }
 
 
