@@ -264,7 +264,7 @@ filter: brightness(1.05) contrast(1.20) saturate(1.30);
 ================================================= */
 .header-unificado nav a.active {
   border-color: #fff;
-  background: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.30);
 }
 
 
