@@ -353,6 +353,13 @@ main {
 /* =================================================
    🖼️ IMAGEN BIENVENIDA — LUJO EDITORIAL REAL
 ================================================= */
+
+.img-bienvenida-wrapper{
+  display:flex;
+  justify-content:center;
+  animation: floatSoft 6s ease-in-out 2.3s infinite;
+}
+
 .img-bienvenida{
   display:block;
   width:85%;
@@ -368,36 +375,35 @@ main {
 
   opacity:0;
 
-outline: 2px solid rgba(255,255,255,.35);
-outline-offset: 4px;
+  outline: 2px solid rgba(255,255,255,.35);
+  outline-offset: 4px;
 
-
-
-
-
-  /* 🔥 ZOOM GRANDE DE ENTRADA */
-  transform: translateY(80px) scale(1.4) rotateX(14deg) rotateY(-6deg);
+  /* 🔥 SOLO ZOOM DE ENTRADA */
+  transform: translateY(80px) scale(0.4) rotateX(10deg) rotateY(-6deg);
 
   animation:
-    zoomIntroPro 2.1s cubic-bezier(0.16, 1, 0.3, 1) forwards,
-    floatSoft 6s ease-in-out 2.3s infinite;
+    zoomIntroPro 2.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 
   will-change: transform, opacity, filter;
 }
 
-/* 🎬 ENTRADA CINEMÁTICA (ZOOM GRANDE → NORMAL) */
+
+/* =================================================
+   🎬 ENTRADA CINEMÁTICA
+================================================= */
+
 @keyframes zoomIntroPro{
 
   0%{
     opacity:0;
-    transform: translateY(80px) scale(1.4) rotateX(14deg) rotateY(-6deg);
+    transform: translateY(80px) scale(0.6) rotateX(14deg) rotateY(-6deg);
     filter: blur(14px) brightness(.6);
   }
 
   45%{
     opacity:1;
-    transform: translateY(-14px) scale(1.08) rotateX(0deg) rotateY(0deg);
-    filter: blur(0px) brightness(1.2);
+    transform: translateY(-14px) scale(1.03) rotateX(0deg) rotateY(0deg);
+    filter: blur(0px) brightness(1.1);
   }
 
   65%{
@@ -405,7 +411,7 @@ outline-offset: 4px;
   }
 
   85%{
-    transform: translateY(-2px) scale(1.02);
+    transform: translateY(-2px) scale(1.01);
   }
 
   100%{
@@ -415,20 +421,32 @@ outline-offset: 4px;
   }
 }
 
-/* 🌊 FLUJO SUAVE (RESPIRACIÓN) */
+
+/* =================================================
+   🌊 FLUJO SUAVE (FLOAT SEPARADO)
+================================================= */
+
 @keyframes floatSoft{
-  0%,100%{ transform: translateY(0) scale(1); }
-  50%{ transform: translateY(-7px) scale(1.02); }
+  0%,100%{
+    transform: translateY(0);
+  }
+
+  50%{
+    transform: translateY(-7px);
+  }
 }
 
-/* 💻 LAPTOP / TABLET */
+
+/* =================================================
+   💻 RESPONSIVE
+================================================= */
+
 @media (max-width:1200px){
   .img-bienvenida{
     max-width:clamp(320px, 70vw, 680px);
   }
 }
 
-/* 📱 MÓVIL */
 @media (max-width:768px){
   .img-bienvenida{
     max-width:90%;
@@ -436,13 +454,11 @@ outline-offset: 4px;
   }
 }
 
-/* 📱 MÓVIL PEQUEÑO */
 @media (max-width:480px){
   .img-bienvenida{
     max-width:92%;
   }
 }
-
 /* =========================
    GRID — LIMPIO Y AIREADO
 ========================= */
