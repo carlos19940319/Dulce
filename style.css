@@ -1126,7 +1126,7 @@ footer::before{
   align-items: flex-start;
 
   padding: 20px;
-  padding-top: 40px;
+  padding-top: 10px;
 
   /* 🔥 scroll externo solo como respaldo */
   overflow-y: auto;
@@ -1156,7 +1156,7 @@ footer::before{
   flex-direction: column;
 
   /* 🔥 CLAVES */
-  max-height: 90vh;
+  max-height: 95vh;
   overflow: hidden;
 }
 
