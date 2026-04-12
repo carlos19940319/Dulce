@@ -172,14 +172,29 @@ filter: brightness(1.05) contrast(1.20) saturate(1.30);
   width: 100%;
 }
 
+
+
 .header-unificado .header-top img.logo {
-  width: clamp(70px, 6vw, 90px);
+  width: clamp(70px, 6vw, 95px);
   height: auto;
   border-radius: 50%;
+
+  /* Borde suave moderno */
+  border: 2px solid rgba(255,255,255,0.25);
+
+  /* Efecto glow moderno */
   box-shadow:
-    0 10px 24px rgba(0,0,0,.85),
-    0 0 14px rgba(31,182,201,.35);
+    0 12px 30px rgba(0,0,0,0.7),
+    0 0 18px rgba(31,182,201,0.45),
+    0 0 35px rgba(31,182,201,0.20);
+
+  /* Suavidad */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+
+
+
 
 .header-unificado .header-top .titulo {
   margin: 0;
@@ -194,75 +209,63 @@ filter: brightness(1.05) contrast(1.20) saturate(1.30);
   text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
-/* =================================================
-   NAV — AUTOADAPTATIVO / NO SE JUNTAN
+//* =================================================
+   NAV CONTENEDOR
 ================================================= */
 .header-unificado nav {
   display: flex;
   justify-content: center;
   align-items: center;
-
-  /* 🔑 ajuste automático real */
   flex-wrap: wrap;
-  gap: clamp(8px, 2.5vw, 22px);
+  gap: clamp(8px, 2vw, 16px);
 
   width: 100%;
   max-width: 1100px;
+  margin: 0 auto;
 }
 
 /* =================================================
-   LINKS DEL NAV (AUTO TAMAÑO + ESPACIO)
+   LINKS — SOLO CONTORNO SUAVE
 ================================================= */
 .header-unificado nav a {
   position: relative;
 
-  background: transparent !important;
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-
-  /* 🔑 evita que se junten */
   min-width: max-content;
+  padding: 6px 16px;
 
-  padding: clamp(4px, 0.8vw, 6px) clamp(2px, 0.6vw, 4px);
   text-decoration: none;
 
   font-family: 'Playfair Display', serif;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
 
-  /* 🔑 texto autoajustable */
-  font-size: clamp(0.95rem, 2.6vw, 1.45rem);
-  letter-spacing: clamp(0.08em, 0.6vw, 0.18em);
+  color: #fff;
 
-  font-weight: 500;
-  color: #f5f5f5;
+  /* 🔥 SOLO CONTORNO */
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 999px;
 
-  text-shadow:
-    0 2px 8px rgba(0,0,0,.95),
-    0 0 16px rgba(0,0,0,.85);
+  background: transparent;
 
-  transition: color .25s ease;
+  transition: all .2s ease;
 
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  user-select: none;
-  touch-action: manipulation;
+  text-shadow: 0 2px 8px rgba(0,0,0,.6);
 }
+
 /* =================================================
-   BLOQUES CON CONTORNO (SIN MODIFICAR LO ANTERIOR)
+   HOVER SUAVE
 ================================================= */
-.header-unificado nav a {
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 10px;
-  background: rgba(255,255,255,0.04);
-}
-
-/* ✨ HOVER MÁS ELEGANTE */
 .header-unificado nav a:hover {
-  border-color: rgba(255,255,255,0.35);
-  background: rgba(255,255,255,0.10);
+  border-color: rgba(255,255,255,0.55);
+  transform: scale(1.03);
 }
 
-
+/* =================================================
+   ACTIVO (MÁS MARCADO PERO LIMPIO)
+================================================= */
+.header-unificado nav a.active {
+  border-color: #fff;
+  background: rgba(255,255,255,0.08);
+}
 
 
 /* =================================================
