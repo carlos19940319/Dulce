@@ -909,7 +909,6 @@ footer::before{
 /* =========================
    BOTÓN COTIZA TU EVENTO — ROJO 3D PREMIUM
 ========================= */
-
 .overlay-content {
   width: 100%;
   display: flex;
@@ -917,16 +916,19 @@ footer::before{
   align-items: flex-end;
 }
 
+/* =========================
+   BOTÓN WHATSAPP PREMIUM
+========================= */
 .btn-cotiza {
   margin-bottom: 14px;
-  padding: 13px 28px;
+  padding: 14px 30px;
 
-  /* 🔴 rojo elegante tipo marca */
+  /* 🟢 VERDE WHATSAPP REAL */
   background: linear-gradient(
     180deg,
-    #ff5a4a 0%,
-    #f04a3a 55%,
-    #c93428 100%
+    #25F46D 0%,
+    #1DBF5A 55%,
+    #128C4A 100%
   );
 
   color: #ffffff;
@@ -937,12 +939,16 @@ footer::before{
 
   border-radius: 999px;
   border: none;
+  cursor: pointer;
 
-  /* 🧱 efecto 3D real */
+  /* 💎 look app moderna */
   box-shadow:
-    0 10px 22px rgba(0,0,0,.45),
-    inset 0 2px 0 rgba(255,255,255,.25),
-    inset 0 -3px 0 rgba(0,0,0,.25);
+    0 12px 26px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.25),
+    inset 0 -3px 0 rgba(0,0,0,.2);
+
+  position: relative;
+  overflow: hidden;
 
   transition:
     transform .2s ease,
@@ -950,28 +956,53 @@ footer::before{
     filter .25s ease;
 }
 
-/* ✨ HOVER — SE ELEVA (PC) */
+/* ✨ brillo suave tipo WhatsApp */
+.btn-cotiza::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -30%;
+  width: 160%;
+  height: 120%;
+  background: radial-gradient(
+    circle,
+    rgba(255,255,255,.25),
+    transparent 60%
+  );
+  transform: rotate(20deg);
+  opacity: .4;
+  pointer-events: none;
+}
+
+/* =========================
+   HOVER (PC)
+========================= */
 @media (hover:hover){
   .btn-cotiza:hover{
-    transform: translateY(-2px);
+    transform: translateY(-3px) scale(1.03);
     filter: brightness(1.05);
+
     box-shadow:
-      0 16px 34px rgba(0,0,0,.55),
-      inset 0 2px 0 rgba(255,255,255,.35),
-      inset 0 -3px 0 rgba(0,0,0,.3);
+      0 18px 40px rgba(0,0,0,.45),
+      inset 0 1px 0 rgba(255,255,255,.3),
+      inset 0 -3px 0 rgba(0,0,0,.2);
   }
 }
 
-/* 📱 ACTIVE — PRESIONADO REAL */
+/* =========================
+   ACTIVE (CLICK REAL)
+========================= */
 .btn-cotiza:active{
-  transform: translateY(1px);
+  transform: translateY(1px) scale(0.98);
   box-shadow:
-    0 6px 14px rgba(0,0,0,.45),
+    0 8px 18px rgba(0,0,0,.35),
     inset 0 1px 0 rgba(255,255,255,.15),
-    inset 0 -1px 0 rgba(0,0,0,.45);
+    inset 0 -2px 0 rgba(0,0,0,.25);
 }
 
-/* 📱 MOBILE */
+/* =========================
+   MOBILE
+========================= */
 @media (max-width: 640px){
   .btn-cotiza{
     font-size: .95rem;
@@ -979,6 +1010,9 @@ footer::before{
     letter-spacing: .3px;
   }
 }
+
+
+
 
 /* =========================
    🎞️ ANIMACIÓN DE ENTRADA
