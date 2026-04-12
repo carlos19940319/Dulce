@@ -37,15 +37,32 @@
 
 
 
-  <!-- whatsapp -->
-  <a href="https://wa.me/5217203173783?text=¡Hola!%20me%20podria%20hacer%20un%20pedido%20a%20domicilio" target="_blank"
-   class="icono">
-
+<!-- whatsapp -->
+<a href="javascript:void(0)" class="icono" onclick="abrirWhatsApp()">
   <img src="img/WAA.png"
        class="img-red"
        alt="WhatsApp"
        onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'fa-brands fa-whatsapp\'></i>';">
 </a>
+
+<script>
+function abrirWhatsApp() {
+  const numero = "5217203173783";
+  const mensaje = "¡Hola! me podria hacer un pedido a domicilio";
+
+  const urlApp = `whatsapp://send?phone=${numero}&text=${encodeURIComponent(mensaje)}`;
+  const urlWeb = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+
+  // Intentar abrir la app
+  window.location.href = urlApp;
+
+  // Si no abre (fallback a web)
+  setTimeout(() => {
+    window.location.href = urlWeb;
+  }, 1500);
+}
+</script>
+
 
 
 
