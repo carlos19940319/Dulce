@@ -1450,15 +1450,17 @@ CONTENEDOR GENERAL
   transform-style: preserve-3d;
   overflow: visible;
 
-  /* 💎 CONTORNO LUJO RESTAURANTE */
-  border: 1px solid rgba(255, 215, 160, 0.35);
-  border-radius: 20px;
+  /* 💎 CONTORNO BLANCO PREMIUM */
+border: 1px solid rgba(255, 255, 255, 0.22);
+border-radius: 20px;
 
-  box-shadow:
-    0 18px 40px rgba(0,0,0,.45),
-    inset 0 0 0 1px rgba(255,255,255,.08),
-    inset 0 0 18px rgba(255, 200, 120, .10);
-}
+box-shadow:
+  0 18px 40px rgba(0,0,0,.45),              /* sombra base */
+  0 0 12px rgba(255,255,255,0.12),          /* glow exterior suave */
+  inset 0 0 0 1px rgba(255,255,255,.10),    /* borde interno fino */
+  inset 0 0 14px rgba(255,255,255,.06);     /* luz difuminada interna */
+
+
 
 /* 📱 MÓVIL */
 @media (max-width: 640px){
