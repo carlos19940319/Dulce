@@ -2217,42 +2217,45 @@ footer {
 
 
 
-
-
-
- .titulo-imagen {
+.titulo-imagen {
   position: absolute;
   top: 14px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 5;
 
-  padding: 10px 18px;
+  padding: 10px 16px;
   border-radius: 999px;
 
-  /* 🖤 FONDO MÁS OSCURO (CLAVE) */
-  background: rgba(0, 0, 0, 0.85);
+  /* 🖤 FONDO MÁS OSCURO */
+  background: rgba(0, 0, 0, 0.9);
   backdrop-filter: blur(6px);
 
-  /* 🔴 ROJO FRESA MÁS FUERTE Y LIMPIO */
-  color: #ff2f5e; /* 👈 color sólido (más visible que gradient) */
+  /* 🔴 ROJO FRESA MÁS VISIBLE */
+  color: #ff2f5e;
 
   font-family: 'Inter', system-ui, Arial, sans-serif;
   font-weight: 900;
 
-  font-size: clamp(0.6rem, 2vw, 1.1rem);
+  /* 🔥 TAMAÑO EQUILIBRADO (NO CHICO, NO SE SALE) */
+  font-size: clamp(0.9rem, 2.5vw, 1.3rem);
 
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
   text-align: center;
   text-transform: uppercase;
 
+  /* 🚫 SIEMPRE UNA LÍNEA */
   white-space: nowrap;
-  max-width: 95%;
+
+  /* ✅ CONTROL TOTAL */
+  width: fit-content;
+  max-width: 90%;
+  overflow: hidden;
 
   /* ✨ VISIBILIDAD PRO */
   text-shadow:
-    0 1px 2px rgba(0,0,0,1),
-    0 0 6px rgba(255, 47, 94, 0.6);
+    0 2px 3px rgba(0,0,0,1),
+    0 0 5px rgba(255, 47, 94, 0.5);
 
   box-shadow:
     0 6px 18px rgba(0,0,0,0.8),
@@ -2261,24 +2264,16 @@ footer {
   pointer-events: none;
 }
 
-
-
-
-
-
-  /* 👇 evita que se desborde del contenedor */
-  max-width: 95%;
-}
-
-
 /* 📱 MÓVIL */
 @media (max-width: 640px) {
   .titulo-imagen {
     top: 10px;
-    font-size: .95rem;
-    padding: 8px 18px;
 
-    max-width: 92%; /* 👈 mejor ajuste en móvil */
+    /* 🔥 más grande en móvil */
+    font-size: clamp(1rem, 4vw, 1.25rem);
+
+    padding: 8px 14px;
+    max-width: 92%;
   }
 }
 
