@@ -36,9 +36,8 @@
   </a>
 
 
-
 <!-- whatsapp -->
-<a href="javascript:void(0)" class="icono" onclick="abrirWhatsApp()">
+<a href="#" class="icono wa-btn">
   <img src="img/WAA.png"
        class="img-red"
        alt="WhatsApp"
@@ -46,21 +45,29 @@
 </a>
 
 <script>
-function abrirWhatsApp() {
-  const numero = "5217203173783";
-  const mensaje = "¡Hola! me podria hacer un pedido a domicilio";
+(function () {
+  const btn = document.querySelector('.wa-btn');
 
-  const urlApp = `whatsapp://send?phone=${numero}&text=${encodeURIComponent(mensaje)}`;
-  const urlWeb = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+  if (!btn) return;
 
-  // Intentar abrir la app
-  window.location.href = urlApp;
+  btn.addEventListener('click', function (e) {
+    e.preventDefault();
 
-  // Si no abre (fallback a web)
-  setTimeout(() => {
-    window.location.href = urlWeb;
-  }, 1500);
-}
+    const numero = "5217203173783";
+    const mensaje = "¡Hola! me podria hacer un pedido a domicilio";
+
+    const urlApp = `whatsapp://send?phone=${numero}&text=${encodeURIComponent(mensaje)}`;
+    const urlWeb = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+
+    // Intentar app
+    window.location.href = urlApp;
+
+    // fallback
+    setTimeout(() => {
+      window.location.href = urlWeb;
+    }, 1200);
+  });
+})();
 </script>
 
 
