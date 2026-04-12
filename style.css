@@ -1215,8 +1215,9 @@ footer::before{
   display: flex;
 }
 
+
 /* =================================================
-   CAJA PRINCIPAL (AQUÍ ESTÁ LA MAGIA)
+   CAJA PRINCIPAL (MODAL PROFESIONAL)
 ================================================= */
 .modal-box {
   background: #1a1a1a;
@@ -1229,9 +1230,19 @@ footer::before{
   display: flex;
   flex-direction: column;
 
-  /* 🔥 CLAVES */
+  /* 🔥 control de tamaño */
   max-height: 95vh;
   overflow: hidden;
+
+  /* ✨ contorno elegante */
+  outline: 2px solid rgba(255, 255, 255, 0.35);
+  outline-offset: 4px;
+
+  /* 🌟 sombra para profundidad */
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+
+  /* 🎬 opcional: suavidad */
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 /* =================================================
