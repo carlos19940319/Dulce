@@ -1505,14 +1505,12 @@ inset 0 0 18px rgba(255, 200, 120, .10);
   display:block;
   border-radius:12px;
 
-/* 🤍 CONTORNO BLANCO SUAVE */
+/* 🤍 CONTORNO BLANCO OPACO */
 outline: none;
 
 box-shadow:
-  0 0 0 1px rgba(255,255,255,0.18),
-  0 4px 12px rgba(0,0,0,0.4),
-  0 0 10px rgba(255,255,255,0.12);
-}
+  0 0 0 1.5px #ffffff,   /* 👈 blanco sólido (opaco real) */
+  0 4px 10px rgba(0,0,0,0.4); /* ligera sombra para separarlo del fondo */
 
 
 /* =========================
