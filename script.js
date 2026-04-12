@@ -89,6 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const pages = [...container.querySelectorAll('.page')];
       const nextBtn = container.querySelector('.nav.next');
       const prevBtn = container.querySelector('.nav.prev');
+      
 
       if (!book || !pages.length || !nextBtn || !prevBtn) return;
 
@@ -122,11 +123,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
+
+updatePages();
+
+
       function updatePages() {
         pages.forEach((page, i) => {
           if (i < localPageIndex) {
             page.style.zIndex = i;
-            page.style.transform = 'rotateY(-180deg)';
+            page.style.transform = 'rotateY(-360deg)';
           }
           else if (i === localPageIndex) {
             page.style.zIndex = pages.length + 5;
