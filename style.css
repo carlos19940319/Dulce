@@ -2378,3 +2378,22 @@ footer {
     right: 10px;
   }
 }
+#listaProductos {
+  max-height: 220px; /* 🔥 ajusta a tu gusto */
+  overflow-y: auto;
+
+  margin-bottom: 10px;
+
+  -webkit-overflow-scrolling: touch;
+}
+#listaProductos:empty {
+  display: none;
+}
+#listaProductos::-webkit-scrollbar {
+  width: 4px;
+}
+
+#listaProductos::-webkit-scrollbar-thumb {
+  background: #f4c430;
+  border-radius: 10px;
+}
