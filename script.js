@@ -131,7 +131,7 @@ updatePages();
         pages.forEach((page, i) => {
           if (i < localPageIndex) {
             page.style.zIndex = i;
-            page.style.transform = 'rotateY(-360deg)';
+            page.style.transform = 'rotateY(-260deg)';
           }
           else if (i === localPageIndex) {
             page.style.zIndex = pages.length + 5;
