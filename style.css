@@ -1544,7 +1544,7 @@ outline-offset: 3px;
   transform-origin:left center;
   transform:rotateY(0deg);
 
-  transition: transform 1.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 3.25s cubic-bezier(0.16, 1, 0.3, 1);
   backface-visibility:hidden;
   -webkit-backface-visibility:hidden;
   transform-style:preserve-3d;
@@ -1638,7 +1638,7 @@ outline-offset: 3px;
   pointer-events: none;
   filter: grayscale(100%);
   box-shadow: none;
-  transform: translateY(-50%) scale(0.95);
+  transform: translateY(-10%) scale(0.95);
 }
 
 /* =========================
@@ -2426,8 +2426,8 @@ footer {
   -webkit-backface-visibility: hidden;
 }
 .page {
-  transition: transform 2.8s cubic-bezier(0.22, 1, 0.36, 1),
-              opacity 2.8s ease;
+ transition: transform 4s cubic-bezier(0.36, 1, 0.36, 1),
+            opacity 4s ease;
   transform-style: preserve-3d;
   backface-visibility: hidden;
 }
